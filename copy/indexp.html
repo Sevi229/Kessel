@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KesselLutschi</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    max-width: 45%;
+    margin: 0 auto;
+    background-color: green;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .label-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .label {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .label.left {
+    text-align: left;
+  }
+  
+  .label.right {
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="title">KesselLutschi</div>
+  <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces"></textarea>
+  <button id="confirm-button" class="confirm-button">Confirm</button>
+</div>
+
+<script>
+  document.getElementById('confirm-button').addEventListener('click', function() {
+    const numbersInput = document.getElementById('number-input').value.trim();
+    if (numbersInput) {
+      const numbersArray = numbersInput.split(' ');
+      const numbersText = numbersArray.join('\n');
+      const blob = new Blob([numbersText], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.download = 'numbers.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      alert('Please enter some numbers before confirming.');
+    }
+  });
+</script>
+
+<!-- Insert provided HTML code here -->
+<div id="main-container"></div>
+
+<script>
+  // Define the number of iterations
+  const iterations = 37;
+
+  // Get the main container
+  const mainContainer = document.getElementById('main-container');
+
+  // Loop to create the structure dynamically
+  for (let i = 0; i < iterations; i++) {
+    // Create div container
+    const divContainer = document.createElement('div');
+    divContainer.classList.add('container');
+
+    // Create label container
+    const labelContainer = document.createElement('div');
+    labelContainer.classList.add('label-container');
+
+    // Create left label
+    const leftLabel = document.createElement('label');
+    leftLabel.textContent = `Label 1`;
+    leftLabel.classList.add('label', 'left');
+
+    // Append left label to label container
+    labelContainer.appendChild(leftLabel);
+
+    // Create right label
+    const rightLabel = document.createElement('label');
+    rightLabel.textContent = `Label 2`;
+    rightLabel.classList.add('label', 'right');
+
+    // Append right label to label container
+    labelContainer.appendChild(rightLabel);
+
+    // Append label container to div container
+    divContainer.appendChild(labelContainer);
+
+    // Append div container to main container
+    mainContainer.appendChild(divContainer);
+  }
+</script>
+
+</body>
+</html>
