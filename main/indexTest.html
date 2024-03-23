@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KesselLutschi</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .number-input {
+    width: calc(100% - 40px);
+    padding: 10px;
+    font-size: 18px;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .button-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .confirm-button,
+  .download-button,
+  .load-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .confirm-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .download-button {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  .load-button {
+    background-color: #f44336;
+    color: white;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    max-width: 45%;
+    margin: 0 auto;
+    background-color: green;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .label-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .label {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .label.left {
+    text-align: left;
+  }
+  
+  .label.right {
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<div class="title">KesselLutschi</div>
+<textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces"></textarea>
+<div class="button-container">
+  <button id="confirm-button" class="confirm-button">Save</button>
+  <button id="download-button" class="download-button">Download</button>
+  <button id="load-button" class="load-button">Load JSON File</button>
+  <input type="file" id="file-input" style="display: none;">
+</div>
+
+<script>
+  document.getElementById('confirm-button').addEventListener('click', function() {
+    const numbersInput = document.getElementById('number-input').value.trim();
+    if (numbersInput) {
+      // Extract numbers and remove non-numeric characters
+      const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num));
+      const numbersObject = { numbers: numbersArray }; // Create an object with a "numbers" property
+      const jsonData = JSON.stringify(numbersObject); // Convert the object to JSON
+      localStorage.setItem('numbers', jsonData); // Save the JSON data to localStorage
+      alert('Numbers saved successfully!');
+    } else {
+      alert('Please enter some numbers before saving.');
+    }
+  });
+
+  document.getElementById('download-button').addEventListener('click', function() {
+    const jsonData = localStorage.getItem('numbers'); // Retrieve the JSON data from localStorage
+    if (jsonData) {
+      const blob = new Blob([jsonData], { type: 'application/json' }); // Create a Blob with the JSON data
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.download = 'numbers.json'; // Set the download attribute to download as numbers.json
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      alert('No numbers saved.');
+    }
+  });
+
+  document.getElementById('load-button').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+  });
+
+  document.getElementById('file-input').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = e.target.result;
+      try {
+        const parsedData = JSON.parse(content);
+        if (parsedData && parsedData.numbers && Array.isArray(parsedData.numbers)) {
+          document.getElementById('number-input').value = parsedData.numbers.join(' ');
+        } else {
+          alert('Invalid JSON format. Please select a valid JSON file.');
+        }
+      } catch (error) {
+        alert('Error parsing JSON. Please select a valid JSON file.');
+      }
+    };
+    reader.readAsText(file);
+  });
+</script>
+
+<br>
+
+<!-- Insert provided HTML code here -->
+<div id="main-container"></div>
+
+<script>
+  // Define the number of iterations
+  const iterations = 37;
+
+  // Get the main container
+  const mainContainer = document.getElementById('main-container');
+
+  // Loop to create the structure dynamically
+  for (let i = 0; i < iterations; i++) {
+    // Create div container
+    const divContainer = document.createElement('div');
+    divContainer.classList.add('container');
+
+    // Create label container
+    const labelContainer = document.createElement('div');
+    labelContainer.classList.add('label-container');
+
+    // Create left label
+    const leftLabel = document.createElement('label');
+    leftLabel.textContent = `Label 1`;
+    leftLabel.classList.add('label', 'left');
+
+    // Append left label to label container
+    labelContainer.appendChild(leftLabel);
+
+    // Create right label
+    const rightLabel = document.createElement('label');
+    rightLabel.textContent = `Label 2`;
+    rightLabel.classList.add('label', 'right');
+
+    // Append right label to label container
+    labelContainer.appendChild(rightLabel);
+
+    // Append label container to div container
+    divContainer.appendChild(labelContainer);
+
+    // Append div container to main container
+    mainContainer.appendChild(divContainer);
+  }
+</script>
+
+</body>
+</html>
