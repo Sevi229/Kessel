@@ -67,8 +67,14 @@
     margin-bottom: 20px;
   }
 
-  .container {
-    max-width: 45%;
+ 
+
+  .label-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 5px; /* Equal spacing */
+    max-width: 65%;
     margin: 0 auto;
     background-color: green;
     border-radius: 15px;
@@ -77,13 +83,6 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-  }
-
-  .label-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 5px; /* Equal spacing */
   }
 
   .label {
@@ -120,8 +119,8 @@
   // Loop to create the structure dynamically
   for (let i = 0; i < iterations; i++) {
     // Create div container
-    const divContainer = document.createElement('div');
-    divContainer.classList.add('container');
+   
+    
 
     // Create label container
     const labelContainer = document.createElement('div');
@@ -130,16 +129,16 @@
     // Create labels
     for (let j = 0; j < 4; j++) {
       const label = document.createElement('label');
-      label.textContent = `Label ${j + 1}`;
+      label.textContent = ``;
       label.classList.add('label', j % 2 === 0 ? 'left' : 'right');
       labelContainer.appendChild(label);
     }
 
     // Append label container to div container
-    divContainer.appendChild(labelContainer);
+  
 
     // Append div container to main container
-    mainContainer.appendChild(divContainer);
+    mainContainer.appendChild(labelContainer);
   }
 
   // Function to calculate neighbors
@@ -206,7 +205,7 @@
 
         console.log("Sorted Array A:", sortedA);
         console.log("Sorted Array B:", sortedB);
-
+       
 
         function calculatePercentage(array) {
     const percentages = {};
@@ -231,28 +230,35 @@
 }
 
         // Calculate percentages and sort arrays A and B
-       
         for (let i = 1; i <= 37; i++) {
     // Text innerhalb von Label 1 (Label 1)
-    for (let i = 0; i < 37; i++) {
+    const AElement = sortedA[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
+
+    // Accessing properties of the element
+    const cA = AElement.count !== null && AElement.count !== undefined && AElement.count !== "" ? Math.round(AElement.count) : "";
+    const nA = AElement.number !== null && AElement.number !== undefined ? AElement.number.toString() : "";
+    const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(3) : ""; // Round to 3 decimal places if it's a valid number
+
+    const BElement = sortedB[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
+
+    // Accessing properties of the element
+    const cB = BElement.count !== null && BElement.count !== undefined && BElement.count !== "" ? Math.round(BElement.count) : "";
+    const nB = BElement.number !== null && BElement.number !== undefined ? BElement.number.toString() : "";
+    const pB = BElement.percentage !== null && BElement.percentage !== undefined && !isNaN(parseFloat(BElement.percentage)) ? parseFloat(BElement.percentage).toFixed(3) : ""; // Round to 3 decimal places if it's a valid number
+
+    // Additional text for percentage
+    const percentageTextA = pA ? " (" + pA + "%)" : "";
+    const percentageTextB = pB ? " (" + pB + "%)" : "";
+
     // Text innerhalb von Label 1 (Label 1)
-    document.querySelector(`.label-container:nth-child(${i + 1}) label:nth-child(1)`).textContent = sortedA[i]?.[0]?.count ? `Count: ${sortedA[i][0].count}` : '';
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA;
     // Text innerhalb von Label 2 (Label 2)
-    document.querySelector(`.label-container:nth-child(${i + 1}) label:nth-child(2)`).textContent = sortedA[i]?.[0]?.count ? `Number: ${sortedA[i][0].number}, Percentage: ${sortedA[i][0].percentage}` : '';
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(2)`).textContent = cA + percentageTextA;
     // Text innerhalb von Label 3 (Label 3)
-    document.querySelector(`.label-container:nth-child(${i + 1}) label:nth-child(3)`).textContent = sortedB[i]?.[0]?.count ? `Count: ${sortedB[i][0].count}` : '';
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(3)`).textContent = nB;
     // Text innerhalb von Label 4 (Label 4)
-    document.querySelector(`.label-container:nth-child(${i + 1}) label:nth-child(4)`).textContent = sortedB[i]?.[0]?.count ? `Number: ${sortedB[i][0].number}, Percentage: ${sortedB[i][0].percentage}` : '';
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(4)`).textContent = cB + percentageTextB;
 }
-
-}
-
-
-        
-
-
-
-
 
     
       
