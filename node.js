@@ -9,8 +9,13 @@ const mainDir = path.join(__dirname, 'main');
 
 // Serve the index.html file from the main directory
 app.get('/', (req, res) => {
-  res.sendFile(path.join(mainDir, 'index.html'));
+  res.sendFile(path.join(mainDir, 'derick.html'));
 });
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(mainDir, 'Roule'));
+});
+
 
 // Start the server
 app.listen(PORT, () => {
