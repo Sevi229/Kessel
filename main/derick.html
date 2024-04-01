@@ -153,21 +153,23 @@
     // You can perform any actions you need based on the new value here
     let nextNumberIndex = rouletteOrder.indexOf(parseInt(input1.value));
     console.log(nextNumberIndex);
-    if(nextNumberIndex + parseInt(input2.value) <= 37) { 
-      f = 37 - (nextNumberIndex + parseInt(input2.value));
-      console.log("log", f.toString())
+    if(nextNumberIndex + parseInt(input2.value) <= 36) { 
+      f = (nextNumberIndex + parseInt(input2.value));
+      console.log("log: ", f)
+      console.log("Test: " + rouletteOrder[f]);
     }
-    if(nextNumberIndex + parseInt(input2.value) > 37) { 
-      f = nextNumberIndex + parseInt(input2.value);
+    if(nextNumberIndex + parseInt(input2.value) > 36) { 
+      f = nextNumberIndex + parseInt(input2.value) - 37;
       console.log("blog", f.toString())
     }
+    
     // For example, update another element with the new value
     const pp = document.getElementById('pp');
-    let ff = rouletteOrder.indexOf(parseInt(f));
+    let ff = rouletteOrder[f];
     pp.innerHTML = ff.toString();
   });
   // Example: Logging the value of input1
-  console.log(input1.value);
+  
   // Define the number of iterations
   const iterations = 37;
 
