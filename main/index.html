@@ -1,124 +1,364 @@
-<!-- versuch js in html anzeigen -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Meine Datentabelle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .filter-container {
+            margin-bottom: 20px;
+        }
+
+            .filter-container label,
+            .filter-container input {
+                margin-right: 10px;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            height: 50px;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #333;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #444; /* Dunkler Hintergrund für die Sidebar */
+            padding: 20px;
+            /*height: 75vh;*/ /* Vollständige Höhe */
+            box-sizing: border-box; /* Padding in die Breite einschließen */
+            margin-bottom: 50px; /* oder die Höhe Ihres Footers */
+        }
+
+        .main-content {
+            flex-grow: 1;
+            background: #555; /* Hintergrund für den Hauptinhalt */
+            padding: 20px;
+            /*height: 75vh;*/
+            width: 100vw;
+            box-sizing: border-box;
+            margin-bottom: 50px; /* oder die Höhe Ihres Footers */
+        }
+
+        .checkbox-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+            .checkbox-list li {
+                padding-bottom: 10px;
+            }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    
-    <div id="myDiv"></div>
+    <div class="container">
+        <div class="sidebar">
+            <ul class="checkbox-list">
+                <li>
+                    <input type="checkbox" id="checkbox1" name="checkbox1">
+                    <label for="checkbox1">Option 1</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="checkbox2" name="checkbox2">
+                    <label for="checkbox2">Option 2</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="checkbox3" name="checkbox3">
+                    <label for="checkbox3">Option 3</label>
+                </li>
+                <!-- Weitere Checkboxen nach Bedarf hinzufügen -->
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="filter-container">
+                <label for="search">Suche:</label>
+                <input type="text" id="search" onkeyup="searchTableInMultipleTables(['meineTabelle', 'meineTabelle2'], 0)" placeholder="Überall suchen...">
 
-    <!-- <script>
-        document.getElementById('myDiv').textContent = 'Hier ist mein einfacher Text.';
-    </script> -->
-    
-    <footer>
-        <p>This is the footer of my website.</p>
-    </footer>
+            </div>
+            <div id="div1" style="display: none;"><p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p></div>
+            <div id="div2" style="display: none;">
+                <table id="meineTabelle" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Distanz</th>
+                            <th class="hidden">Anzahl</th>
+                            <th onclick="sortTable('meineTabelle',1)">Prozentsatz &#x25B2;&#x25BC;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Die Zellen werden durch das Skript hinzugefügt -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="div3" style="display: none;">
+                <table id="meineTabelle2" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Nummer</th>
+                            <th class="hidden">Anzahl</th>
+                            <th onclick="sortTable('meineTabelle2',1)">Prozentsatz &#x25B2;&#x25BC;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Die Zellen werden durch das Skript hinzugefügt -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        function searchTableInMultipleTables(tableIds, columnIndex) {
+            var input, filter, i, j, table, tr, td, txtValue;
+            input = document.getElementById("search"); // Ein einzelnes Sucheingabefeld für alle Tabellen
+            filter = input.value.toUpperCase();
+
+            // Gehe durch alle übergebenen Tabellen-IDs
+            tableIds.forEach(function (tableId) {
+                table = document.getElementById(tableId);
+                tr = table.getElementsByTagName("tr");
+
+                // Durch alle Tabellenzeilen gehen und die verstecken, die nicht der Suche entsprechen
+                for (i = 1; i < tr.length; i++) { // i beginnt bei 1, um die Kopfzeile zu überspringen
+                    td = tr[i].getElementsByTagName("td")[columnIndex]; // Die spezifizierte Spalte für die Suche
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            });
+        }
+
+
+
+        function sortTable(tableId, n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById(tableId);
+            switching = true;
+            // Set the sorting direction to ascending:
+            dir = "asc";
+            /* Make a loop that will continue until
+            no switching has been done: */
+            while (switching) {
+                // Start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /* Loop through all table rows (except the
+                first, which contains table headers): */
+                for (i = 1; i < (rows.length - 1); i++) {
+                    // Start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* Get the two elements you want to compare,
+                    one from current row and one from the next: */
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /* Check if the two rows should switch place,
+                    based on the direction, asc or desc: */
+                    if (dir == "asc") {
+                        if (parseFloat(x.innerHTML.replace('%', '')) > parseFloat(y.innerHTML.replace('%', ''))) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (parseFloat(x.innerHTML.replace('%', '')) < parseFloat(y.innerHTML.replace('%', ''))) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark that a switch has been done: */
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    // Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /* If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again. */
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+
+
+        // Hier Ausrechnen Table
+
+        $(document).ready(function () {
+            // Daten generieren
+            var numbers = []; // Ihre generierten Zahlen
+            for (var i = 0; i < 500; i++) {
+                numbers.push(Math.floor(Math.random() * 37));
+            }
+            var rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+
+            //Schaut in in arr für jede zahl welche zahl wie viel mal als nächstes gekommen ist
+            function calculateProbabilities(numbers) {
+                var probabilities = {};
+                for (var i = 0; i < numbers.length - 1; i++) {
+                    var currentNumber = numbers[i];
+                    var nextNumber = numbers[i + 1];
+                    if (!probabilities[currentNumber]) {
+                        probabilities[currentNumber] = {};
+                    }
+                    if (!probabilities[currentNumber][nextNumber]) {
+                        probabilities[currentNumber][nextNumber] = 0;
+                    }
+                    probabilities[currentNumber][nextNumber]++;
+                }
+                return probabilities;
+            }
+
+            //Zählt wie oft eine Zahl vorkommt
+            function countOccurrences(numbers) {
+                var occurrences = {};
+                for (var i = 0; i < numbers.length; i++) {
+                    var number = numbers[i];
+                    if (!occurrences[number]) {
+                        occurrences[number] = { count: 0, percentage: 0 };
+                    }
+                    occurrences[number].count++;
+                }
+
+                for (var number in occurrences) {
+                    occurrences[number].percentage = parseFloat(((occurrences[number].count / numbers.length) * 100).toFixed(2));
+                }
+
+                return occurrences;
+            }
+
+            //Kesselgucken
+            function calculateDistances(numbers, rouletteOrder) {
+                var distances = [];
+                for (var i = 0; i < numbers.length - 1; i++) {
+                    var currentNumber = numbers[i];
+                    var nextNumber = numbers[i + 1];
+                    var currentIndex = rouletteOrder.indexOf(currentNumber);
+                    var nextIndex = rouletteOrder.indexOf(nextNumber);
+                    var distance;
+                    if (nextIndex >= currentIndex) {
+                        distance = nextIndex - currentIndex;
+                    } else {
+                        distance = nextIndex - currentIndex + 37;
+                    }
+                    if (!distances[distance]) {
+                        distances[distance] = { distance: distance, count: 0, percentage: 0 };
+                    }
+                    distances[distance].count++;
+                }
+
+                var totalDistances = numbers.length - 1;
+                for (var i = 0; i < distances.length; i++) {
+                    if (distances[i]) {
+                        distances[i].percentage = parseFloat(((distances[i].count / totalDistances) * 100).toFixed(2));
+                    }
+                }
+
+                return distances;
+            }
+
+            // Die Tabelle mit den berechneten Daten befüllen
+            var probabilities = calculateProbabilities(numbers); // Beispiel-Funktion
+            console.log(probabilities);
+            var occurrences = countOccurrences(numbers); // Beispiel-Funktion
+            console.log(occurrences);
+            var distances = calculateDistances(numbers, rouletteOrder); // Beispiel-Funktion
+            console.log(distances);
+
+            // Tabelle aufbauen
+            var tBody = $('#meineTabelle tbody');
+            $.each(distances, function (index, value) {
+                var row = `<tr>
+                                            <td>${value.distance}</td>
+                                            <td class="hidden">${value.count}</td>
+                                            <td>${value.percentage}%</td>
+                                        </tr>`;
+                tBody.append(row);
+            });
+
+            var tBody2 = $('#meineTabelle2 tbody');
+            $.each(occurrences, function (index, value) {
+                var row = `<tr>
+                                <td>${index}</td>
+                                <td class="hidden">${value.count}</td>
+                                <td>${value.percentage}%</td>
+                            </tr>`;
+                tBody2.append(row);
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach(checkbox => {
+                // Zustand der Checkboxen beim Laden der Seite wiederherstellen
+                let isChecked = localStorage.getItem(checkbox.id) === 'true';
+                checkbox.checked = isChecked;
+                let div = document.getElementById('div' + checkbox.id.replace('checkbox', ''));
+                div.style.display = isChecked ? 'block' : 'none';
+
+                // Event-Listener für Änderungen an den Checkboxen
+                checkbox.addEventListener('change', function () {
+                    let div = document.getElementById('div' + this.id.replace('checkbox', ''));
+                    div.style.display = this.checked ? 'block' : 'none';
+
+                    // Speichern des Zustands der Checkboxen in localStorage
+                    localStorage.setItem(this.id, this.checked);
+                });
+            });
+        });
+
+    </script>
 </body>
-
-<script>
-// document.addEventListener('DOMContentLoaded', (event) => {
-//     var numbers = [];
-//     for (var i = 0; i < 500; i++) {
-//         numbers.push(Math.floor(Math.random() * 37));
-//     }
-//     var rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-    
-//     console.log(calculateProbabilities(numbers));
-//     var numberOccurrences = countOccurrences(numbers);
-//     console.log(numberOccurrences);
-//     var numberDistances = calculateDistances(numbers, rouletteOrder);
-//     console.log(numberDistances);
-    
-//     document.getElementById('myDiv').textContent = 'Apfel';
-// });
-
-//Schaut in in arr für jede zahl welche zahl wie viel mal als nächstes gekommen ist
-function calculateProbabilities(numbers) {
-    var probabilities = {};
-    for (var i = 0; i < numbers.length - 1; i++) {
-        var currentNumber = numbers[i];
-        var nextNumber = numbers[i + 1];
-        if (!probabilities[currentNumber]) {
-            probabilities[currentNumber] = {};
-        }
-        if (!probabilities[currentNumber][nextNumber]) {
-            probabilities[currentNumber][nextNumber] = 0;
-        }
-        probabilities[currentNumber][nextNumber]++;
-    }
-    return probabilities;
-}
-
-//Zählt wie oft eine Zahl vorkommt
-function countOccurrences(numbers) {
-    var occurrences = {};
-    for (var i = 0; i < numbers.length; i++) {
-        var number = numbers[i];
-        if (!occurrences[number]) {
-            occurrences[number] = { count: 0, percentage: 0 };
-        }
-        occurrences[number].count++;
-    }
-
-    for (var number in occurrences) {
-        occurrences[number].percentage = parseFloat(((occurrences[number].count / numbers.length) * 100).toFixed(2));
-    }
-
-    return occurrences;
-}
-
-//Kesselgucken
-function calculateDistances(numbers, rouletteOrder) {
-    var distances = [];
-    for (var i = 0; i < numbers.length - 1; i++) {
-        var currentNumber = numbers[i];
-        var nextNumber = numbers[i + 1];
-        var currentIndex = rouletteOrder.indexOf(currentNumber);
-        var nextIndex = rouletteOrder.indexOf(nextNumber);
-        var distance;
-        if (nextIndex >= currentIndex) {
-            distance = nextIndex - currentIndex;
-        } else {
-            distance = nextIndex - currentIndex + 37;
-        }
-        if (!distances[distance]) {
-            distances[distance] = { distance: distance, count: 0, percentage: 0 };
-        }
-        distances[distance].count++;
-    }
-
-    var totalDistances = numbers.length - 1;
-    for (var i = 0; i < distances.length; i++) {
-        if (distances[i]) {
-            distances[i].percentage = parseFloat(((distances[i].count / totalDistances) * 100).toFixed(2));
-        }
-    }
-
-    return distances;
-}
-
-var numbers = [];
-for (var i = 0; i < 500; i++) {
-    numbers.push(Math.floor(Math.random() * 37));
-}
-var rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-    
-console.log(calculateProbabilities(numbers));
-var numberOccurrences = countOccurrences(numbers);
-console.log(numberOccurrences);
-var numberDistances = calculateDistances(numbers, rouletteOrder);
-console.log(numberDistances);
-
-var myDiv = document.getElementById('myDiv');
-for (var i = 0; i < numberDistances.length; i++) {
-    var p = document.createElement('p');
-    p.textContent = JSON.stringify(numberDistances[i]);
-    myDiv.appendChild(p);
-}
-</script>
 </html>
