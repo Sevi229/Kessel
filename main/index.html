@@ -86,6 +86,118 @@
             .checkbox-list li {
                 padding-bottom: 10px;
             }
+
+
+            body {
+    font-family: Arial, sans-serif;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .number-input {
+    width: calc(100% - 40px);
+    padding: 10px;
+    font-size: 18px;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .button-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .confirm-button,
+  .download-button,
+  .load-button,.file-input{
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .confirm-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .download-button {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  .load-button {
+    background-color: #f44336;
+    color: white;
+  }
+  .file-input{
+    background-color: #4936f4;
+    color: white;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+ 
+
+  .label-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 5px; /* Equal spacing */
+    max-width: 65%;
+    margin: 0 auto;
+    background-color: green;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .label {
+    flex: 1;
+    text-align: center;
+  }
+  .containers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}
+.content {
+    text-align: center;
+}
+.pp {
+    margin-right: 10px;
+}
+.input1 {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.input2 {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
     </style>
 </head>
 <body>
@@ -94,7 +206,15 @@
             <ul class="checkbox-list">
                 <li>
                     <input type="checkbox" id="checkbox1" name="checkbox1">
-                    <label for="checkbox1">Option 1</label>
+                    <label for="checkbox1">Infos</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="checkbox4" name="checkbox4">
+                    <label for="checkbox4">Data upload</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="checkbox7" name="checkbox7">
+                    <label for="checkbox7">Such feld</label>
                 </li>
                 <li>
                     <input type="checkbox" id="checkbox2" name="checkbox2">
@@ -105,10 +225,6 @@
                     <label for="checkbox3">Option 3</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="checkbox4" name="checkbox4">
-                    <label for="checkbox4">Option 4</label>
-                </li>
-                <li>
                     <input type="checkbox" id="checkbox5" name="checkbox5">
                     <label for="checkbox5">Option 5</label>
                 </li>
@@ -116,10 +232,7 @@
                     <input type="checkbox" id="checkbox6" name="checkbox6">
                     <label for="checkbox6">Option 6</label>
                 </li>
-                <li>
-                    <input type="checkbox" id="checkbox7" name="checkbox7">
-                    <label for="checkbox7">Option 7</label>
-                </li>
+                
                 <li>
                     <input type="checkbox" id="checkbox8" name="checkbox8">
                     <label for="checkbox8">Option 8</label>
@@ -128,12 +241,23 @@
             </ul>
         </div>
         <div class="main-content">
-            <div class="filter-container">
+            <div id="div1" style="display: none;"><p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p></div>
+            <div id="div4" style="display: none;">
+                <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces"></textarea>
+  <div class="button-container">
+    <button id="confirm-button" class="confirm-button">Save</button>
+    <button id="download-button" class="download-button">Download</button>
+    <button id="load-button" class="load-button">Load JSON File</button>
+    <!-- Use an input type="file" for loading images -->
+    <input type="file" id="file-input" accept="image/*" style="display: none;">
+    <label for="file-input" class="file-input">Load Image</label>
+  </div>
+            </div>
+            <div id="div7" style="display: none;"><div class="filter-container">
                 <label for="search">Suche:</label>
                 <input type="text" id="search" onkeyup="searchTableInMultipleTables(['meineTabelle', 'meineTabelle2'], 0)" placeholder="Überall suchen...">
 
-            </div>
-            <div id="div1" style="display: none;"><p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p></div>
+            </div></div>
             <div id="div2" style="display: none;">
                 <table id="meineTabelle" class="display" style="width:100%">
                     <thead>
@@ -162,18 +286,17 @@
                     </tbody>
                 </table>
             </div>
-            <div id="div4" style="display: none;">
-                <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces"></textarea>
-                <div class="button-container">
-                  <button id="confirm-button" class="confirm-button">Save</button>
-                  <button id="download-button" class="download-button">Download</button>
-                  <button id="load-button" class="load-button">Load JSON File</button>
-                  <input type="file" id="file-input" style="display: none;">
+            <div id="div5" style="display: none;">
+                <div class="containers">
+                <div class="content">
+                  <input type="text" id="input1">
+                  <input type="text" id="input2">
+                  <label id="pp" for="input1">Label:</label>
                 </div>
+              </div>
             </div>
-            <div id="div5" style="display: none;"><p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p></div>
-            <div id="div6" style="display: none;"><p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p></div>
-            <div id="div7" style="display: none;"><p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p></div>
+            <div id="div6" style="display: none;"><div id="main-container"></div></div>
+            
             <div id="div8" style="display: none;"><p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p></div>
         </div>
     </div>
@@ -395,7 +518,44 @@
 
 
         //Severin
-        let f = 0;
+        document.getElementById('file-input').addEventListener('change', function(event) {
+      // Get the selected image file
+      var files = event.target.files;
+      // Check if there are selected files
+      if (files.length > 0) {
+        var file = files[0];
+        // Check if the file is an image
+        if (file.type.startsWith('image/')) {
+          // Perform action to recognize text in the selected image
+          console.log('Image selected:', file.name);
+          // Create a new file reader to read the selected image file
+          var reader = new FileReader();
+          reader.onload = function(event) {
+            // Read the image data as a data URL
+            var imageData = event.target.result;
+            // Perform text recognition on the loaded image data
+            Tesseract.recognize(imageData, "eng", {})
+              .then(out => {
+                // Extract the recognized text from the result
+                var output = out.data.text;
+                console.log(output);
+                var textarea = document.getElementById('number-input');
+                textarea.value += output;
+              })
+              .catch(err => {
+                console.error('Error recognizing text:', err);
+              });
+          };
+          // Read the selected image file as a data URL
+          reader.readAsDataURL(file);
+        } else {
+          console.log('File is not an image:', file.name);
+        }
+      }
+    });
+    
+ 
+  let f = 0;
   const input1 = document.getElementById('input1');
   const input2 = document.getElementById('input2');
 
@@ -403,17 +563,15 @@
   const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
 
   input2.addEventListener('input', function(event) {
-    // This function will be called whenever the value of the input changes
-    // You can access the new value using event.target.value
-    console.log("Input value changed:", event.target.value);
-    // You can perform any actions you need based on the new value here
     let nextNumberIndex = rouletteOrder.indexOf(parseInt(input1.value));
     console.log(nextNumberIndex);
     if(nextNumberIndex + parseInt(input2.value) <= 36) { 
       f = (nextNumberIndex + parseInt(input2.value));
+      
     }
     if(nextNumberIndex + parseInt(input2.value) > 36) { 
       f = nextNumberIndex + parseInt(input2.value) - 37;
+      
     }
     
     // For example, update another element with the new value
@@ -501,6 +659,8 @@
 }
 
 
+
+
   document.getElementById('confirm-button').addEventListener('click', function() {
     const numbersInput = document.getElementById('number-input').value.trim();
     
@@ -579,42 +739,31 @@
   });
 
   document.getElementById('download-button').addEventListener('click', function() {
-    const jsonData = localStorage.getItem('numbers'); // Retrieve the JSON data from localStorage
-    if (jsonData) {
-      const blob = new Blob([jsonData], { type: 'application/json' }); // Create a Blob with the JSON data
-      const a = document.createElement('a');
-      a.href = window.URL.createObjectURL(blob);
-      a.download = 'numbers.json'; // Set the download attribute to download as numbers.json
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } else {
-      alert('No numbers saved.');
-    }
+   
   });
 
-  document.getElementById('load-button').addEventListener('click', function() {
-    document.getElementById('file-input').click();
-  });
+//   document.getElementById('load-button').addEventListener('click', function() {
+//     document.getElementById('file-input').click();
+//   });
 
-  document.getElementById('file-input').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const content = e.target.result;
-      try {
-        const parsedData = JSON.parse(content);
-        if (parsedData && parsedData.numbers && Array.isArray(parsedData.numbers)) {
-          document.getElementById('number-input').value = parsedData.numbers.join(' ');
-        } else {
-          alert('Invalid JSON format. Please select a valid JSON file.');
-        }
-      } catch (error) {
-        alert('Error parsing JSON. Please select a valid JSON file.');
-      }
-    };
-    reader.readAsText(file);
-  });
+//   document.getElementById('file-input').addEventListener('change', function(event) {
+//     const file = event.target.files[0];
+//     const reader = new FileReader();
+//     reader.onload = function(e) {
+//       const content = e.target.result;
+//       try {
+//         const parsedData = JSON.parse(content);
+//         if (parsedData && parsedData.numbers && Array.isArray(parsedData.numbers)) {
+//           document.getElementById('number-input').value = parsedData.numbers.join(' ');
+//         } else {
+//           alert('Invalid JSON format. Please select a valid JSON file.');
+//         }
+//       } catch (error) {
+//         alert('Error parsing JSON. Please select a valid JSON file.');
+//       }
+//     };
+//     reader.readAsText(file);
+//   });
     </script>
 </body>
 </html>
