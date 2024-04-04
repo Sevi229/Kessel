@@ -336,11 +336,27 @@
         for (let i = 1; i <= 37; i++) {
     // Text innerhalb von Label 1 (Label 1)
     const AElement = sortedA[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
-
+     
     // Accessing properties of the element
     const cA = AElement.count !== null && AElement.count !== undefined && AElement.count !== "" ? Math.round(AElement.count) : "";
     const nA = AElement.number !== null && AElement.number !== undefined ? AElement.number.toString() : "";
     const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(3) : ""; // Round to 3 decimal places if it's a valid number
+    const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+    
+    const numbersInput = document.getElementById('number-input').value.trim();
+    
+      // Extract numbers and remove non-numeric characters
+    const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num) || num === 'x' || num === 'f' || num === 'b');
+
+
+//
+let secondLast = String(numbersArray[numbersArray.length - 2]);
+let last = String(numbersArray[numbersArray.length - 1]);
+
+    console.log(" last" ,secondLast);
+
+   
+    console.log("second last" ,last);
 
     const BElement = sortedB[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
 
@@ -353,8 +369,29 @@
     const percentageTextA = pA ? " (" + pA + "%)" : "";
     const percentageTextB = pB ? " (" + pB + "%)" : "";
 
+    if (nA !== "" &&  last !== 'x' && last !== 'f' && last !== 'b' && secondLast !== 'x' && secondLast !== 'f' && secondLast !== 'b'){
+   
+    if(parseInt(nA) + parseInt(last) <= 36) { 
+      const x = (parseInt(nA) + parseInt(last));
+      const m = rouletteOrder.indexOf(parseInt(x));
+      f = String(rouletteOrder[parseInt(m)]);
+      
+      console.log("x",x)
+    }
+    
+    if(parseInt(nA) + parseInt(last) > 36) { 
+      const x  = parseInt(nA) + parseInt(last) - 37;
+      console.log("x",x)
+      const m = rouletteOrder.indexOf(parseInt(x));
+      f = String(rouletteOrder[parseInt(m)]);
+    }
+    
+  }
+  else{f = 0;}
+
+
     // Text innerhalb von Label 1 (Label 1)
-    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA;
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA + "       " + f.toString();
     // Text innerhalb von Label 2 (Label 2)
     document.querySelector(`.label-container:nth-child(${i}) label:nth-child(2)`).textContent = cA + percentageTextA;
     // Text innerhalb von Label 3 (Label 3)
