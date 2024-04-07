@@ -145,7 +145,6 @@
   <div id="main-container"></div>
   <input type="file" id="file-input" accept="image/*">
   <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
-  <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
   <script>
     document.getElementById('file-input').addEventListener('change', function(event) {
       // Get the selected image file
@@ -242,6 +241,40 @@
     mainContainer.appendChild(labelContainer);
   }
 
+  function recalculateNeighbors(modifiziertesArrayA) {
+    const neighbors = {};
+    let A = [];
+    let Neighbors = 0;
+    for (let i = 0; i < modifiziertesArrayA.length -1; i++) {
+      const number = parseInt(modifiziertesArrayA[i + 1]);
+      const prevnumber = parseInt(modifiziertesArrayA[i]);
+      
+        console.log("Number:", number);
+        console.log("Previous Number as:", prevnumber);
+        const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+        
+   
+     
+        if (prevnumber !== 'x' && prevnumber !== 'f' && prevnumber !== 'b' && number !== 'x' && number !== 'f' && number !== 'b') {
+        let f = 0;
+        if(37 - prevnumber > 0) { f = prevnumber;    const d = rouletteOrder[parseInt(f)];  console.log("DL", prevnumber);   A[i] = String(d) }
+        if(37 - prevnumber < 0) { f = prevnumber - 37;   const r = rouletteOrder[parseInt(f)]; A[i] = String(r)}
+
+        } 
+   
+        
+    }
+    console.log("Array A:", A);
+   
+    return A;
+}
+
+
+
+
+
+
+
   // Function to calculate neighbors
   function calculateNeighbors(numbersArray) {
     const neighbors = {};
@@ -288,6 +321,24 @@
 }
 
 
+function addLastElementToEachPosition(array, s) {
+  // Entferne Duplikate
+  array = array.filter((value, index, self) => {
+      return self.indexOf(value) === index;
+  });
+
+  // Sortieren des Arrays
+  array.sort((a, b) => a - b);
+  const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+  const lastElement = array[array.length - 1];
+  for (let i = 0; i < array.length; i++) {
+        const prevNumberIndex = rouletteOrder.indexOf(parseInt(s));
+      array[i] = String(parseInt(array[i]) + parseInt(prevNumberIndex ));
+  }
+  return array;
+}
+
+// Beispielaufruf der Funktion mit dem Array 'sortedPercentages'
 
 
   document.getElementById('confirm-button').addEventListener('click', function() {
@@ -295,17 +346,24 @@
     
       // Extract numbers and remove non-numeric characters
       const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num) || num === 'x' || num === 'f' || num === 'b');
-
+      const letzteZahl = numbersArray[numbersArray.length - 1];
       console.log(numbersArray);
       //const neighbors = calculateNeighbors(numbersArray);
       const [A, B] = calculateNeighbors(numbersArray);
       
-        console.log(A);
-        console.log(B);
+        console.log("s",A);
+        console.log(B); 
 
         const sortedA = calculatePercentage(A);
         const sortedB = calculatePercentage(B);
 
+        const modifiziertesArrayA =   addLastElementToEachPosition(A, letzteZahl);
+        const modifiziertesArrayB=  addLastElementToEachPosition(B, letzteZahl);
+
+        console.log("MOD", modifiziertesArrayA);
+        const [X] = recalculateNeighbors(modifiziertesArrayA);
+        console.log(X, "Penis");
+      
         console.log("Sorted Array A:", sortedA);
         console.log("Sorted Array B:", sortedB);
        
@@ -336,27 +394,11 @@
         for (let i = 1; i <= 37; i++) {
     // Text innerhalb von Label 1 (Label 1)
     const AElement = sortedA[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
-     
+
     // Accessing properties of the element
     const cA = AElement.count !== null && AElement.count !== undefined && AElement.count !== "" ? Math.round(AElement.count) : "";
     const nA = AElement.number !== null && AElement.number !== undefined ? AElement.number.toString() : "";
     const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(3) : ""; // Round to 3 decimal places if it's a valid number
-    const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-    
-    const numbersInput = document.getElementById('number-input').value.trim();
-    
-      // Extract numbers and remove non-numeric characters
-    const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num) || num === 'x' || num === 'f' || num === 'b');
-
-
-//
-let secondLast = String(numbersArray[numbersArray.length - 2]);
-let last = String(numbersArray[numbersArray.length - 1]);
-
-    console.log(" last" ,secondLast);
-
-   
-    console.log("second last" ,last);
 
     const BElement = sortedB[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
 
@@ -369,29 +411,8 @@ let last = String(numbersArray[numbersArray.length - 1]);
     const percentageTextA = pA ? " (" + pA + "%)" : "";
     const percentageTextB = pB ? " (" + pB + "%)" : "";
 
-    if (nA !== "" &&  last !== 'x' && last !== 'f' && last !== 'b' && secondLast !== 'x' && secondLast !== 'f' && secondLast !== 'b'){
-   
-    if(parseInt(nA) + parseInt(last) <= 36) { 
-      const x = (parseInt(nA) + parseInt(last));
-      const m = rouletteOrder.indexOf(parseInt(x));
-      f = String(rouletteOrder[parseInt(m)]);
-      
-      console.log("x",x)
-    }
-    
-    if(parseInt(nA) + parseInt(last) > 36) { 
-      const x  = parseInt(nA) + parseInt(last) - 37;
-      console.log("x",x)
-      const m = rouletteOrder.indexOf(parseInt(x));
-      f = String(rouletteOrder[parseInt(m)]);
-    }
-    
-  }
-  else{f = 0;}
-
-
     // Text innerhalb von Label 1 (Label 1)
-    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA + "       " + f.toString();
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA;
     // Text innerhalb von Label 2 (Label 2)
     document.querySelector(`.label-container:nth-child(${i}) label:nth-child(2)`).textContent = cA + percentageTextA;
     // Text innerhalb von Label 3 (Label 3)
