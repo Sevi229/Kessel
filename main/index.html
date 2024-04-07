@@ -254,9 +254,8 @@
 
                 <li>
                     <input type="checkbox" id="checkbox8" name="checkbox8">
-                    <label for="checkbox8">Option 8</label>
+                    <label for="checkbox8">Data upload Upgrade</label>
                 </li>
-                <!-- Weitere Checkboxen nach Bedarf hinzufügen -->
             </ul>
         </div>
         <div class="main-content">
@@ -326,7 +325,25 @@
             </div>
 
             <div id="div8" style="display: none;">
-                <p>Infos zu Kessel: z.B 2.70% = Durchschnitt wie oft sein sollte</p>
+                <input type="file" id="fileInput">
+                <button id="newtable">neue tabelle</button>
+                <textarea id="bigInput" name="bigInput"></textarea>
+                <table id="infoTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pfad</th>
+                            <th>Array</th>
+                            <th>Bearbeiten</th>
+                            <th>Löschen</th>
+                            <th>Speichern</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Hier wird die Dateiinformation eingefügt -->
+                    </tbody>
+                </table>
+                <button onclick=AuslesenArray(0)>test</button>
             </div>
         </div>
     </div>
@@ -339,6 +356,8 @@
         const input1 = document.getElementById('input1');
         const input2 = document.getElementById('input2');
         var rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+        let rowIdCounter = 0; 
+        let arrays = {};
 
         // einfach generierte Testdaten
         // var numbers = [];
@@ -346,12 +365,164 @@
         //     numbers.push(Math.floor(Math.random() * 37));
         // }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var maininput = document.getElementById('number-input').value.split(',');
-            console.log(maininput);
-            console.log(calculateDistances(maininput));
-            erstellenTabelle(maininput);
-        });
+
+        //einlesen Daten
+        document.getElementById('fileInput').addEventListener('change', readFile);
+        document.getElementById('newtable').addEventListener('click', readFile);
+
+        function readFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            const textInput = document.getElementById('bigInput').value;
+            const tableBody = document.getElementById('tableBody');
+        
+            const fileID = rowIdCounter++;
+            const rowId = `row-${fileID}`;
+            let content, isJson = false;
+        
+            if (file) {
+                const reader = new FileReader();
+            
+                reader.onload = function(e) {
+                    content = e.target.result;
+                    if (file.type === "application/json") {
+                        isJson = true;
+                    }
+                    processContent(content, isJson, fileID, file.name);
+                };
+            
+                reader.readAsText(file);
+            } else if (textInput.trim() !== '') {
+                content = extractNumbers(textInput);
+                console.log("textInput: " + textInput);
+                console.log("content: "+content);
+                processContent(content, isJson, fileID, 'Text Input');
+            } else {
+                addRow(fileID, '', '');
+            }
+        }
+
+        function processContent(content, isJson, fileID, fileName) {
+            let array = [];
+        
+            if (isJson) {
+                array = JSON.parse(content);
+            } else {
+                array = content;
+            }
+        
+            arrays[fileID] = array;
+        
+            addRow(fileID, fileName, array);
+            document.getElementById('fileInput').value = '';
+            document.getElementById('bigInput').value = '';
+        }
+
+        function addRow(fileID, fileName, array) {
+            const tableBody = document.getElementById('tableBody');
+            const rowId = `row-${fileID}`;
+
+            const last20Numbers = array.slice(-20);
+            tableBody.innerHTML += `
+                <tr id="${rowId}">
+                    <td>${fileID}</td>
+                    <td>${fileName}</td>
+                    <td>${last20Numbers}</td>
+                    <td>
+                        <input type="text" id="input-${rowId}">
+                        <button onclick="addElementToArray('${fileID}')">OK</button>
+                    </td>
+                    <td><button onclick="deleteRow(this, ${fileID})">Löschen</button></td>
+                    <td><button onclick="saveArrayAsJson(${fileID})">Speichern</button></td>
+                </tr>
+            `;
+        }
+
+        function addElementToArray(fileID) {
+        
+            var array = arrays[fileID];
+            console.log("array: " + array);
+            const rowId = `row-${fileID}`;
+            const inputElement = document.getElementById(`input-${rowId}`);
+            const newValue = inputElement.value.trim();
+        
+            if (newValue) {
+                if (array.length > 0 && array[0] !== '') {
+                    array.push(newValue);
+                } else {
+                    array[0] = newValue;
+                }
+            
+                arrays[fileID] = array;
+            
+                const last20Numbers = array.slice(-20);
+            
+                const newRowContent = `
+                    <td>${fileID}</td>
+                    <td>${document.getElementById(rowId).cells[1].textContent}</td>
+                    <td>${last20Numbers.join(', ')}</td>
+                    <td>
+                        <input type="text" id="input-${rowId}">
+                        <button onclick="addElementToArray('${fileID}')">OK</button>
+                    </td>
+                    <td><button onclick="deleteRow(this, ${fileID})">Löschen</button></td>
+                    <td><button onclick="saveArrayAsJson(${fileID})">Speichern</button></td>
+                `;
+                
+                document.getElementById(rowId).innerHTML = newRowContent;
+                inputElement.value = '';
+            }
+        }
+
+        function saveArrayAsJson(fileID) {
+            const array = arrays[fileID];
+            if (array) {
+                const jsonString = JSON.stringify(array);
+                const blob = new Blob([jsonString], {type: "application/json"});
+                const url = URL.createObjectURL(blob);
+            
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `array-${fileID}.json`;
+                document.body.appendChild(a);
+                a.click();
+            
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else {
+                alert('Array nicht gefunden.');
+            }
+        }
+
+        function deleteRow(button, fileID) {
+            delete arrays[fileID];
+            button.parentElement.parentElement.remove();
+        }
+
+        function AuslesenArray(FileID) {
+            const array = arrays[FileID];
+            if (array) {
+                console.log('Array für FileID', FileID, ':', array);
+                erstellenTabelle(array)
+                return array;
+            } else {
+                console.log('Kein Array für FileID gefunden:', FileID);
+                return null;
+            }
+        }
+
+        //Html Daten von jackpods.ch auswerten
+        function extractNumbers(a) {
+            const regex = /data-role="number-(\d{1,2})"/g;
+            let match;
+            let numbers = [];
+        
+            while ((match = regex.exec(a)) !== null) {
+                numbers.push(parseInt(match[1], 10));
+            }
+        
+            return numbers.reverse();
+        }
 
         // Input Load Image
         document.getElementById('file-input').addEventListener('change', function (event) {
@@ -509,30 +680,6 @@
 
         });
 
-        //Download Button
-        //   document.getElementById('load-button').addEventListener('click', function() {
-        //     document.getElementById('file-input').click();
-        //   });
-
-        //   document.getElementById('file-input').addEventListener('change', function(event) {
-        //     const file = event.target.files[0];
-        //     const reader = new FileReader();
-        //     reader.onload = function(e) {
-        //       const content = e.target.result;
-        //       try {
-        //         const parsedData = JSON.parse(content);
-        //         if (parsedData && parsedData.numbers && Array.isArray(parsedData.numbers)) {
-        //           document.getElementById('number-input').value = parsedData.numbers.join(' ');
-        //         } else {
-        //           alert('Invalid JSON format. Please select a valid JSON file.');
-        //         }
-        //       } catch (error) {
-        //         alert('Error parsing JSON. Please select a valid JSON file.');
-        //       }
-        //     };
-        //     reader.readAsText(file);
-        //   });
-
         //Logik Suchfeld
         function searchTableInMultipleTables(tableIds, columnIndex) {
             var input, filter, i, j, table, tr, td, txtValue;
@@ -664,27 +811,34 @@
             var probabilities = calculateProbabilities(numbersArray);
             var occurrences = countOccurrences(numbersArray);
             var distances = calculateDistances(numbersArray);
+            console.log("distances: ", distances);
 
             // Tabelle aufbauen
-            var tBody = $('#meineTabelle tbody');
-            $.each(distances, function (index, value) {
-                var row = `<tr>
-                                <td>${value.distance}</td>
-                                <td class="hidden">${value.count}</td>
-                                <td>${value.percentage}%</td>
-                            </tr>`;
-                tBody.append(row);
-            });
+
+            //Hier an kessel könnte auch der fehler sein da der code unten nicht geht
+            // var tBody = $('#meineTabelle tbody');
+            // $.each(distances, function (index, value) {
+            //     var row = `<tr>
+            //                     <td>${value.distance}</td>
+            //                     <td class="hidden">${value.count}</td>
+            //                     <td>${value.percentage}%</td>
+            //                 </tr>`;
+            //     tBody.append(row);
+            // });
 
             var tBody2 = $('#meineTabelle2 tbody');
-            $.each(occurrences, function (index, value) {
-                var row = `<tr>
-                                <td>${index}</td>
-                                <td class="hidden">${value.count}</td>
-                                <td>${value.percentage}%</td>
-                            </tr>`;
-                tBody2.append(row);
-            });
+
+// Leert den Inhalt der Tabelle, bevor neue Zeilen hinzugefügt werden
+tBody2.empty();
+
+$.each(occurrences, function (index, value) {
+    var row = `<tr>
+                    <td>${index}</td>
+                    <td class="hidden">${value.count}</td>
+                    <td>${value.percentage}%</td>
+                </tr>`;
+    tBody2.append(row);
+});
         }
         
 
