@@ -241,34 +241,6 @@
     mainContainer.appendChild(labelContainer);
   }
 
-  function recalculateNeighbors(modifiziertesArrayA) {
-    const neighbors = {};
-    let A = [];
-    let Neighbors = 0;
-    for (let i = 0; i < modifiziertesArrayA.length -1; i++) {
-      const number = parseInt(modifiziertesArrayA[i + 1]);
-      const prevnumber = parseInt(modifiziertesArrayA[i]);
-      
-        console.log("Number:", number);
-        console.log("Previous Number as:", prevnumber);
-        const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-        
-   
-     
-        if (prevnumber !== 'x' && prevnumber !== 'f' && prevnumber !== 'b' && number !== 'x' && number !== 'f' && number !== 'b') {
-        let f = 0;
-        if(37 - prevnumber > 0) { f = prevnumber;    const d = rouletteOrder[parseInt(f)];  console.log("DL", prevnumber);   A[i] = String(d) }
-        if(37 - prevnumber < 0) { f = prevnumber - 37;   const r = rouletteOrder[parseInt(f)]; A[i] = String(r)}
-
-        } 
-   
-        
-    }
-    console.log("Array A:", A);
-   
-    return A;
-}
-
 
 
 
@@ -321,22 +293,7 @@
 }
 
 
-function addLastElementToEachPosition(array, s) {
-  // Entferne Duplikate
-  array = array.filter((value, index, self) => {
-      return self.indexOf(value) === index;
-  });
 
-  // Sortieren des Arrays
-  array.sort((a, b) => a - b);
-  const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-  const lastElement = array[array.length - 1];
-  for (let i = 0; i < array.length; i++) {
-        const prevNumberIndex = rouletteOrder.indexOf(parseInt(s));
-      array[i] = String(parseInt(array[i]) + parseInt(prevNumberIndex ));
-  }
-  return array;
-}
 
 // Beispielaufruf der Funktion mit dem Array 'sortedPercentages'
 
@@ -357,35 +314,49 @@ function addLastElementToEachPosition(array, s) {
         const sortedA = calculatePercentage(A);
         const sortedB = calculatePercentage(B);
 
-        const modifiziertesArrayA =   addLastElementToEachPosition(A, letzteZahl);
-        const modifiziertesArrayB=  addLastElementToEachPosition(B, letzteZahl);
 
-        console.log("MOD", modifiziertesArrayA);
-        const [X] = recalculateNeighbors(modifiziertesArrayA);
-        console.log(X, "Penis");
-      
         console.log("Sorted Array A:", sortedA);
         console.log("Sorted Array B:", sortedB);
        
 
         function calculatePercentage(array) {
-    const percentages = {};
-    const length = array.length;
-
-    // Count occurrences of each number
-    array.forEach(number => {
-        percentages[number] = (percentages[number] || 0) + (1 / length * 100);
-    });
-
-    // Convert to an array of objects with count, number, and percentage
-    const sortedPercentages = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
-    const result = sortedPercentages.map(entry => {
-        return {
-            count: entry[1] / 100 * length, // Calculate count
-            number: parseInt(entry[0]), // Convert number to integer
-            percentage: entry[1] // Keep percentage
-        };
-    });
+          const percentages = {};
+          const length = array.length;
+          array.forEach(number => {
+            percentages[number] = (percentages[number] || 0) + (1 / length * 100);
+        });
+    
+        // Convert to an array of objects with count, number, and percentage
+        const sortedPercentages = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+       const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+        const numbersInput = document.getElementById('number-input').value.trim();
+        const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num));
+        const furz = numbersArray[numbersArray.length - 1];
+        console.log("Furzy" + furz)
+    
+        const result = sortedPercentages.map(entry => {
+            const number = parseInt(entry[0]);
+            const percentage = entry[1];
+            
+            let nextNumberIndex = number;
+            let neighborIndex = nextNumberIndex + rouletteOrder.indexOf(parseInt(furz));
+            console.log(rouletteOrder.indexOf(parseInt(furz))), "NN";
+            console.log(nextNumberIndex);
+            // Adjust neighborIndex to stay within the bounds of the rouletteOrder array
+            if (neighborIndex >= rouletteOrder.length) {
+                neighborIndex -= rouletteOrder.length;
+            }
+           
+    
+            const oppositeNeighbor = rouletteOrder[neighborIndex];
+    
+            return {
+                count: percentage / 100 * length, // Calculate count
+                number: number, // Convert number to integer
+                percentage: percentage, // Keep percentage
+                bet: oppositeNeighbor // Assign the opposite neighbor as the bet
+            };
+        });
 
     return result;
 }
@@ -399,7 +370,8 @@ function addLastElementToEachPosition(array, s) {
     const cA = AElement.count !== null && AElement.count !== undefined && AElement.count !== "" ? Math.round(AElement.count) : "";
     const nA = AElement.number !== null && AElement.number !== undefined ? AElement.number.toString() : "";
     const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(3) : ""; // Round to 3 decimal places if it's a valid number
-
+    const ppops = AElement.bet;
+    console.log(ppops);
     const BElement = sortedB[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
 
     // Accessing properties of the element
