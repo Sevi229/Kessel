@@ -77,17 +77,13 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 0 5px; /* Equal spacing */
     max-width: 65%;
     margin: 0 auto;
-    background-color: green;
     border-radius: 15px;
     padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 10px;
-  }
+    background: linear-gradient(to right, rgb(207, 206, 206) 50%, #c0c0c0 50%); /* Gradient */
+}
 
   .label {
     flex: 1;
@@ -99,22 +95,92 @@
     align-items: center;
     height: 10vh;
 }
-.content {
-    text-align: center;
+/* Text in A */
+/* Text in A */
+/* Text in A */
+.label-text-A {
+  color: #0000FF; /* Meerblau */
+  font-style: italic; /* Kursiver Textstil */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten */
 }
-.pp {
-    margin-right: 10px;
+
+/* Text in B */
+.label-text-B {
+  color: #9900cc; /* Violette Textfarbe für Text in B auf dunklem Hintergrund */
+  font-style: italic; /* Kursiver Textstil */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten */
 }
-.input1 {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.container {
+  display: flex;
+  justify-content: center; /* Zentriert die Tabelle horizontal */
+  margin: 0 auto; /* Zur Horizontalen zentrierung */
+  padding: 0 8%;
+  max-width: 100%;
 }
-.input2 {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  max-width: 100%;
 }
+
+.sortable-table {
+  border-collapse: collapse;
+  font-size: 16px;
+  width: auto;
+  transform-origin: top left;
+}
+
+.sortable-table th, .sortable-table td {
+  border: 1px solid #ddd;
+  padding: 23px;
+  text-align: left;
+}
+
+.sortable-table th {
+  background-color: #f2f2f2;
+  cursor: pointer;
+  position: relative;
+}
+
+.sortable-table th .arrow {
+  margin-left: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sortable-table th:hover {
+  background-color: #ddd;
+}
+
+.sortable-table th:last-child, .sortable-table td:last-child {
+  border-right: none;
+}
+
+.sortable-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.sortable-table tr:hover {
+  background-color: #ddd;
+}
+
+.unsortable {
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+}
+
+.select-strategy-select, .style-select {
+  width: 100px;
+  font-size: 14px;
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
 
 </style>
 </head>
@@ -140,12 +206,165 @@
       <label id="pp" for="input1">Label:</label>
     </div>
   </div>
-  
+   
   <!-- Insert provided HTML code here -->
   <div id="main-container"></div>
+  <div class="container">
+    <div class="table-container">
+      <table class="sortable-table">
+        <thead>
+          <tr>
+            <th>Strategy 
+              <select class="select-strategy-select">
+                <option value="all">All</option>
+                <option value="third">Third</option>
+                <option value="quarter">Quarter</option>
+                <option value="half">Half</option>
+                <option value="2-thirds">2-Thirds</option>
+                <option value="3-quarters">3-Quarters</option>
+              </select>
+            </th>
+            <th>Style
+              <select class="style-select">
+                <option value="all">All</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="middle">Middle</option>
+                <option value="most">Most</option>
+              </select>
+            </th>
+            <th class="sortable" data-type="numeric">Numbers <span class="arrow">&#x25B2;</span></th>
+            <th class="sortable" data-type="numeric">Count <span class="arrow">&#x25B2;</span></th>
+            <th class="sortable" data-type="numeric">Percent <span class="arrow">&#x25B2;</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>All</td>
+            <td>All</td>
+            <td class="unsortable">1</td>
+            <td>10</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>Third</td>
+            <td>Left Right</td>
+            <td class="unsortable">2</td>
+            <td>5</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>Quarter</td>
+            <td>Middle</td>
+            <td class="unsortable">3</td>
+            <td>15</td>
+            <td>30%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <input type="file" id="file-input" accept="image/*">
   <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
   <script>
+    // Funktion zum Anpassen der Schriftgröße basierend auf der Container-Breite
+// Funktion zum Anpassen der Schriftgröße, bis der Text innerhalb des Containers passt
+// Funktion zum Anpassen der Schriftgröße, bis der Text innerhalb des Containers passt
+document.addEventListener('DOMContentLoaded', function() {
+  const arrows = document.querySelectorAll('.arrow');
+
+  arrows.forEach(arrow => {
+    arrow.addEventListener('click', function() {
+      const th = arrow.parentElement;
+      const column = th.cellIndex;
+      const table = th.closest('table');
+      const type = th.dataset.type;
+
+      // Toggle arrow direction
+      if (arrow.classList.contains('asc')) {
+        arrow.classList.remove('asc');
+        arrow.classList.add('desc');
+      } else {
+        arrow.classList.remove('desc');
+        arrow.classList.add('asc');
+      }
+
+      const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+      rows.sort((rowA, rowB) => {
+        let valueA, valueB;
+
+        if (type === 'numeric') {
+          valueA = parseFloat(rowA.cells[column].textContent);
+          valueB = parseFloat(rowB.cells[column].textContent);
+        } else {
+          valueA = rowA.cells[column].textContent;
+          valueB = rowB.cells[column].textContent;
+        }
+
+        if (arrow.classList.contains('asc')) {
+          return valueA > valueB ? 1 : -1;
+        } else {
+          return valueA < valueB ? 1 : -1;
+        }
+      });
+
+      // Rearrange rows
+      table.querySelector('tbody').innerHTML = '';
+      rows.forEach(row => table.querySelector('tbody').appendChild(row));
+    });
+  });
+});
+
+
+
+
+
+
+function adjustFontSize() {
+  const containers = document.querySelectorAll('.label-container');
+  containers.forEach(container => {
+    const labelA = container.querySelector('.label-text-A');
+    const labelB = container.querySelector('.label-text-B');
+    const containerWidth = container.offsetWidth;
+    const maxFontSize = 24; // Maximal zulässige Schriftgröße
+    const reductionStep = 2; // Schrittgröße für die Reduktion der Schriftgröße
+
+    let fontSize = maxFontSize; // Starte mit der maximalen Schriftgröße
+
+    // Schleife, um die Schriftgröße schrittweise zu reduzieren, bis der Text passt
+    while (labelA.offsetWidth > containerWidth / 2 || labelB.offsetWidth > containerWidth / 2) {
+      fontSize -= reductionStep;
+      if (fontSize <= 0) break; // Abbruch, wenn die Schriftgröße 0 oder negativ wird
+      labelA.style.fontSize = fontSize + 'px';
+      labelB.style.fontSize = fontSize + 'px';
+    }
+  });
+}
+window.addEventListener('resize', function() {
+  resizeTable();
+});
+
+function resizeTable() {
+  var tableContainer = document.querySelector('.table-container');
+  var table = document.querySelector('.sortable-table');
+  var containerWidth = tableContainer.offsetWidth;
+  var tableWidth = table.offsetWidth;
+  var scaleFactor = containerWidth / tableWidth;
+
+  table.style.transform = 'scale(' + scaleFactor + ')';
+}
+
+
+
+// Ruf die Funktion einmal beim Laden der Seite auf
+window.addEventListener('load', adjustFontSize);
+
+// Ruf die Funktion erneut auf, wenn sich die Fenstergröße ändert
+window.addEventListener('resize', adjustFontSize);
+
+    
+    
     document.getElementById('file-input').addEventListener('change', function(event) {
       // Get the selected image file
       var files = event.target.files;
@@ -369,28 +588,36 @@
     // Accessing properties of the element
     const cA = AElement.count !== null && AElement.count !== undefined && AElement.count !== "" ? Math.round(AElement.count) : "";
     const nA = AElement.number !== null && AElement.number !== undefined ? AElement.number.toString() : "";
-    const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(3) : ""; // Round to 3 decimal places if it's a valid number
+    const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(2) : ""; // Round to 3 decimal places if it's a valid number
     const ppops = AElement.bet;
+    const nrA = AElement.bet !== null && AElement.bet !== undefined ? `  ${AElement.bet.toString()}` : "";
+
     console.log(ppops);
     const BElement = sortedB[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
 
     // Accessing properties of the element
     const cB = BElement.count !== null && BElement.count !== undefined && BElement.count !== "" ? Math.round(BElement.count) : "";
     const nB = BElement.number !== null && BElement.number !== undefined ? BElement.number.toString() : "";
-    const pB = BElement.percentage !== null && BElement.percentage !== undefined && !isNaN(parseFloat(BElement.percentage)) ? parseFloat(BElement.percentage).toFixed(3) : ""; // Round to 3 decimal places if it's a valid number
+    const pB = BElement.percentage !== null && BElement.percentage !== undefined && !isNaN(parseFloat(BElement.percentage)) ? parseFloat(BElement.percentage).toFixed(2) : ""; // Round to 3 decimal places if it's a valid number
+    const prB = BElement.bet !== null && BElement.bet !== undefined ? `  ${BElement.bet.toString()}` : "";
 
     // Additional text for percentage
     const percentageTextA = pA ? " (" + pA + "%)" : "";
     const percentageTextB = pB ? " (" + pB + "%)" : "";
 
     // Text innerhalb von Label 1 (Label 1)
-    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA;
-    // Text innerhalb von Label 2 (Label 2)
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA + nrA;
     document.querySelector(`.label-container:nth-child(${i}) label:nth-child(2)`).textContent = cA + percentageTextA;
-    // Text innerhalb von Label 3 (Label 3)
-    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(3)`).textContent = nB;
-    // Text innerhalb von Label 4 (Label 4)
+    
+    // Labels innerhalb von B
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(3)`).textContent = nB + prB;
     document.querySelector(`.label-container:nth-child(${i}) label:nth-child(4)`).textContent = cB + percentageTextB;
+    
+    // Klassen für die Textfarben hinzufügen
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).classList.add('label-text-A');
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(2)`).classList.add('label-text-A');
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(3)`).classList.add('label-text-B');
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(4)`).classList.add('label-text-B');
 }
 
     
