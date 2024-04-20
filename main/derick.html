@@ -172,8 +172,8 @@
   cursor: default;
 }
 
-.select-strategy-select, .style-select {
-  width: 100px;
+.select-strategy-select, .style-select, .select-show {
+  width: 60px;
   font-size: 14px;
 }
 
@@ -214,23 +214,28 @@
       <table class="sortable-table">
         <thead>
           <tr>
-            <th>Strategy 
+            <th> Strategy 
               <select class="select-strategy-select">
-                <option value="all">All</option>
-                <option value="third">Third</option>
-                <option value="quarter">Quarter</option>
-                <option value="half">Half</option>
-                <option value="2-thirds">2-Thirds</option>
-                <option value="3-quarters">3-Quarters</option>
+                <option value="all" data-number="1">All</option>
+                <option value="third" data-number="2">Third</option>
+                <option value="quarter" data-number="3">Quarter</option>
+                <option value="half" data-number="4">Half</option>
+                <option value="2-thirds" data-number="5">2-Thirds</option>
+                <option value="3-quarters" data-number="6">3-Quarters</option>
+              </select>
+              <select class="select-show">
+                <option value="all1" data-number="1">All</option>
+                <option value="green" data-number="2">Ready</option>
+                <option value="red" data-number="3">False</option>
               </select>
             </th>
             <th>Style
               <select class="style-select">
-                <option value="all">All</option>
-                <option value="left">Left</option>
-                <option value="right">Right</option>
-                <option value="middle">Middle</option>
-                <option value="most">Most</option>
+                <option value="all2" data-number="1">All</option>
+                <option value="left" data-number="2">Left</option>
+                <option value="right" data-number="3">Right</option>
+                <option value="middle" data-number="4">Middle</option>
+                <option value="most" data-number="5">Most</option>
               </select>
             </th>
             <th class="sortable" data-type="numeric">Numbers <span class="arrow">&#x25B2;</span></th>
@@ -267,6 +272,56 @@
   <input type="file" id="file-input" accept="image/*">
   <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
   <script>
+    let strategyNumber = 0;
+    let showNumber = 0;
+    let styleNumber = 0;
+    let numbersArray = [[], []];
+    
+    
+
+
+
+
+    // Get references to the select elements
+    const strategySelect = document.querySelector('.select-strategy-select');
+    const showSelect = document.querySelector('.select-show');
+    const styleSelect = document.querySelector('.style-select');
+
+    // Event listener for strategy select
+    strategySelect.addEventListener('change', function() {
+      const selectedOption = strategySelect.options[strategySelect.selectedIndex];
+      strategyNumber = parseInt(selectedOption.dataset.number);
+      console.log('Selected Strategy Number:', strategyNumber);
+    });
+
+    // Event listener for show select
+    showSelect.addEventListener('change', function() {
+      const selectedOption = showSelect.options[showSelect.selectedIndex];
+      showNumber = parseInt(selectedOption.dataset.number);
+      console.log('Selected Show Number:', showNumber);
+    });
+
+    // Event listener for style select
+    styleSelect.addEventListener('change', function() {
+      const selectedOption = styleSelect.options[styleSelect.selectedIndex];
+      styleNumber = parseInt(selectedOption.dataset.number);
+      console.log('Selected Style Number:', styleNumber);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Funktion zum Anpassen der Schriftgröße basierend auf der Container-Breite
 // Funktion zum Anpassen der Schriftgröße, bis der Text innerhalb des Containers passt
 // Funktion zum Anpassen der Schriftgröße, bis der Text innerhalb des Containers passt
@@ -511,6 +566,139 @@ window.addEventListener('resize', adjustFontSize);
     return [A, B];
 }
 
+function calculateNeighborsKessel(numbersArray) {
+  const neighbors = {};
+  let bool = true;
+  let A = [];
+  let B = [];
+  let Neighbors = 0;
+  for (let i = 0; i < numbersArray.length-1; i++) {
+      const number = numbersArray[i + 1];
+      const prevnumber = numbersArray[i];
+      console.log("Number:", number);
+      console.log("Previous Number:", prevnumber);
+      const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+      let nextNumberIndex = rouletteOrder.indexOf(parseInt(number));
+      let prevNumberIndex = rouletteOrder.indexOf(parseInt(prevnumber));
+      console.log("Position of next number:", nextNumberIndex);
+      console.log("Position of previous number:", prevNumberIndex);
+      if (prevnumber === 'f') {
+          bool = true;
+      } if (prevnumber === 'b') {
+          bool = false;
+      }
+      if (bool) {
+      if(prevnumber === 'x' || prevnumber === 'f' || prevnumber === 'b' && number === 'x' || number === 'f' || number === 'b'){  A.push("k");}
+      else{
+      let f = 0;
+      if(nextNumberIndex - prevNumberIndex > 0) { f = nextNumberIndex - prevNumberIndex }
+      if(nextNumberIndex - prevNumberIndex < 0) { f = 37 + (nextNumberIndex - prevNumberIndex)}
+          A.push(f);
+          console.log("Gezählte Nachbarn F:",f );
+      }
+      }
+      if (!bool) {
+      if(prevnumber === 'x' || prevnumber === 'f' || prevnumber === 'b' || number === 'x' || number === 'f' || number === 'b'){B.push("k");}
+      else{
+      let b = 0;
+      if(nextNumberIndex - prevNumberIndex > 0) { b = nextNumberIndex - prevNumberIndex }
+      if(nextNumberIndex - prevNumberIndex < 0) { b = 37 + (nextNumberIndex - prevNumberIndex)}
+          
+          B.push(b);
+          console.log("Gezählte Nachbarn B:",b );
+
+      }
+      }
+      
+  }
+  console.log("Array A:", A);
+  console.log("Array B:", B);
+  return [A, B];
+}
+function evaluateArray(arr) {
+  // Initialisiere das Mehrdimensionale Array zur Speicherung der Ergebnisse
+  let resultArray = [];
+  let nesw = [];
+  // Definiere die Array-Länge für den Iterationsbereich
+  let arrayLength = arr.length;
+
+  // Iteriere über das Array mit drei verschachtelten forEach-Schleifen
+  [2, 3, 4, 5, 6, 7].forEach(num1 => {
+      [27, 24, 18, 12, 9].forEach(num2 => {
+          [0, 1, 2, 3].forEach(num3 => { // Add foreach loop for num3
+              let isValid = true; // Setze die Bedingung zunächst auf gültig
+              let hasK = false; // Initialisiere den Wert für 'k'
+              let diff = -1;
+         
+              // Überprüfe, ob genug Elemente im Array vorhanden sind
+              if (arrayLength < num1) {
+                  isValid = false; // Setze die Bedingung auf ungültig, wenn nicht genügend Elemente vorhanden sind
+              } else {
+                  for (let i = arrayLength - num1; i < arrayLength; i++) {
+                      // Überprüfe, ob das Kriterium erfüllt ist
+                       diff = Math.max(...arr.slice(i - num1 + 1, i + 1)) - Math.min(...arr.slice(i - num1 + 1, i + 1));
+                      if (diff > num2) {
+                          isValid = false; // Setze die Bedingung auf ungültig, wenn das Kriterium nicht erfüllt ist
+                          break; // Beende die Schleife, wenn die Bedingung nicht erfüllt ist
+                      }
+                      if (arr[i] === 'k') {
+                          hasK = true; // Setze 'k' auf true, wenn es zwischen den letzten 'num1' Elementen vorkommt
+                      }
+                  }
+              }
+           
+            if (num3 === 0 && isValid === true) {
+              //ubrige nachbare
+                const u1 = 36 - num2 + diff; 
+                console.log("Zero");
+                //Links kleiner
+                for (let i = u1; i <= num2 + u1; i++) {
+                  console.log("Iteration " + i);
+                  nesw.push(i);
+               
+
+                
+
+            }
+            if (num3 === 1 && isValid === true) {
+
+              const u2 = 36 - num2 + diff;  //Umgekehrtr - reserverit + freie noch
+              for (let i = u2 * -1; i <= num2 - u2; i++) {
+                console.log("Iteration " + i);
+                nesw.push(i);
+
+              }
+              
+            }
+            if (num3 === 2 && isValid === true) {
+              const u3 = 36- num2 + diff; 
+              for (let i = 0; i <= num2; i++) {
+                console.log("Iteration " + i);
+                nesw.push(i);
+
+              }
+            }
+            if (num3 === 3 && isValid === true) {
+                console.log("Three");
+                nesw.push(i);
+            }
+
+            }
+              // Füge das Ergebnis in das Mehrdimensionale Array ein
+              let result = isValid ? (hasK ? 'F' : 'T') : 'F'; // Wenn isValid true ist, prüfe ob 'k' vorhanden ist, ansonsten ist das Ergebnis 'F'
+              resultArray.push([num1, num2, num3, diff, result]);
+          });
+      });
+  });
+
+  return resultArray;
+}
+
+
+
+
+
+
 
 
 
@@ -521,7 +709,7 @@ window.addEventListener('resize', adjustFontSize);
     const numbersInput = document.getElementById('number-input').value.trim();
     
       // Extract numbers and remove non-numeric characters
-      const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num) || num === 'x' || num === 'f' || num === 'b');
+      numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num) || num === 'x' || num === 'f' || num === 'b');
       const letzteZahl = numbersArray[numbersArray.length - 1];
       console.log(numbersArray);
       //const neighbors = calculateNeighbors(numbersArray);
@@ -579,7 +767,22 @@ window.addEventListener('resize', adjustFontSize);
 
     return result;
 }
+function calculateOppositeNeighbor(numberInput) {
+  const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+  const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num));
+  
+  const furz = numbersArray[numbersArray.length - 1];
 
+  let nextNumberIndex = numberInput[i];
+  let neighborIndex = nextNumberIndex + rouletteOrder.indexOf(parseInt(furz));
+
+  // Adjust neighborIndex to stay within the bounds of the rouletteOrder array
+  if (neighborIndex >= rouletteOrder.length) {
+      neighborIndex -= rouletteOrder.length;
+  }
+
+  return rouletteOrder[neighborIndex];
+}
         // Calculate percentages and sort arrays A and B
         for (let i = 1; i <= 37; i++) {
     // Text innerhalb von Label 1 (Label 1)
@@ -620,9 +823,27 @@ window.addEventListener('resize', adjustFontSize);
     document.querySelector(`.label-container:nth-child(${i}) label:nth-child(4)`).classList.add('label-text-B');
 }
 
-    
-      
+const [Ass, Bss] = calculateNeighborsKessel(numbersArray);
+console.log("AdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS:", Ass);
+console.log("BsadddddddddddddddddddddddddddddddddddS:", Bss);
+
+
+let result = evaluateArray(Ass);
+console.log("BENJAMINDERELEFANT:", result);
+
+
+
+
+
+
+
+
+
+
+
+   
   });
+
 
   document.getElementById('download-button').addEventListener('click', function() {
    
