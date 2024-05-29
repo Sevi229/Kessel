@@ -686,10 +686,16 @@ function evaluateArray(arr, numbersArray ) {
   let lsol2n = [];
   // Definiere die Array-Länge für den Iterationsbereich
   let arrayLength = arr.length;
+  for (let b = 0; b <= numbersArray.length - 1; b++) {
+    const index = rouletteOrder.indexOf(parseInt(numbersArray[b]));
+    resultArray.push(index);
+    console.log("wedwed", resultArray)
+  }
+
 
   // Iteriere über das Array mit drei verschachtelten forEach-Schleifen
   [2, 3, 4, 5, 6, 7].forEach(num1 => {
-      [28, 27, 24, 22, 19, 18, 15, 13, 10, 9].forEach(num2 => {
+      [18, 27, 24, 22, 19, 18, 15, 13, 10, 9].forEach(num2 => {
          // Add foreach loop for num3
             let rouletteOrders = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
              let isValid = false;
@@ -699,6 +705,7 @@ function evaluateArray(arr, numbersArray ) {
               let isValide1 = false;
                
               let difference = 0;
+              let difference2 = 0;
               
               // Setze die Bedingung zunächst auf gültig
               let hasK = false; // Initialisiere den Wert für 'k'
@@ -741,56 +748,63 @@ function evaluateArray(arr, numbersArray ) {
               //One less because it is not possible to create one then statistic by 3 22
               const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
 //10 + 27 
-              for (let b = 0; b <= numbersArray.length - 1; b++) {
-                const index = rouletteOrder.indexOf(parseInt(numbersArray[b]));
-                resultArray.push(index);
-                console.log("wedwed", resultArray)
-              }
-
-              for (let b = 0; b <= resultArray.length - num1 ; b++) {
+           
+              for (let b = 0; b <= resultArray.length - num1 -1 ; b++) {
                 if (b <= resultArray.length  - num1) {
-                    const range = resultArray.slice(b , b  + num1 -1);
-                    const ranges = resultArray.slice(b , b  + num1) ;
+                    //length normal +1 becuase array remove -1 add one to get lastr
+                    const range = resultArray.slice(b, b + num1);
+                    const anus = resultArray[b + num1];
+                    console.log("anus", anus)
+                    console.log("ID23", range) 
                     const maxValue = Math.max(...range);
                     const minValue = Math.min(...range);
-                    //SECOND
-                    const maxValues = Math.max(...ranges);
-                    const minValues = Math.min(...ranges);
+                    console.log("FIckmi", minValue )
+                  
 
                     const higherThan18 = range.filter(value => value > 18);
                     const lowerThan18 = Math.max(...range.filter(value => value < 18));
                     const minHigherThan18 = Math.min(...higherThan18);
                     
-                    //SECOND
-                    const higherThan18s = ranges.filter(values => values > 18);
-                    const lowerThan18s = Math.max(...ranges.filter(values => values < 18));
-                    const minHigherThan18s = Math.min(...higherThan18s);
+                    
+                   
 
                     console.log("Maximum value:", maxValue, num1, num2);
                     console.log("Minimum value:", minValue,  num1, num2);
 
                     console.log("lowerThan18:", lowerThan18);
                     console.log("minHigherThan18", minHigherThan18);
-                    //Extra filter
-                   //Right Fillup
-                  if(maxValue - num2 < minValue){countpositiv = true;}else{countpositiv = false;} //
-                   if(minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne = true;}else{countdowne = false;} 
+                  
+                    //fertig//Right Fillup
+                   if(maxValue - num2 < minValue){countpositiv = true;}else{countpositiv = false;} //
+                  //fertig//Right Fillup
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true;}else{console.log("ID876Ne");countdowne = false;} 
 
-                   if(maxValues - num2 < minValues && countpositiv == true){endn++; countpositiv = false}else{endp++; countpositiv = false}//
-                   if(minHigherThan18s -37 + num2 > lowerThan18s && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18)){endne++; countdowne = false;}else{endpe++; countdowne = false;}
+                   //fertig //anus infinite, infinite anus
+                   if(maxValue - num2 < minValue && countpositiv == true && maxValue - num2 < anus && maxValue >= anus){console.log("ID999NeF");endn++; countpositiv = false}else if(countpositiv == true){console.log("ID999PoF");endp++; countpositiv = false}//
+                  //fertig //anus infinite, infinite anus
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && minHigherThan18 -37 + num2 > anus && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID9Ne");endne++; countdowne = false;}else if(countdowne == true){console.log("ID9PO");endpe++; countdowne = false;}
 
 
 
                    //with Difference Left Fillup
                     difference = num2 - (maxValue - minValue) - 1;
+                    console.log(difference, "Trans")
+
+                    difference2 =  num2 - (37 -minHigherThan18) - lowerThan18 -1;
+                    console.log("Difference2", difference2 )
                  
                    console.log("Difference", difference)
-                   if(maxValue - num2 + difference < minValue + difference){countpositiv1 = true;}else{countpositiv1 = false;} 
-                   if(minHigherThan18 -37 + num2 - difference > lowerThan18 - difference && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true;}else{countdowne1 = false;} 
-
+                  // else normal difference höher als 2;
+                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true;}else{countpositiv1 = false;} 
+                   //muss crossen else normal
+                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 - difference2 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true;}else{countdowne1 = false;} 
                   
-                   if(maxValues - num2 + difference < minValues + difference && countpositiv == true){endn1++; countpositiv1 = false}else{endp1++; countpositiv1 = false}
-                   if(minHigherThan18s -37 + num2 - difference  > lowerThan18s - difference  && countdowne1 == true && isFinite(minHigherThan18) && isFinite(lowerThan18)){endne1++; countdowne1 = false;}else{endpe1++; countdowne1 = false;}
+                   console.log("Fre", lowerThan18);
+                  
+                   //difference check , anus check
+                   // difference check ,2 overcross cehck.
+                   if(difference > 1 && maxValue - num2 + difference < minValue + difference && countpositiv1 == true && maxValue - num2 + difference <= anus){console.log("ID123Po");endn1++; countpositiv1 = false}else if(countpositiv1 == true){console.log("Iddiff");endp1++; countpositiv1 = false}
+                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18 -difference2  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 >= anus && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("IddiffAnusNe");endne1++; countdowne1 = false;}else if(countdowne1 == true){console.log("IddiffAnus");endpe1++; countdowne1 = false;}
 
                   
                   console.log("KP", parseInt(maxValue - num2), minValue)
@@ -829,12 +843,12 @@ function evaluateArray(arr, numbersArray ) {
                     rsol1n.push(nextNumberIndex.toString());
                   }
 
-            
+            dsaasd
                   }//
             
                 
               
-                  //´´´´´´´´´´´´´´´´´´´´´´´GANZ Rechts + WEGEN MINUS   maxValues - num2 < minValues
+                  //´´´´´´´´´´´´´´´´´´´´´´´GANZ Rechts + WEGEN MINUS   maxValue - num2 < minValue
                   if(minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){isValide = true;
                     for (let i = minHigherThan18 -37; i < num2 + (minHigherThan18 -37)  ; i++) {
          
