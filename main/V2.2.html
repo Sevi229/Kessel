@@ -225,7 +225,7 @@ max-height: 100%;
     <div class="second1" onclick="toggleDivs(2)">Second</div>
     <div class="third1" onclick="toggleDivs(3)">All</div>
 </div>
-  <div class="title">v0.1</div>
+  <div class="title">v2.2</div>
   <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces"></textarea>
   <div class="button-container">
     <button id="confirm-button" class="confirm-button">Save</button>
@@ -763,8 +763,8 @@ function evaluateArray(arr, numbersArray ) {
                 if (b <= resultArray.length  - num1) {
                     //length normal +1 becuase array remove -1 add one to get lastr
                     console.log(resultArray.length, "Mande")
-                    const range = resultArray.slice(b, b + num1);
-                    const anus = resultArray[b + num1];
+                    const range = resultArray.slice(b, b + num1 - 1);
+                    const anus = resultArray[b + num1  ];
                     console.log("anus", anus)
                     console.log("ID23", range) 
                     const maxValue = Math.max(...range);
@@ -792,9 +792,9 @@ function evaluateArray(arr, numbersArray ) {
 
              
                    //fertig //anus infinite, infinite anus
-                   if(maxValue - num2 < minValue && countpositiv == true && maxValue - num2 < anus && maxValue >= anus){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true){console.log("ID999PoF");endp++; countpositiv = false;  }//
+                   if(maxValue - num2 < minValue && countpositiv == true && maxValue - num2 < anus && maxValue >= anus && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - num1 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
                   //fertig //anus infinite, infinite anus
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && minHigherThan18 -37 + num2 > anus && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID9Ne");endne++; countdowne = false;  }else if(countdowne == true){console.log("ID9PO");endpe++; countdowne = false; }
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && minHigherThan18 -37 + num2 > anus && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne");endne++; countdowne = false;  }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
 
 
 
@@ -818,8 +818,8 @@ function evaluateArray(arr, numbersArray ) {
 
                    //difference check , anus check
                    // difference check ,2 overcross cehck.
-                   if(difference > 1 && maxValue - num2 + difference < minValue && countpositiv1 == true && maxValue - num2 + difference  < anus && maxValue + difference >= anus){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true){console.log("ID123po");endp1++; countpositiv1 = false; }
-                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
+                   if(difference > 1 && maxValue - num2 + difference < minValue && countpositiv1 == true && maxValue - num2 + difference  < anus && maxValue + difference >= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
+                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && isFinite(minHigherThan18) && isFinite(lowerThan18 && b <= resultArray.length  - num1 -1) ){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
 
                   
                   console.log("KP", parseInt(maxValue - num2), minValue)
@@ -886,8 +886,9 @@ function evaluateArray(arr, numbersArray ) {
                 }
                 
                 if (xrsol2n == true) {
-                  //unlogisch
-                  for (let i = minHigherThan18 -37; i < num2 + (minHigherThan18 -37)  ; i++) {
+                  //unlogisch  (26 - 37) -11   (26  37 + 18) 7
+                  console.log("Dreckiger schleinm,",  minHigherThan18 -37, num2, (minHigherThan18 -37) + num2)
+                  for (let i = minHigherThan18 -37; i < (minHigherThan18 -37) + num2 ; i++) {
           
                     let neighborIndex = i;
               
@@ -948,7 +949,7 @@ function evaluateArray(arr, numbersArray ) {
                 
                 if (xlsol2 == true && difference2 > 1) {
                  //logisch
-                  for ( let i = minHigherThan18 -37 + num2 - difference2; i < num2 + (minHigherThan18 -37) + (37 -num2) - difference2 + 1 ; i++) {
+                  for ( let i = minHigherThan18 -37 + num2 - difference2 + 1; i < num2 + (minHigherThan18 -37) + (37 -num2) - difference2 + 1 ; i++) {
          
                     let neighborIndex = i;
               
@@ -962,7 +963,7 @@ function evaluateArray(arr, numbersArray ) {
                     let nextNumberIndex = rouletteOrders[neighborIndex];
 
 
-                    rsol2.push(nextNumberIndex.toString());
+                    lsol2.push(nextNumberIndex.toString());
                   }
                   xlsol2 = false;
                 }
@@ -981,161 +982,12 @@ function evaluateArray(arr, numbersArray ) {
                     }
                     let nextNumberIndex = rouletteOrders[neighborIndex];
 
-                    rsol2n.push(nextNumberIndex.toString());
+                    lsol2n.push(nextNumberIndex.toString());
 
                   }
                   xlsol2n = false;
                 }
 
-                  if(b == -100000){
-
-                  if(maxValue - num2 < minValue){isValid = true; //
-                    for (let i = maxValue - (37 - num2); i < maxValue; i++) {//
-              
-                    let neighborIndex = i;
-                
-                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                    if (neighborIndex >= rouletteOrders.length) {
-                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                       }
-                       else{ neighborIndex -= rouletteOrders.length;}
-                    }
-                    let nextNumberIndex = rouletteOrders[neighborIndex];
-                    rsol1.push(nextNumberIndex.toString());
-
-                  }// Umgekehrt 37 +17 10
-                  for (let i = maxValue; i <  maxValue + num2; i++) {//
-         
-                    let neighborIndex = i;
-                
-                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                    if (neighborIndex >= rouletteOrders.length) {
-                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                       }
-                       else{ neighborIndex -= rouletteOrders.length;}
-                    }
-                    let nextNumberIndex = rouletteOrders[neighborIndex];
-                    rsol1n.push(nextNumberIndex.toString());
-                  }
-                  }//
-            
-                
-              
-                  //´´´´´´´´´´´´´´´´´´´´´´´GANZ Rechts + WEGEN MINUS   maxValue - num2 < minValue
-                  if(minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){isValide = true;
-                    for (let i = minHigherThan18 -37; i < num2 + (minHigherThan18 -37)  ; i++) {
-         
-                      let neighborIndex = i;
-                
-                      if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                      if (neighborIndex >= rouletteOrders.length) {
-                        if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                          neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                         }
-                         else{ neighborIndex -= rouletteOrders.length;}
-                      }
-                      let nextNumberIndex = rouletteOrders[neighborIndex];
-
-
-                      rsol2.push(nextNumberIndex.toString());
-                    }
-                    for (let i = num2 + (minHigherThan18 -37); i < minHigherThan18; i++) {
-          
-                      let neighborIndex = i;
-                
-                      if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                      if (neighborIndex >= rouletteOrders.length) {
-                        if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                          neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                         }
-                         else{ neighborIndex -= rouletteOrders.length;}
-                      }
-                      let nextNumberIndex = rouletteOrders[neighborIndex];
-
-                      rsol2n.push(nextNumberIndex.toString());
-
-                    }
-          
-
-                  }//+-
-              
-                  /// 2 Differe ce
-
-                  if(maxValue - num2 - difference  < minValue - difference ){isValid = true; 
-                    for (let i = maxValue - (37 - num2) -  difference; i < maxValue - difference; i++) {//
-         
-                    let neighborIndex = i;
-                
-                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                    if (neighborIndex >= rouletteOrders.length) {
-                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                       }
-                       else{ neighborIndex -= rouletteOrders.length;} 
-                    }
-                    let nextNumberIndex = rouletteOrders[neighborIndex];
-
-                    lsol1.push(nextNumberIndex.toString());
-
-                  }// Umgekehrt 37 +17 10 Umegkehrt auch difference
-                  for (let i = maxValue - difference; i <  maxValue + num2 - difference; i++) {
-          
-                    let neighborIndex = i;
-                
-                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                    if (neighborIndex >= rouletteOrders.length) {
-                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                       }
-                       else{ neighborIndex -= rouletteOrders.length;}
-                    }
-                    let nextNumberIndex = rouletteOrders[neighborIndex];
-                    lsol1n.push(nextNumberIndex.toString());
-                  }
-
-            
-                  }//
-                  //´´´´´´´´´´´´´´´´´´´´´´´GANZ Rechts + WEGEN MINUS
-                  if(minHigherThan18 -37 + num2 + difference > lowerThan18 + difference && isFinite(minHigherThan18) && isFinite(lowerThan18)){isValide = true;
-                    for (let i = minHigherThan18 -37 + difference; i < num2 + (minHigherThan18 -37) + difference;  i++) {
-          
-                      let neighborIndex = i;
-                
-                      if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                      if (neighborIndex >= rouletteOrders.length) {
-                        if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                          neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                         }
-                         else{ neighborIndex -= rouletteOrders.length;}
-                      }
-                      let nextNumberIndex = rouletteOrders[neighborIndex];
-                      lsol2.push(nextNumberIndex.toString());
-                    }
-                    for (let i = num2 + (minHigherThan18 -37) + difference; i < minHigherThan18 + difference ; i++) {
-   
-                      let neighborIndex = i;
-                
-                      if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
-                      if (neighborIndex >= rouletteOrders.length) {
-                        if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
-                          neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
-                         }
-                         else{ neighborIndex -= rouletteOrders.length;}
-                      }
-                      let nextNumberIndex = rouletteOrders[neighborIndex];
-                      lsol2n.push(nextNumberIndex.toString());
-                    }
-          
-
-                  }//
-
-
-
-
-
-                }
               }  
             }
             console.log("countpositiv", countpositiv)
@@ -1194,16 +1046,16 @@ function evaluateArray(arr, numbersArray ) {
             returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
             returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
 
-            returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endne]);
-            returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endpe]);
+            returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endpe]);
+            returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endne]);
             console.log(100 / 0 * 0 ,"zerohero");
             
            
-            returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endn]);
-            returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endp1]);
+            returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
+            returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
 
-            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo1, endne1]);
-            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo0, endpe1]);
+            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo1, endpe1]);
+            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo0, endne1]);
             
             
             endp= 0; endn = 0;
@@ -1221,7 +1073,7 @@ function evaluateArray(arr, numbersArray ) {
             lsol2 = [];
             lsol2n = [];
             
-            resultArray = [];
+           
 
         
       });
