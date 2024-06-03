@@ -9,7 +9,7 @@ const mainDir = path.join(__dirname, 'main');
 
 // Serve the index.html file from the main directory
 app.get('/', (req, res) => {
-  res.sendFile(path.join(mainDir, 'V2.2.html'));
+  res.sendFile(path.join(mainDir, 'V2.3.html'));
 });
 
 app.get('/', (req, res) => {
