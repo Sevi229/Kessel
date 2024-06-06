@@ -265,7 +265,7 @@ max-height: 100%;
                 <option value="28" data-number="69">18, 15, 13</option>
                 <option value="28" data-number="2">28</option>
                 <option value="3" data-number="3">27</option>
-                <option value="24" data-number="5">24</option>
+                <option value="24" data-number="4">24</option>
                 <option value="24" data-number="5">22</option>
                 <option value="19" data-number="6">19</option>
                 <option value="18" data-number="7">18</option>
@@ -699,22 +699,11 @@ function evaluateArray(arr, numbersArray ) {
       [28, 27, 24, 22, 19, 18, 15, 13, 10, 9].forEach(num2 => {
          // Add foreach loop for num3
             let rouletteOrders = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-             let isValid = false;
-              let isValide = false; 
-              
-              let isValid1 = false;
-              let isValide1 = false;
-               
+          
               let difference = 0;
               let difference2 = 0;
               
-              // Setze die Bedingung zunächst auf gültig
-              let hasK = false; // Initialisiere den Wert für 'k'
-              let diff = -1;
-              let u1 = -1;
-              let u2 = 1;
-              let pos = 0;
-
+             
               let endp = 0;
               let endn = 0;
 
@@ -761,7 +750,7 @@ function evaluateArray(arr, numbersArray ) {
               console.log(resultArray.length, "DAMs");
            
               for (let b = 0; b <= resultArray.length - num1; b++) {
-                if (b <= resultArray.length  - num1) {
+                if (b <= resultArray.length  - num1 ) {
                     //length normal +1 becuase array remove -1 add one to get lastr
                     console.log(resultArray.length, "Mande")
                     const range = resultArray.slice(b, b + num1 - 1);
@@ -770,6 +759,7 @@ function evaluateArray(arr, numbersArray ) {
                     console.log("ID23", range) 
                     const maxValue = Math.max(...range);
                     const minValue = Math.min(...range);
+                    if(maxValue === 36){console.log("hellisreal");}
                     console.log("FIckmi", minValue )
                   
 
@@ -792,10 +782,10 @@ function evaluateArray(arr, numbersArray ) {
                    if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - num1 ){console.log("rum2", anus), xrsol2 = true; xrsol2n = true;}}else{console.log("ID876Ne");countdowne = false;} 
 
              
-                   //fertig //anus infinite, infinite anus
-                   if(maxValue - num2 < minValue && countpositiv == true && maxValue - num2 < anus && maxValue >= anus && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - num1 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
+                   //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
+                   if(maxValue - num2 < minValue && countpositiv == true && maxValue - num2 < anus && maxValue >= anus && maxValue -num2 <= anus && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - num1 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
                   //fertig //anus infinite, infinite anus
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && minHigherThan18 -37 + num2 > anus && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne");endne++; countdowne = false;  }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  >= anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne");endne++; countdowne = false;  }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
 
 
 
@@ -819,7 +809,7 @@ function evaluateArray(arr, numbersArray ) {
 
                    //difference check , anus check
                    // difference check ,2 overcross cehck.
-                   if(difference > 1 && maxValue - num2 + difference < minValue && countpositiv1 == true && maxValue - num2 + difference  < anus && maxValue + difference >= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
+                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  < anus && maxValue + difference >= anus  && maxValue -num2 <= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
                    if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && isFinite(minHigherThan18) && isFinite(lowerThan18 && b <= resultArray.length  - num1 -1) ){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
 
                   
@@ -910,7 +900,7 @@ function evaluateArray(arr, numbersArray ) {
                 
                 if (xlsol1 == true && difference > 1) {
                   //logisch
-                  for (  let i = maxValue + difference + 1; i <  maxValue + num2 + difference + 2; i++) {//
+                  for (  let i = maxValue + difference + 1; i <  maxValue + (37 - num2) + difference + 2; i++) {//
          
                     let neighborIndex = i;
                 
@@ -1040,7 +1030,7 @@ function evaluateArray(arr, numbersArray ) {
 
             returnv.push(["LO0", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
             returnv.push(["LO1", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
-
+             
             */
 
 
@@ -1057,6 +1047,8 @@ function evaluateArray(arr, numbersArray ) {
 
             returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo1, endpe1]);
             returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo0, endne1]);
+
+            //n hinten unlogisch gleich pe  negativ = logisch; positiv = unlogisch
             
             
             endp= 0; endn = 0;
