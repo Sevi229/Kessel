@@ -783,9 +783,9 @@ function evaluateArray(arr, numbersArray ) {
 
              
                    //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
-                   if(maxValue - num2 < minValue && countpositiv == true && maxValue - num2 < anus && maxValue >= anus && maxValue -num2 <= anus && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - num1 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
+                   if(maxValue - num2 < minValue && countpositiv == true && maxValue - num2 < anus && maxValue > anus && maxValue -num2 <= anus && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - num1 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
                   //fertig //anus infinite, infinite anus
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  >= anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne");endne++; countdowne = false;  }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus && anus -37 + num2 > 0    && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne");endne++; countdowne = false;  }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
 
 
 
@@ -809,8 +809,8 @@ function evaluateArray(arr, numbersArray ) {
 
                    //difference check , anus check
                    // difference check ,2 overcross cehck.
-                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  < anus && maxValue + difference >= anus  && maxValue -num2 <= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
-                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && isFinite(minHigherThan18) && isFinite(lowerThan18 && b <= resultArray.length  - num1 -1) ){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
+                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  < anus && maxValue + difference > anus  && maxValue -num2 <= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
+                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 )  && b <= resultArray.length  - num1 -1 ){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
 
                   
                   console.log("KP", parseInt(maxValue - num2), minValue)
@@ -1034,19 +1034,19 @@ function evaluateArray(arr, numbersArray ) {
             */
 
 
-            returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
-            returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
+            returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn0, endn]);
+            returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn1, endp]);
 
-            returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endpe]);
-            returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endne]);
+            returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro0, endne]);
+            returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro1, endpe]);
             console.log(100 / 0 * 0 ,"zerohero");
             
            
-            returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
-            returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
+            returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln0, endn1]);
+            returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln1, endp1]);
 
-            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo1, endpe1]);
-            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo0, endne1]);
+            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
+            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
 
             //n hinten unlogisch gleich pe  negativ = logisch; positiv = unlogisch
             
