@@ -225,7 +225,7 @@ max-height: 100%;
     <div class="second1" onclick="toggleDivs(2)">Second</div>
     <div class="third1" onclick="toggleDivs(3)">All</div>
 </div>
-  <div class="title">v2.5</div>
+  <div class="title">v2.6</div>
   <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces"></textarea>
   <div class="button-container">
     <button id="confirm-button" class="confirm-button">Save</button>
@@ -329,6 +329,7 @@ max-height: 100%;
             <br>
             <select class="lookback">
               <option value="Max" data-number="1">Max</option>
+              <option value="28" data-number="2">6</option>
               <option value="28" data-number="2">8</option>
               <option value="3" data-number="3">10</option>
               <option value="24" data-number="4">12</option>
@@ -536,9 +537,11 @@ max-height: 100%;
 
     lookkbackw.addEventListener('change', function() {
       const selectedOption = lookkbackw.options[lookkbackw.selectedIndex];
-      lookkback = parseInt(selectedOption.dataset.number);
-      processInput()
+      const test = lookback;
+      lookback = parseInt(selectedOption.dataset.number);
+      if(test != lookback){processInput()}
       console.log('lookkback', lookkback);
+     
     });
     
 
@@ -712,7 +715,7 @@ function calculateNeighborsKessel(numbersArray) {
   console.log("Array B:", B);
   return [A, B];
 }
-function evaluateArray(arr, numbersArray ) {
+function evaluateArray(arr, numbersArray) {
   // Initialisiere das Mehrdimensionale Array zur Speicherung der Ergebnisse
   
   saferesult = [];
@@ -746,7 +749,7 @@ function evaluateArray(arr, numbersArray ) {
               let difference = 0;
               let difference2 = 0;
               
-             
+              let b = 0;
               let endp = 0;
               let endn = 0;
 
@@ -786,29 +789,31 @@ function evaluateArray(arr, numbersArray ) {
               let xlsol1n = false;
               let xlsol2n = false;
              
-              let b = 0;
+             
               console.log("lookbacksex", lookback )
-              if(lookback === 2){ b = resultArray.length - num1 - 8}
-              if(lookback === 3){ b = resultArray.length - num1 - 10}
-              if(lookback === 4){ b = resultArray.length - num1 - 12}
-              if(lookback === 5){ b = resultArray.length - num1 - 14}
-              if(lookback === 6){ b = resultArray.length - num1 - 16}
-              if(lookback === 7){ b = resultArray.length - num1 - 18}
-              if(lookback === 8){ b = resultArray.length - num1 - 20}
-              if(lookback === 9){ b = resultArray.length - num1 - 24}
-              if(lookback === 10){ b = resultArray.length - num1 - 26}
-              if(lookback === 11){ b = resultArray.length - num1 - 30}
+              if(lookback === 2){ b = resultArray.length - num1 - 6}
+              if(lookback === 3){ b = resultArray.length - num1 - 8}
+              if(lookback === 4){ b = resultArray.length - num1 - 10}
+              if(lookback === 5){ b = resultArray.length - num1 - 12}
+              if(lookback === 6){ b = resultArray.length - num1 - 14}
+              if(lookback === 7){ b = resultArray.length - num1 - 16}
+              if(lookback === 8){ b = resultArray.length - num1 - 18}
+              if(lookback === 9){ b = resultArray.length - num1 - 20}
+              if(lookback === 10){ b = resultArray.length - num1 - 24}
+              if(lookback === 11){ b = resultArray.length - num1 - 26}
+              if(lookback === 12){ b = resultArray.length - num1 - 30}
 
               if (b < 0) {
                 b = 0;
-            }
+              }
         
               // Überprüfe, ob genug Elemente im Array vorhanden sind
               //One less because it is not possible to create one then statistic by 3 22
               const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
               console.log(resultArray.length, "DAMs");
+              console.log(b, "Bams");
            
-              for ( ;b <= resultArray.length - num1; b++) {
+              for (;b <= resultArray.length - num1; b++) {
                 if (b <= resultArray.length  - num1 ) {
                     //length normal +1 becuase array remove -1 add one to get lastr
                     console.log(resultArray.length, "Mande")
