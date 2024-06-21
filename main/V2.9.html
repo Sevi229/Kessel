@@ -225,8 +225,8 @@ max-height: 100%;
     <div class="second1" onclick="toggleDivs(2)">Second</div>
     <div class="third1" onclick="toggleDivs(3)">All</div>
 </div>
-  <div class="title">v2.8</div>
-  <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces -v2.8"></textarea>
+  <div class="title">v2.9</div>
+  <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces -v2.9"></textarea>
   <div class="button-container">
     <button id="confirm-button" class="confirm-button">Save</button>
   
@@ -742,7 +742,7 @@ function evaluateArray(arr, numbersArray) {
 
   // Iteriere über das Array mit drei verschachtelten forEach-Schleifen
   [2, 3, 4, 5, 6, 7].forEach(num1 => {
-      [28, 27, 24, 22, 19, 18, 15, 13, 10, 9].forEach(num2 => {
+      [18, 27, 24, 22, 19, 18, 15, 13, 10, 9].forEach(num2 => {
          // Add foreach loop for num3
             let rouletteOrders = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
           
@@ -849,9 +849,9 @@ function evaluateArray(arr, numbersArray) {
                    //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
                    if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - num1 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
                   //fertig //anus infinite, infinite anus
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && anus -37 + num2 > 0  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne");endne++; countdowne = false; }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne#"); endne++; countdowne = false; }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
 
-
+                  //&& anus -37 + num2 > 0 
 
                    //with Difference Left Fillup
                     difference = num2 - (maxValue - minValue) - 1;
@@ -1096,8 +1096,27 @@ function evaluateArray(arr, numbersArray) {
             returnv.push(["LO1", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
              
             */
+            /*
+            returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
+            returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
+            
+
+            returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro1, endpe]);
+            returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro0, endne]);
+
+            console.log(100 / 0 * 0 ,"zerohero");
+            
+            returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
+            returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
+           
+            // Change
+
+            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
+            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
 
 
+            */
+            
             returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
             returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
 
@@ -1109,16 +1128,20 @@ function evaluateArray(arr, numbersArray) {
             returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
             returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
 
-            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo1, endpe1]);
-            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo0, endne1]);
+            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
+            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
 
             //n hinten unlogisch gleich pe  negativ = logisch; positiv = unlogisch
             
             
-            endp =  0; endn = 0;
-            endpe = 0; endne = 0;
-            endp1 = 0; endn1 = 0;
-            endpe1 = 0; endne1 = 0;
+            endp =  0; 
+            endn = 0;
+            endpe = 0; 
+            endne = 0;
+            endp1 = 0; 
+            endn1 = 0;
+            endpe1 = 0; 
+            endne1 = 0;
 
 
             rsol1 = [];
@@ -1130,7 +1153,7 @@ function evaluateArray(arr, numbersArray) {
             lsol2 = [];
             lsol2n = [];
            //resultArray = [];
-           //resultArray = [];
+           resultArray = [];
             
            
 
