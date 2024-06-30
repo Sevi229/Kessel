@@ -261,10 +261,9 @@ max-height: 100%;
             <th class="sortable" data-type="numeric">Numbers<br>
               
               <select class="select-strategy-select">
-                <option value="1" data-number="1">18, 19</option>
-                <option value="all" data-number="70">All</option>
+                <option value="all" data-number="1">All</option>
                 <option value="28" data-number="69">18, 15, 13</option>
-                <option value="28" data-number="40">28</option>
+                <option value="28" data-number="2">28</option>
                 <option value="3" data-number="3">27</option>
                 <option value="24" data-number="4">24</option>
                 <option value="24" data-number="5">22</option>
@@ -311,7 +310,6 @@ max-height: 100%;
             
             <select class="count">
               <option value="all" data-number="1">All</option>
-              <option value="all" data-number="10">1</option>
               <option value="28" data-number="2">3, 4, 5</option>
               <option value="3" data-number="3">2</option>
               <option value="24" data-number="4">3</option>
@@ -474,7 +472,7 @@ max-height: 100%;
     strategySelect.addEventListener('change', function() {
       const selectedOption = strategySelect.options[strategySelect.selectedIndex];
       strategyNumber = parseInt(selectedOption.dataset.number);
-      processInput()
+      filter(saferesult); 
       console.log('darumdumm', strategyNumber);
     });
 
@@ -511,7 +509,7 @@ max-height: 100%;
     countw.addEventListener('change', function() {
       const selectedOption = countw.options[countw.selectedIndex];
       count = parseInt(selectedOption.dataset.number);
-      processInput()
+      filter(saferesult); 
       console.log('count', count);
     });
 
@@ -740,34 +738,11 @@ function evaluateArray(arr, numbersArray) {
     resultArray.push(index);
     console.log("wedwed", resultArray)
   }
- 
-let countf = [0, 1, 2, 3, 4, 5, 6];
-let numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9];
 
 
-if(strategyNumber === 2){numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9];}
-if(strategyNumber === 40 || strategyNumber === 11){numbersf = [28, 9];}
-if(strategyNumber === 3 || strategyNumber === 10){numbersf = [ 27, 10];}
-if(strategyNumber === 4 || strategyNumber === 9){numbersf = [24, 13];}
-if(strategyNumber === 5 || strategyNumber === 8){numbersf = [22, 15];}
-if(strategyNumber === 6 || strategyNumber === 7 || strategyNumber === 1){numbersf = [19, 18];}
-if(strategyNumber === 69){numbersf = [24, 22, 19, 18, 15, 13];}
-
-if(count === 10){countf = [0];}
-if(count === 1){countf = [0, 1, 2, 3, 4, 5, 6];}
-if(count === 2){countf = [2, 3, 4];}
-if(count === 3){countf = [1]}
-if(count === 4){countf = [2]}
-if(count === 5){countf = [3]}
-if(count === 6){countf = [4]}
-if(count === 7){countf = [5]}
-if(count === 8){countf = [6]}
-
-
-//x
   // Iteriere über das Array mit drei verschachtelten forEach-Schleifen
-  countf.forEach(num1 => {
-    numbersf.forEach(num2 => {
+  [2, 3, 4, 5, 6, 7].forEach(num1 => {
+      [18, 27, 24, 22, 19, 18, 15, 13, 10, 9].forEach(num2 => {
          // Add foreach loop for num3
             let rouletteOrders = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
           
@@ -786,21 +761,6 @@ if(count === 8){countf = [6]}
 
               let endpe1 = 0;
               let endne1 = 0; 
-
-
-              let cendp = 0;
-              let cendn = 0;
-
-              let cendpe = 0;
-              let cendne = 0;
-
-              let cendp1 = 0;
-              let cendn1 = 0;
-
-              let cendpe1 = 0;
-              let cendne1 = 0;
-
-
 
               let countdown = false;
               let countpositiv = false;
@@ -857,8 +817,8 @@ if(count === 8){countf = [6]}
                 if (b <= resultArray.length  - num1 ) {
                     //length normal +1 becuase array remove -1 add one to get lastr
                     console.log(resultArray.length, "Mande")
-                    const range = resultArray.slice(b, b + 2);
-                    const anus = resultArray[b + 3];
+                    const range = resultArray.slice(b, b + num1);
+                    const anus = resultArray[b + num1];
                     console.log("anus#", anus)
                     console.log("reng", range) 
                     const maxValue = Math.max(...range);
@@ -881,15 +841,15 @@ if(count === 8){countf = [6]}
                     console.log("minHigherThan18", minHigherThan18);
                   
                     //fertig//Right Fillup
-                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - num2){console.log( "rum", anus); xrsol1 = true; xrsol1n = true; } }else{countpositiv = false;} //
+                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - num1){console.log( "rum", anus); xrsol1 = true; xrsol1n = true;  }}else{countpositiv = false;} //
                   //fertig//Right Fillup
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - 3 ){if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}} }else{console.log("ID876Ne");countdowne = false;} 
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - num1 ){console.log("rum2", anus), xrsol2 = true; xrsol2n = true;}}else{console.log("ID876Ne");countdowne = false;} 
 
              
                    //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
-                   if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; cendn++ ; cendp = 0; }else if(countpositiv == true && b <= resultArray.length  - num1 -1 && isFinite(anus)){console.log("ID999PoF");endp++; countpositiv = false; cendp++; cendn = 0;   }//
+                   if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - num1 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
                   //fertig //anus infinite, infinite anus
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne#"); endne++; countdowne = false;  cendne++ ; cendpe = 0; }else if(countdowne == true && b <= resultArray.length  - num1 -1 && isFinite(anus)){console.log("ID9PO");endpe++; countdowne = false; cendpe++; cendne = 0; }
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne#"); endne++; countdowne = false; }else if(countdowne == true && b <= resultArray.length  - num1 -1){console.log("ID9PO");endpe++; countdowne = false; }
 
                   //&& anus -37 + num2 > 0 
 
@@ -899,14 +859,12 @@ if(count === 8){countf = [6]}
 
                     difference2 =  num2 - (37 -minHigherThan18) - lowerThan18 -1;
                     console.log("Difference2", difference2 )
-                 //bb
-
+                 
+            
                   // else normal difference höher als 2;
-                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - num1){ xlsol1 = true; xlsol1n = true; }}else{countpositiv1 = false;} 
+                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - num1){console.log("rum", anus), xlsol1 = true; xlsol1n = true;}}else{countpositiv1 = false;} 
                    //muss crossen else normal
-                   //if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}
-
-                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - num1){ xlsol2 = true;  xlsol2n = true; }}else{countdowne1 = false;} 
+                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - num1){console.log("rum", anus), xlsol2 = true; xlsol2n = true;}}else{countdowne1 = false;} 
                   
                    console.log("Fre", lowerThan18);
                  
@@ -915,8 +873,8 @@ if(count === 8){countf = [6]}
 
                    //difference check , anus check
                    // difference check ,2 overcross cehck.
-                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  <= anus && maxValue + difference >= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; cendn1++; cendp1 = 0; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1 && isFinite(anus) ){console.log("ID123po");endp1++; cendn1 = 0; cendp1++;    countpositiv1 = false; }
-                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 ) && b <= resultArray.length  - num1 -1 ){console.log("IddiffAnusNe");endne1++;  cendne1++;  cendpe1 = 0;   countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1 && isFinite(anus) ){console.log("IddiffAnusPo");endpe1++; cendpe1++;  cendne1 = 0;  countdowne1 = false;  }
+                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  <= anus && maxValue + difference >= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
+                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 )  && b <= resultArray.length  - num1 -1 ){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
 
                   
                   console.log("KP", parseInt(maxValue - num2), minValue)
@@ -1086,7 +1044,7 @@ if(count === 8){countf = [6]}
                 }
 
               }  
-           
+            }
             console.log("countpositiv", countpositiv)
             console.log("countd", countdown)
 
@@ -1139,13 +1097,32 @@ if(count === 8){countf = [6]}
              
             */
             /*
+            returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
+            returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
+            
+
+            returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro1, endpe]);
+            returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro0, endne]);
+
+            console.log(100 / 0 * 0 ,"zerohero");
+            
+            returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
+            returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
+           
+            // Change
+
+            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
+            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
+
+
+            */
             
             returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
             returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
 
             returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endpe]);
             returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endne]);
-
+            console.log(100 / 0 * 0 ,"zerohero");
             
            
             returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
@@ -1154,35 +1131,8 @@ if(count === 8){countf = [6]}
             returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
             returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
 
-        */
-          if (rsol1.length > 1) {
-              returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
-          }
-          if (rsol1n.length > 1) {
-              returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
-          }
-          if (rsol2.length > 1) {
-              returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endpe]);
-          }
-          if (rsol2n.length > 1) {
-              returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endne]);
-          }
-          if (lsol1.length > 1) {
-              returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
-          }
-          if (lsol1n.length > 1) {
-              returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
-          }
-          if (lsol2.length > 1) {
-              returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
-          }
-          if (lsol2n.length > 1) {
-              returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
-          }
-          
-
             //n hinten unlogisch gleich pe  negativ = logisch; positiv = unlogisch
-            /*
+            
             
             endp =  0; 
             endn = 0;
@@ -1191,8 +1141,8 @@ if(count === 8){countf = [6]}
             endp1 = 0; 
             endn1 = 0;
             endpe1 = 0; 
-            endne1 = 0; */
-            //y
+            endne1 = 0;
+
 
             rsol1 = [];
             rsol1n = [];
@@ -1202,12 +1152,12 @@ if(count === 8){countf = [6]}
             lsol1n = [];
             lsol2 = [];
             lsol2n = [];
-            resultArray = [];
+           //resultArray = [];
            //resultArray = [];
             
            
 
-          }
+        
       });
   });
 
@@ -1364,12 +1314,12 @@ console.log("sucess")
 let copy;
  copy = [...saferesult];
 
-//z
 
-if (strategyNumber != 2) {
+
+if (strategyNumber != 1) {
     for (let i = copy.length - 1; i >= 0; i--) {
         if (
-            (strategyNumber === 40 && copy[i][1] !== 28) ||
+            (strategyNumber === 2 && copy[i][1] !== 28) ||
             (strategyNumber === 3 && copy[i][1] !== 27) ||
             (strategyNumber === 4 && copy[i][1] !== 24) ||
             (strategyNumber === 5 && copy[i][1] !== 22) ||
@@ -1379,7 +1329,6 @@ if (strategyNumber != 2) {
             (strategyNumber === 9 && copy[i][1] !== 13) ||
             (strategyNumber === 10 && copy[i][1] !== 10) ||
             (strategyNumber === 69 && copy[i][1] !== 18 && copy[i][1] !== 15 && copy[i][1] !== 13 ) ||
-            (strategyNumber === 1 && copy[i][1] !== 18 && copy[i][1] !== 19) ||
             (strategyNumber === 11 && copy[i][1] !== 9)
         ) {
             copy.splice(i, 1);
@@ -1389,14 +1338,13 @@ if (strategyNumber != 2) {
 if (count != 1) {
   for (let i = copy.length - 1; i >= 0; i--) {
       if (
-          (count === 10 && copy[i][2] !== 0) ||
-          (count === 2 && copy[i][2] !== 2 && copy[i][2] !== 3 && copy[i][2] !== 4) ||
-          (count === 3 && copy[i][2] !== 1) ||
-          (count === 4 && copy[i][2] !== 2) ||
-          (count === 5 && copy[i][2] !== 3) ||
-          (count === 6 && copy[i][2] !== 4) ||
-          (count === 7 && copy[i][2] !== 5) ||
-          (count === 8 && copy[i][2] !== 6)
+          (count === 2 && copy[i][2] !== 3 && copy[i][2] !== 4 && copy[i][2] !== 5) ||
+          (count === 3 && copy[i][2] !== 2) ||
+          (count === 4 && copy[i][2] !== 3) ||
+          (count === 5 && copy[i][2] !== 4) ||
+          (count === 6 && copy[i][2] !== 5) ||
+          (count === 7 && copy[i][2] !== 6) ||
+          (count === 8 && copy[i][2] !== 7)
       ) {
           copy.splice(i, 1);
       }

@@ -857,8 +857,8 @@ if(count === 8){countf = [6]}
                 if (b <= resultArray.length  - num1 ) {
                     //length normal +1 becuase array remove -1 add one to get lastr
                     console.log(resultArray.length, "Mande")
-                    const range = resultArray.slice(b, b + 2);
-                    const anus = resultArray[b + 3];
+                    const range = resultArray.slice(b, b + num1);
+                    const anus = resultArray[b + num1];
                     console.log("anus#", anus)
                     console.log("reng", range) 
                     const maxValue = Math.max(...range);
@@ -881,9 +881,9 @@ if(count === 8){countf = [6]}
                     console.log("minHigherThan18", minHigherThan18);
                   
                     //fertig//Right Fillup
-                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - num2){console.log( "rum", anus); xrsol1 = true; xrsol1n = true; } }else{countpositiv = false;} //
+                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - num1){console.log( "rum", anus); if(cendn >= num1){ xrsol1 = true; cendn = 0; }if(cendp >= num1){xrsol1n = true; cendp = 0;}} }else{countpositiv = false;} //
                   //fertig//Right Fillup
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - 3 ){if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}} }else{console.log("ID876Ne");countdowne = false;} 
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - num1 ){if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}} }else{console.log("ID876Ne");countdowne = false;} 
 
              
                    //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
@@ -902,11 +902,10 @@ if(count === 8){countf = [6]}
                  //bb
 
                   // else normal difference höher als 2;
-                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - num1){ xlsol1 = true; xlsol1n = true; }}else{countpositiv1 = false;} 
+                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - num1){  if(cendn1 >= num1){xlsol1 = true; cendn1 = 0;} if(cendp1 >= num1){xlsol1n = true; cendp1 = 0;} }}else{countpositiv1 = false;} 
                    //muss crossen else normal
-                   //if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}
-
-                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - num1){ xlsol2 = true;  xlsol2n = true; }}else{countdowne1 = false;} 
+                   if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}
+                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - num1){ if(cendne1 >= num1){xlsol2 = true; cendne1 = 0;} if(cendpe1 >= num1){ xlsol2n = true; cendpe1 = 0;} }}else{countdowne1 = false;} 
                   
                    console.log("Fre", lowerThan18);
                  

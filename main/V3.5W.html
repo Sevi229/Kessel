@@ -225,8 +225,8 @@ max-height: 100%;
     <div class="second1" onclick="toggleDivs(2)">Second</div>
     <div class="third1" onclick="toggleDivs(3)">All</div>
 </div>
-  <div class="title">v2.9</div>
-  <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces -v2.9"></textarea>
+  <div class="title">v3.5</div>
+  <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces -v3.5"></textarea>
   <div class="button-container">
     <button id="confirm-button" class="confirm-button">Save</button>
   
@@ -262,7 +262,7 @@ max-height: 100%;
               
               <select class="select-strategy-select">
                 <option value="1" data-number="1">18, 19</option>
-                <option value="all" data-number="70">All</option>
+                <option value="all" data-number="2">All</option>
                 <option value="28" data-number="69">18, 15, 13</option>
                 <option value="28" data-number="40">28</option>
                 <option value="3" data-number="3">27</option>
@@ -275,6 +275,7 @@ max-height: 100%;
                 <option value="10" data-number="10">10</option>
                 <option value="9" data-number="11">9</option>
               </select>
+
               <select class="select-show">
                 <option value="ready" data-number="1">Optimum</option>
                 <option value="all1" data-number="2">Ready</option>
@@ -286,14 +287,17 @@ max-height: 100%;
               <option value="all2" data-number="1">All</option>
               <option value="left" data-number="2">Left</option>
               <option value="right" data-number="3">Right</option>
+              <option value="right" data-number="4">M-Logic</option>
+              <option value="right" data-number="5">M-NotLogic</option>
             </select>
 
             <select class="prof">
               <option value="d" data-number="1">All</option>
-              <option value="ed" data-number="2">Max, Medium</option>
-              <option value="3e" data-number="3">Max</option>
-              <option value="w24" data-number="4">Medium</option>
-              <option value="w24" data-number="5">NoProfit</option>
+              <option value="ed" data-number="2">All Mirror</option>
+              <option value="ed" data-number="3">Mirror-Repeat</option>
+              <option value="ed" data-number="4">//Mirror:1/2-Structure-Repeat</option>
+              <option value="3e" data-number="5">Kessel</option>
+              <option value="ed" data-number="6">//Neighbors-Imbalance</option>
             </select>
 
             <br>
@@ -311,7 +315,8 @@ max-height: 100%;
             
             <select class="count">
               <option value="all" data-number="1">All</option>
-              <option value="all" data-number="10">1</option>
+              <option value="all" data-number="11">0</option>
+              <option value="dwe" data-number="10">1</option>
               <option value="28" data-number="2">3, 4, 5</option>
               <option value="3" data-number="3">2</option>
               <option value="24" data-number="4">3</option>
@@ -319,7 +324,10 @@ max-height: 100%;
               <option value="19" data-number="6">5</option>
               <option value="18" data-number="7">6</option>
               <option value="18" data-number="8">7</option>
+              <option value="18" data-number="9">8</option>
+              <option value="18" data-number="10">9</option>
             </select>
+
 
             <select class="asort">
               <option value="d" data-number="1">MaxPercent</option>
@@ -475,7 +483,7 @@ max-height: 100%;
       const selectedOption = strategySelect.options[strategySelect.selectedIndex];
       strategyNumber = parseInt(selectedOption.dataset.number);
       processInput()
-      console.log('darumdumm', strategyNumber);
+      //console.log('darumdumm', strategyNumber);
     });
 
     // Event listener for show select
@@ -483,7 +491,7 @@ max-height: 100%;
       const selectedOption = showSelect.options[showSelect.selectedIndex];
       ReadyNotAll = parseInt(selectedOption.dataset.number);
       filter(saferesult); 
-      console.log('ReadyNotAll:', ReadyNotAll);
+      //console.log('ReadyNotAll:', ReadyNotAll);
     });
 
     // Event listener for style select
@@ -491,49 +499,49 @@ max-height: 100%;
       const selectedOption = styleSelect.options[styleSelect.selectedIndex];
       LeftRightAll = parseInt(selectedOption.dataset.number);
       filter(saferesult); 
-      console.log('LeftRightAll:', LeftRightAll);
+      //console.log('LeftRightAll:', LeftRightAll);
     });
 
     styleSelect1.addEventListener('change', function() {
       const selectedOption = styleSelect1.options[styleSelect1.selectedIndex];
       RangeOverAll = parseInt(selectedOption.dataset.number);
       filter(saferesult); 
-      console.log('RangeOverAll', RangeOverAll);
+      //console.log('RangeOverAll', RangeOverAll);
     });
 
     styleSelect2.addEventListener('change', function() {
       const selectedOption = styleSelect2.options[styleSelect2.selectedIndex];
       LogicNonLogicAll = parseInt(selectedOption.dataset.number);
       filter(saferesult); 
-      console.log('LogicNonLogicAll', LogicNonLogicAll);
+      //console.log('LogicNonLogicAll', LogicNonLogicAll);
     });
 
     countw.addEventListener('change', function() {
       const selectedOption = countw.options[countw.selectedIndex];
       count = parseInt(selectedOption.dataset.number);
       processInput()
-      console.log('count', count);
+      //console.log('count', count);
     });
 
     asortw.addEventListener('change', function() {
       const selectedOption = countw.options[asortw.selectedIndex];
       asort = parseInt(selectedOption.dataset.number);
       filter(saferesult); 
-      console.log('asort', asort);
+      //console.log('asort', asort);
     });
 
     profw.addEventListener('change', function() {
       const selectedOption = profw.options[profw.selectedIndex];
       prof = parseInt(selectedOption.dataset.number);
-      filter(saferesult); 
-      console.log('prof', prof);
+      processInput()
+      //console.log('prof', prof);
     });
     
     ssortw.addEventListener('change', function() {
       const selectedOption = ssortw.options[ssortw.selectedIndex];
       ssort = parseInt(selectedOption.dataset.number);
       filter(saferesult); 
-      console.log('ssort', ssort);
+      //console.log('ssort', ssort);
     });
     
 
@@ -542,7 +550,7 @@ max-height: 100%;
       const test = lookback;
       lookback = parseInt(selectedOption.dataset.number);
       if(test != lookback){processInput()}
-      console.log('lookkback', lookkback);
+      //console.log('lookkback', lookkback);
      
     });
     
@@ -563,12 +571,12 @@ max-height: 100%;
   const input1 = document.getElementById('input1');
   const input2 = document.getElementById('input2');
 
-  console.log(parseInt(input2.value));
+  //console.log(parseInt(input2.value));
   const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
 
   input2.addEventListener('input', function(event) {
     let nextNumberIndex = rouletteOrder.indexOf(parseInt(input1.value));
-    console.log(nextNumberIndex);
+    //console.log(nextNumberIndex);
     if(nextNumberIndex + parseInt(input2.value) <= 36) { 
       f = (nextNumberIndex + parseInt(input2.value));
       
@@ -633,13 +641,13 @@ max-height: 100%;
     for (let i = 0; i < numbersArray.length-1; i++) {
         const number = numbersArray[i + 1];
         const prevnumber = numbersArray[i];
-        console.log("Number:", number);
-        console.log("Previous Number:", prevnumber);
+        //console.log("Number:", number);
+        //console.log("Previous Number:", prevnumber);
         const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
         let nextNumberIndex = rouletteOrder.indexOf(parseInt(number));
         let prevNumberIndex = rouletteOrder.indexOf(parseInt(prevnumber));
-        console.log("Position of next number:", nextNumberIndex);
-        console.log("Position of previous number:", prevNumberIndex);
+        //console.log("Position of next number:", nextNumberIndex);
+        //console.log("Position of previous number:", prevNumberIndex);
         if (prevnumber === 'f') {
             bool = true;
         } if (prevnumber === 'b') {
@@ -650,7 +658,7 @@ max-height: 100%;
         if(nextNumberIndex - prevNumberIndex > 0) { f = nextNumberIndex - prevNumberIndex }
         if(nextNumberIndex - prevNumberIndex < 0) { f = 37 + (nextNumberIndex - prevNumberIndex)}
             A.push(f);
-            console.log("Gezählte Nachbarn F:",f );
+            //console.log("Gezählte Nachbarn F:",f );
         } 
         if (!bool && prevnumber !== 'x' && prevnumber !== 'f' && prevnumber !== 'b' && number !== 'x' && number !== 'f' && number !== 'b') {
             let b = 0;
@@ -658,13 +666,13 @@ max-height: 100%;
         if(nextNumberIndex - prevNumberIndex < 0) { b = 37 + (nextNumberIndex - prevNumberIndex)}
             
             B.push(b);
-            console.log("Gezählte Nachbarn B:",b );
+            //console.log("Gezählte Nachbarn B:",b );
 
         }
         
     }
-    console.log("Array A:", A);
-    console.log("Array B:", B);
+    //console.log("Array A:", A);
+    //console.log("Array B:", B);
     return [A, B];
 }
 
@@ -677,13 +685,13 @@ function calculateNeighborsKessel(numbersArray) {
   for (let i = 0; i < numbersArray.length-1; i++) {
       const number = numbersArray[i + 1];
       const prevnumber = numbersArray[i];
-      console.log("Number:", number);
-      console.log("Previous Number:", prevnumber);
+      //console.log("Number:", number);
+      //console.log("Previous Number:", prevnumber);
       const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
       let nextNumberIndex = rouletteOrder.indexOf(parseInt(number));
       let prevNumberIndex = rouletteOrder.indexOf(parseInt(prevnumber));
-      console.log("Position of next number:", nextNumberIndex);
-      console.log("Position of previous number:", prevNumberIndex);
+      //console.log("Position of next number:", nextNumberIndex);
+      //console.log("Position of previous number:", prevNumberIndex);
       if (prevnumber === 'f') {
           bool = true;
       } if (prevnumber === 'b') {
@@ -696,7 +704,7 @@ function calculateNeighborsKessel(numbersArray) {
       if(nextNumberIndex - prevNumberIndex > 0) { f = nextNumberIndex - prevNumberIndex }
       if(nextNumberIndex - prevNumberIndex < 0) { f = 37 + (nextNumberIndex - prevNumberIndex)}
           A.push(f);
-          console.log("Gezählte Nachbarn F:",f );
+          //console.log("Gezählte Nachbarn F:",f );
       }
       }
       if (!bool) {
@@ -707,14 +715,14 @@ function calculateNeighborsKessel(numbersArray) {
       if(nextNumberIndex - prevNumberIndex < 0) { b = 37 + (nextNumberIndex - prevNumberIndex)}
           
           B.push(b);
-          console.log("Gezählte Nachbarn B:",b );
+          //console.log("Gezählte Nachbarn B:",b );
 
       }
       }
       
   }
-  console.log("Array A:", A);
-  console.log("Array B:", B);
+  //console.log("Array A:", A);
+  //console.log("Array B:", B);
   return [A, B];
 }
 function evaluateArray(arr, numbersArray) {
@@ -738,36 +746,169 @@ function evaluateArray(arr, numbersArray) {
   for (let b = 0; b <= numbersArray.length - 1; b++) {
     const index = rouletteOrder.indexOf(parseInt(numbersArray[b]));
     resultArray.push(index);
-    console.log("wedwed", resultArray)
+    //console.log("wedwed", resultArray)
   }
  
-let countf = [0, 1, 2, 3, 4, 5, 6];
-let numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9];
+
+  if(prof === 1 || prof === 2 || prof === 3){
+
+    if (strategyNumber === 1) { numbersf = [18, 19, 20, 21, 22, 23]; }
+    if (strategyNumber === 2) { numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9]; }
+  if (strategyNumber === 69) { numbersf = [18, 19, 20, 21, 22, 15, 16, 17, 13, 14]; }
+  if (strategyNumber === 40) { numbersf = [28, 29, 30, 31, 32]; }
+  if (strategyNumber === 3) { numbersf = [27, 28, 29, 30, 31]; }
+  if (strategyNumber === 4) { numbersf = [24, 25, 26, 27, 28]; }
+  if (strategyNumber === 5) { numbersf = [22, 23, 24, 25, 26]; }
+  if (strategyNumber === 6) { numbersf = [19, 20, 21, 22, 23]; }
+  if (strategyNumber === 7) { numbersf = [18, 19, 20, 21, 22]; }
+  if (strategyNumber === 8) { numbersf = [15, 16, 17, 18, 19]; }
+  if (strategyNumber === 9) { numbersf = [13, 14, 15, 16, 17]; }
+  if (strategyNumber === 10) { numbersf = [10, 11, 12, 13, 14]; }
+  if (strategyNumber === 11) { numbersf = [9, 10, 11, 12, 13]; }
+
+    if(count === 10){countf = [0];}
+    if(count === 1){countf = [0, 2, 3, 4, 5, 6, 7];}
+    if(count === 2){countf = [2, 3, 4];}
+    if(count === 3){countf = [7]}
+    if(count === 4){countf = [2]}
+    if(count === 5){countf = [3]}
+    if(count === 6){countf = [4]}
+    if(count === 7){countf = [5]}
+    if(count === 8){countf = [6]}
+
+    
+  
+    // Ausgabe der Positionen
+    let pos = new Array(100).fill(null).map(() => new Array(100).fill(null).map(() => new Array(100).fill(0)));
+    let neg = new Array(100).fill(null).map(() => new Array(100).fill(null).map(() => new Array(100).fill(0)));
+
+   
+      numbersf.forEach(num2 => {
+        // Your code here
+        //console.log("iq",num2 )
+        if(numbersArray.length  >= num2){
+       
+        
+       
+          for (let x = 0; x < numbersArray.length  - num2 + 1; x++) {
+          
+           
+            let copynumbersArray = [];
+            let duplicatesCount = 0;
+            
+           if(numbersArray.length + 1 > num2 + x ){
+            //console.log("xx", x)
+            
+            for (let b = 0 + x;  b  < num2 + x; b++) {
+                let currentElement1 = numbersArray[b];
+                if (copynumbersArray.includes(currentElement1)) {
+                  duplicatesCount++;
+                 
+                   // Break to avoid counting multiple duplicates of the same element
+                } else {
+                  copynumbersArray.push(currentElement1); // Add unique elements to the new array
+              }
+            }
+            
+          if(duplicatesCount < 6){
+          let rouletteOrders = [];
+          let copynumbersArrayAsNumbers = copynumbersArray.map(Number);
+          //console.log("Ficki", copynumbersArray, x, "NUM2",num2, duplicatesCount)
+          rouletteOrders = rouletteOrders.filter(order => !copynumbersArrayAsNumbers.includes(order));
+            
+          //console.log( "Bug",rouletteOrders, copynumbersArray );
+          let brx = true;
+          let br0 = true;
+          let br1 = true;
+          let br2 = true;
+          let br3 = true;
+          let br4 = true;
+          let br5 = true;
+
+          for(let c = 0; c < 10; c++){
+          let lc = copynumbersArray.length;
+
+          let currentElement = copynumbersArray.length  + x + c + duplicatesCount ;
+          //console.log("copynumbersArray length:", copynumbersArray.length);
+//console.log("xxx:", x);
+//console.log("ccc:", c);
+          let ddx = numbersArray[copynumbersArray.length  + x -1 + c];
+
+          //console.log("BTC" , ddx);
+          //console.log("GAY","currentElement,",currentElement, "numbersArray.length",numbersArray.length -1, "copynumbersArray", copynumbersArray,  "X", x,  "c",   c ,  "NUM2",num2, "DUP", duplicatesCount);
+          //console.log("duplicate", duplicatesCount);
+          
+          if(brx == true &&  duplicatesCount < 6){if (copynumbersArray.includes(ddx)){neg[lc][30][c] += 1; }else{pos[lc][30][c] += 1; brx = false;} }
+          if(currentElement  === numbersArray.length -1 && brx == true && duplicatesCount < 6  ){    console.log("TRICK","currentElement,",currentElement, "numbersArray.length",numbersArray.length -1, "copynumbersArray", copynumbersArray,  "X", x,  "c",   c ,  "NUM2",num2, "DUP", duplicatesCount);     let nn0 = 0;  let p0 = 0; if (pos[lc][30][c] + neg[lc][30][c] === 0) {}else{  p0 = 100 / (pos[lc][30][c] + neg[lc][30][c]) * pos[lc][30][c];   nn0 = 100 / (pos[lc][30][c] + neg[lc][30][c]) * neg[lc][30][c];}    returnv.push([`MX0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][30][c]]);  returnv.push([`MX1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][30][c]]);  }
+        
+
+          if(br0 == true && duplicatesCount == 0){if (copynumbersArray.includes(ddx)){neg[lc][duplicatesCount][c] += 1; }else{pos[lc][duplicatesCount][c] += 1; br0 = false;} }
+          if(currentElement  === numbersArray.length -1 && br0 == true && duplicatesCount == 0  ){    console.log("TRICK","currentElement,",currentElement, "numbersArray.length",numbersArray.length -1, "copynumbersArray", copynumbersArray,  "X", x,  "c",   c ,  "NUM2",num2, "DUP", duplicatesCount);     let nn0 = 0;  let p0 = 0; if (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c] === 0) {}else{  p0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * pos[lc][duplicatesCount][c];   nn0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * neg[lc][duplicatesCount][c];}    returnv.push([`M${duplicatesCount}0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][duplicatesCount][c]]);  returnv.push([`M${duplicatesCount}1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][duplicatesCount][c]]);  }
+         
+          if(br1 == true && duplicatesCount == 1){if (copynumbersArray.includes(ddx)){neg[lc][duplicatesCount][c] += 1; }else{pos[lc][duplicatesCount][c] += 1; br1 = false; } }
+          if(currentElement === numbersArray.length -1 && br1 == true  && duplicatesCount == 1 ){  console.log("TRICK1", copynumbersArray, x, "NUM2",num2, duplicatesCount);      let nn0 = 0;  let p0 = 0; if (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c] === 0) {}else{  p0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * pos[lc][duplicatesCount][c];   nn0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * neg[lc][duplicatesCount][c];}    returnv.push([`M${duplicatesCount}0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][duplicatesCount][c]]);  returnv.push([`M${duplicatesCount}1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][duplicatesCount][c]]);  }
+          
+          
+          if(br2 == true && duplicatesCount == 2){if (copynumbersArray.includes(ddx)){neg[lc][duplicatesCount][c] += 1; }else{pos[lc][duplicatesCount][c] += 1; br2 = false; } }
+          if(currentElement === numbersArray.length -1 && br2 == true && duplicatesCount == 2  ){  console.log("TRICK2", copynumbersArray, x, "NUM2",num2, duplicatesCount);      let nn0 = 0;  let p0 = 0; if (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c] === 0) {}else{  p0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * pos[lc][duplicatesCount][c];   nn0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * neg[lc][duplicatesCount][c];}    returnv.push([`M${duplicatesCount}0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][duplicatesCount][c]]);  returnv.push([`M${duplicatesCount}1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][duplicatesCount][c]]); }
+          
+       
+          if(br3 == true && duplicatesCount == 3){if (copynumbersArray.includes(ddx)){neg[lc][duplicatesCount][c] += 1; }else{pos[lc][duplicatesCount][c] += 1; br3 = false;} }
+          if(currentElement === numbersArray.length -1 && br3 == true  && duplicatesCount == 3  ){  console.log("TRICK3", copynumbersArray, x, "NUM2",num2, duplicatesCount);      let nn0 = 0;  let p0 = 0; if (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c] === 0) {}else{  p0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * pos[lc][duplicatesCount][c];   nn0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * neg[lc][duplicatesCount][c];}    returnv.push([`M${duplicatesCount}0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][duplicatesCount][c]]);  returnv.push([`M${duplicatesCount}1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][duplicatesCount][c]]);  }
+          
+          if(br4 == true && duplicatesCount == 4){if (copynumbersArray.includes(ddx)){neg[lc][duplicatesCount][c] += 1; }else{pos[lc][duplicatesCount][c] += 1; br4 = false;} }
+          if(currentElement === numbersArray.length -1 && br4 == true && duplicatesCount == 4  ){  console.log("TRICK4", copynumbersArray, x, "NUM2",num2, duplicatesCount);      let nn0 = 0;  let p0 = 0; if (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c] === 0) {}else{  p0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * pos[lc][duplicatesCount][c];   nn0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * neg[lc][duplicatesCount][c];}    returnv.push([`M${duplicatesCount}0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][duplicatesCount][c]]);  returnv.push([`M${duplicatesCount}1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][duplicatesCount][c]]);  }
+       
+          if(br5 == true && duplicatesCount == 5){if (copynumbersArray.includes(ddx)){neg[lc][duplicatesCount][c] += 1; }else{pos[lc][duplicatesCount][c] += 1; br5 = false;} }
+          if(currentElement === numbersArray.length -1 && br5 == true && duplicatesCount == 5  ){  console.log("TRICK5", copynumbersArray, x, "NUM2",num2, duplicatesCount);      let nn0 = 0;  let p0 = 0; if (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c] === 0) {}else{  p0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * pos[lc][duplicatesCount][c];   nn0 = 100 / (pos[lc][duplicatesCount][c] + neg[lc][duplicatesCount][c]) * neg[lc][duplicatesCount][c];}    returnv.push([`M${duplicatesCount}0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][duplicatesCount][c]]);  returnv.push([`M${duplicatesCount}1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][duplicatesCount][c]]);  }
+        
+          
+          }
+        //klammer check ob nicht infinite ifs
+      }
+
+        }
+      }
+     }
+   });
+ 
+}
+ 
 
 
-if(strategyNumber === 2){numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9];}
-if(strategyNumber === 40 || strategyNumber === 11){numbersf = [28, 9];}
-if(strategyNumber === 3 || strategyNumber === 10){numbersf = [ 27, 10];}
-if(strategyNumber === 4 || strategyNumber === 9){numbersf = [24, 13];}
-if(strategyNumber === 5 || strategyNumber === 8){numbersf = [22, 15];}
-if(strategyNumber === 6 || strategyNumber === 7 || strategyNumber === 1){numbersf = [19, 18];}
-if(strategyNumber === 69){numbersf = [24, 22, 19, 18, 15, 13];}
-
-if(count === 10){countf = [0];}
-if(count === 1){countf = [0, 1, 2, 3, 4, 5, 6];}
-if(count === 2){countf = [2, 3, 4];}
-if(count === 3){countf = [1]}
-if(count === 4){countf = [2]}
-if(count === 5){countf = [3]}
-if(count === 6){countf = [4]}
-if(count === 7){countf = [5]}
-if(count === 8){countf = [6]}
 
 
-//x
-  // Iteriere über das Array mit drei verschachtelten forEach-Schleifen
-  countf.forEach(num1 => {
-    numbersf.forEach(num2 => {
+
+
+
+
+
+  if(prof === 1 || prof === 5){
+
+  if(strategyNumber === 2){numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9];}
+  if(strategyNumber === 40 || strategyNumber === 11){numbersf = [28, 9];}
+  if(strategyNumber === 3 || strategyNumber === 10){numbersf = [ 27, 10];}
+  if(strategyNumber === 4 || strategyNumber === 9){numbersf = [24, 13];}
+  if(strategyNumber === 5 || strategyNumber === 8){numbersf = [22, 15];}
+  if(strategyNumber === 6 || strategyNumber === 7 || strategyNumber === 1){numbersf = [19, 18];}
+  if(strategyNumber === 69){numbersf = [24, 22, 19, 18, 15, 13];}
+  
+  if(count === 11){countf = [0];}
+  if(count === 10){countf = [2];}
+  if(count === 1){countf = [0, 2, 3, 4, 5, 6, 7, 8, 9];}
+  if(count === 2){countf = [2, 3, 4];}
+  if(count === 3){countf = [3]}
+  if(count === 4){countf = [4]}
+  if(count === 5){countf = [5]}
+  if(count === 6){countf = [6]}
+  if(count === 7){countf = [7]}
+  if(count === 8){countf = [8]}
+
+  
+  //x
+    // Iteriere über das Array mit drei verschachtelten forEach-Schleifen
+    countf.forEach(num1 => {
+      numbersf.forEach(num2 => {
          // Add foreach loop for num3
             let rouletteOrders = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
           
@@ -788,19 +929,33 @@ if(count === 8){countf = [6]}
               let endne1 = 0; 
 
 
-              let cendp = 0;
-              let cendn = 0;
+              let endpUN = 0;
+              let endnUN = 0;
+              
+              let endpeUN = 0;
+              let endneUN = 0;
+              
+              let endp1UN = 0;
+              let endn1UN = 0;
+              
+              let endpe1UN = 0;
+              let endne1UN = 0;
 
-              let cendpe = 0;
-              let cendne = 0;
-
-              let cendp1 = 0;
-              let cendn1 = 0;
-
-              let cendpe1 = 0;
-              let cendne1 = 0;
 
 
+              let endpLO = 0;
+              let endnLO = 0;
+
+              let endpeLO = 0;
+              let endneLO = 0;
+
+              let endp1LO = 0;
+              let endn1LO = 0;
+
+              let endpe1LO = 0;
+              let endne1LO = 0;
+
+              
 
               let countdown = false;
               let countpositiv = false;
@@ -830,18 +985,18 @@ if(count === 8){countf = [6]}
               let xlsol2n = false;
              
              
-              console.log("lookbacksex", lookback )
-              if(lookback === 2){ b = resultArray.length - num1 - 6}
-              if(lookback === 3){ b = resultArray.length - num1 - 8}
-              if(lookback === 4){ b = resultArray.length - num1 - 10}
-              if(lookback === 5){ b = resultArray.length - num1 - 12}
-              if(lookback === 6){ b = resultArray.length - num1 - 14}
-              if(lookback === 7){ b = resultArray.length - num1 - 16}
-              if(lookback === 8){ b = resultArray.length - num1 - 18}
-              if(lookback === 9){ b = resultArray.length - num1 - 20}
-              if(lookback === 10){ b = resultArray.length - num1 - 24}
-              if(lookback === 11){ b = resultArray.length - num1 - 26}
-              if(lookback === 12){ b = resultArray.length - num1 - 30}
+             
+              if(lookback === 2){ b = resultArray.length - 1 - 6}
+              if(lookback === 3){ b = resultArray.length - 1 - 8}
+              if(lookback === 4){ b = resultArray.length - 1 - 10}
+              if(lookback === 5){ b = resultArray.length - 1 - 12}
+              if(lookback === 6){ b = resultArray.length - 1 - 14}
+              if(lookback === 7){ b = resultArray.length - 1 - 16}
+              if(lookback === 8){ b = resultArray.length - 1 - 18}
+              if(lookback === 9){ b = resultArray.length - 1 - 20}
+              if(lookback === 10){ b = resultArray.length - 1 - 24}
+              if(lookback === 11){ b = resultArray.length - 1 - 26}
+              if(lookback === 12){ b = resultArray.length - 1 - 30}
 
               if (b < 0) {
                 b = 0;
@@ -850,21 +1005,21 @@ if(count === 8){countf = [6]}
               // Überprüfe, ob genug Elemente im Array vorhanden sind
               //One less because it is not possible to create one then statistic by 3 22
               const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-              console.log(resultArray.length, "DAMs");
-              console.log(b, "Bams");
+            
+              
            
-              for (;b <= resultArray.length - num1; b++) {
-                if (b <= resultArray.length  - num1 ) {
+              for (;b <= resultArray.length - 2; b++) {
+                if (b <= resultArray.length  - 2 ) {
                     //length normal +1 becuase array remove -1 add one to get lastr
-                    console.log(resultArray.length, "Mande")
+                    //console.log(resultArray.length, "Mande")
                     const range = resultArray.slice(b, b + 2);
-                    const anus = resultArray[b + 3];
-                    console.log("anus#", anus)
-                    console.log("reng", range) 
+                    const anus = resultArray[b + 2];
+                    //console.log("anus#", anus)
+                    //console.log("reng", range) 
                     const maxValue = Math.max(...range);
                     const minValue = Math.min(...range);
                   
-                    console.log("FIckmi", minValue )
+                    //console.log("FIckmi", minValue )
                   
 
                     const higherThan18 = range.filter(value => value > 18);
@@ -874,53 +1029,110 @@ if(count === 8){countf = [6]}
                     
                    
 
-                    console.log("Maximum value:", maxValue, b, num2);
-                    console.log("Minimum value:", minValue,  b, num2);
+                    //console.log("Maximum value:", maxValue, b, num2);
+                    //console.log("Minimum value:", minValue,  b, num2);
 
-                    console.log("lowerThan18:", lowerThan18);
-                    console.log("minHigherThan18", minHigherThan18);
+                    //console.log("lowerThan18:", lowerThan18);
+                    //console.log("minHigherThan18", minHigherThan18);
                   
                     //fertig//Right Fillup
-                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - num2){console.log( "rum", anus); xrsol1 = true; xrsol1n = true; } }else{countpositiv = false;} //
+                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - 2){console.log( "rum", anus); xrsol1 = true; xrsol1n = true;  }}else{countpositiv = false;} //
                   //fertig//Right Fillup
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - 3 ){if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}} }else{console.log("ID876Ne");countdowne = false;} 
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - 2 ){console.log("rum2", anus), xrsol2 = true; xrsol2n = true;}}else{console.log("ID876Ne");countdowne = false;} 
 
              
                    //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
-                   if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; cendn++ ; cendp = 0; }else if(countpositiv == true && b <= resultArray.length  - num1 -1 && isFinite(anus)){console.log("ID999PoF");endp++; countpositiv = false; cendp++; cendn = 0;   }//
+                   if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - 2 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - 2 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
                   //fertig //anus infinite, infinite anus
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne#"); endne++; countdowne = false;  cendne++ ; cendpe = 0; }else if(countdowne == true && b <= resultArray.length  - num1 -1 && isFinite(anus)){console.log("ID9PO");endpe++; countdowne = false; cendpe++; cendne = 0; }
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - 2 -1){console.log("ID9Ne#"); endne++; countdowne = false; }else if(countdowne == true && b <= resultArray.length  - 2 -1){console.log("ID9PO");endpe++; countdowne = false; }
 
                   //&& anus -37 + num2 > 0 
 
                    //with Difference Left Fillup
                     difference = num2 - (maxValue - minValue) - 1;
-                    console.log(difference, "Difference")
+                    //console.log(difference, "Difference")
 
                     difference2 =  num2 - (37 -minHigherThan18) - lowerThan18 -1;
-                    console.log("Difference2", difference2 )
-                 //bb
-
+                    //console.log("Difference2", difference2 )
+                 
+            
                   // else normal difference höher als 2;
-                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - num1){ xlsol1 = true; xlsol1n = true; }}else{countpositiv1 = false;} 
+                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - 2){console.log("rum", anus), xlsol1 = true; xlsol1n = true;}}else{countpositiv1 = false;} 
                    //muss crossen else normal
-                   //if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}
-
-                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - num1){ xlsol2 = true;  xlsol2n = true; }}else{countdowne1 = false;} 
+                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - 2){console.log("rum", anus), xlsol2 = true; xlsol2n = true;}}else{countdowne1 = false;} 
                   
-                   console.log("Fre", lowerThan18);
+                   //console.log("Fre", lowerThan18);
                  
 
              
 
                    //difference check , anus check
                    // difference check ,2 overcross cehck.
-                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  <= anus && maxValue + difference >= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; cendn1++; cendp1 = 0; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1 && isFinite(anus) ){console.log("ID123po");endp1++; cendn1 = 0; cendp1++;    countpositiv1 = false; }
-                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 ) && b <= resultArray.length  - num1 -1 ){console.log("IddiffAnusNe");endne1++;  cendne1++;  cendpe1 = 0;   countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1 && isFinite(anus) ){console.log("IddiffAnusPo");endpe1++; cendpe1++;  cendne1 = 0;  countdowne1 = false;  }
+                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  <= anus && maxValue + difference >= anus && b <= resultArray.length  - 2 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - 2 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
+                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 )  && b <= resultArray.length  - 2 -1 ){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - 2 -1){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
 
                   
-                  console.log("KP", parseInt(maxValue - num2), minValue)
-                  console.log("KN", parseInt(minHigherThan18 -37 + num2 ), lowerThan18)
+                  //console.log("KP", parseInt(maxValue - num2), minValue)
+                  //console.log("KN", parseInt(minHigherThan18 -37 + num2 ), lowerThan18)
+
+                  if(num1 != 0){
+                  //RN0 negativ - logisch korrekt
+                  if(num1 != endp && endn != 0){xrsol1 = false;}
+                  if(num1 == endp && endn == 1) { endpUN++}
+                  if(num1 < endp){endp = 1;  endnUN ++}
+                
+
+                  //RN1
+                  if(num1 != endn && endp != 0){xrsol1n = false;}
+                  if(num1 == endn && endp == 1){ endpLO++}
+                  if(num1 < endn){endn = 1; endnLO ++}
+                  if(endn != 0 && endp != 0){endn = 0; endp = 0;}
+
+
+                  //Ro0
+                  if(num1 != endpe && endne != 0){xrsol2 = false;}
+                  if(num1 == endpe && endne == 1){ endpeUN++}
+                  if(num1 < endpe){endpe = 1; endneUN ++}
+                
+                  //Ro1
+                  if(num1 != endne && endpe != 0){xrsol2n = false;}
+                  if(num1 == endne && endpe == 1){endpeLO++}
+                  if(num1 < endne){endne = 1; endneLO++}
+                  if(endne != 0 && endpe != 0){endne = 0; endpe = 0;}
+
+
+
+
+                  //LN0
+                  if(num1 != endp1 && endn1 != 0){xlsol1 = false;}
+                  if(num1 == endp1 && endn1 == 1){endp1UN++}
+                  if(num1 < endp1){endp1 = 1; endn1UN ++}
+             
+
+                  //LN1
+                  if(num1 != endn1 && endp1 != 0){xlsol1n = false;}
+                  if(num1 == endn1 && endp1 == 1){  endp1LO++}
+                  if(num1 < endn1){endn1 = 1; endn1LO ++}
+                  if(endn1 != 0 && endp1 != 0){endn1 = 0; endp1 = 0;}
+
+
+
+                  //L00
+                  if(num1 != endpe1 && endne1 != 0){xlsol2 = false;}
+                  if(num1 == endpe1 && endne1 == 1){ endpe1UN++}
+                  if(num1 < endpe1){endpe1 = 1; endne1UN++}
+             
+
+                  //L01
+                  if(num1 != endne1 && endpe1 != 0){xlsol2n = false;}
+                  if(num1 == endne1 && endpe1 == 1){endpe1LO++}
+                  if(num1 < endne1){endne1 = 1; endne1LO++}
+                  if(endne1 != 0 && endpe1 != 0){endne1 = 0; endpe1 = 0;}
+
+
+                }
+
+ 
 
                 if (xrsol1 == true) {
                   //logisch
@@ -984,7 +1196,7 @@ if(count === 8){countf = [6]}
                 
                 if (xrsol2n == true) {
                   //unlogisch  (26 - 37) -11   (26  37 + 18) 7
-                  console.log("Dreckiger schleinm,",  minHigherThan18 -37, num2, (minHigherThan18 -37) + num2)
+                  //console.log("Dreckiger schleinm,",  minHigherThan18 -37, num2, (minHigherThan18 -37) + num2)
                   for (let i = minHigherThan18 -37; i < (minHigherThan18 -37) + num2 ; i++) {
           
                     let neighborIndex = i;
@@ -1086,27 +1298,28 @@ if(count === 8){countf = [6]}
                 }
 
               }  
-           
-            console.log("countpositiv", countpositiv)
-            console.log("countd", countdown)
+            }
+            //console.log("countpositiv", countpositiv)
+            //console.log("countd", countdown)
 
-            console.log("endp", endp);
-            console.log("endn", endn);
-            console.log("endpe", endpe);
-            console.log("endne", endne);
+            //console.log("endp", endp);
+            //console.log("endn", endn);
+            //console.log("endpe", endpe);
+            //console.log("endne", endne);
 
-            console.log("rsol1", rsol1);
-            console.log("rsol1n", rsol1n);
+            //console.log("rsol1", rsol1);
+            //console.log("rsol1n", rsol1n);
 
-            console.log("rsol2", rsol2);
-            console.log("rsol2n", rsol2n);
+            //console.log("rsol2", rsol2);
+            //console.log("rsol2n", rsol2n);
 
 
-            console.log("lsol1", lsol1);
-            console.log("lsol1n", lsol1n);
+            //console.log("lsol1", lsol1);
+            //console.log("lsol1n", lsol1n);
 
-            console.log("lsol2", lsol2);
-            console.log("lsol2n", lsol2n);
+            //console.log("lsol2", lsol2);
+            //console.log("lsol2n", lsol2n);
+            if(num1 == 0){
             let rn1 = 0;
             let rn0 = 0;
             if(endp == 0 && endn == 0){rn1 = 0; rn0 = 0;}else{rn1 = (100 / (endp + endn)) * endp; rn0 = (100 / (endp + endn))* endn;}
@@ -1122,77 +1335,57 @@ if(count === 8){countf = [6]}
             let lo1 = 0;
             let lo0 = 0;
             if(endpe1 == 0 && endne1 == 0){lo1 = 0; lo0 = 0;}else{lo1 = (100 / (endpe1 + endne1)) * endpe1; lo0 = (100 / (endpe1 + endne1)) * endne1;}
-            /*
-            returnv.push(["RN0", rsol1.length || -1, num1, num2, rsol1, rn0, endp]);
-            returnv.push(["RN1", rsol1n.length || -1, num1, num2, rsol1n, rn1, endn]);
-
-            returnv.push(["RO0", rsol2.length || -1, num1, num2, rsol2, ro0, endne]);
-            returnv.push(["RO1", rsol2n.length || -1, num1, num2, rsol2n, ro1, endpe]);
-            console.log(100 / 0 * 0 ,"zerohero");
+         
             
-           
-            returnv.push(["LN0", lsol1.length || -1, num1, num2, lsol1, ln0, endn]);
-            returnv.push(["LN1", lsol1n.length || -1, num1, num2, lsol1n, ln1, endp1]);
-
-            returnv.push(["LO0", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
-            returnv.push(["LO1", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
-             
-            */
-            /*
+            rsol1.length > 1 && returnv.push(["RN1", rsol1.length, num1 , num2, rsol1, rn1, endp]);
+            rsol1n.length > 1 && returnv.push(["RN0", rsol1n.length, num1 , num2, rsol1n, rn0, endn]);
+            rsol2.length > 1 && returnv.push(["RO1", rsol2.length, num1 , num2, rsol2, ro1, endpe]);
+            rsol2n.length > 1 && returnv.push(["RO0", rsol2n.length, num1 , num2, rsol2n, ro0, endne]);
+            lsol1.length > 1 && returnv.push(["LN1", lsol1.length, num1 , num2, lsol1, ln1, endp1]);
+            lsol1n.length > 1 && returnv.push(["LN0", lsol1n.length, num1 , num2, lsol1n, ln0, endn1]);
+            lsol2.length > 1 && returnv.push(["LO1", lsol2.length, num1 , num2, lsol2, lo0, endne1]);
+            lsol2n.length > 1 && returnv.push(["LO0", lsol2n.length, num1 , num2, lsol2n, lo1, endpe1]);
             
-            returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
-            returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
-
-            returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endpe]);
-            returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endne]);
-
-            
-           
-            returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
-            returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
-
-            returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
-            returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
-
-        */
-          if (rsol1.length > 1) {
-              returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
-          }
-          if (rsol1n.length > 1) {
-              returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
-          }
-          if (rsol2.length > 1) {
-              returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endpe]);
-          }
-          if (rsol2n.length > 1) {
-              returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endne]);
-          }
-          if (lsol1.length > 1) {
-              returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
-          }
-          if (lsol1n.length > 1) {
-              returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
-          }
-          if (lsol2.length > 1) {
-              returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
-          }
-          if (lsol2n.length > 1) {
-              returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
-          }
-          
 
             //n hinten unlogisch gleich pe  negativ = logisch; positiv = unlogisch
-            /*
+          }
+          else{
+     
+              let rn1 = 0;
+              let rn0 = 0;
+              if(endpUN  == 0 && endnUN == 0){rn0 = 0;}else{rn0 = (100 / (endpUN + endnUN)) * endpUN;}
+              if(endpLO  == 0 && endnLO == 0){rn1 = 0;}else{rn1 = (100 / (endpLO + endnLO)) * endpLO;}
+             
             
-            endp =  0; 
-            endn = 0;
-            endpe = 0; 
-            endne = 0;
-            endp1 = 0; 
-            endn1 = 0;
-            endpe1 = 0; 
-            endne1 = 0; */
-            //y
+              let ro1 = 0;
+              let ro0 = 0;
+              if(endpeUN  == 0 && endneUN == 0){ro0 = 0;}else{ro0 = (100 / (endpeUN + endneUN)) * endpeUN;}
+              if(endpeLO  == 0 && endneLO == 0){ro1 = 0;}else{ro1 = (100 / (endpeLO + endneLO)) * endpeLO;}
+
+              let ln1 = 0;
+              let ln0 = 0;
+              if(endp1UN  == 0 && endn1UN == 0){ln0 = 0;}else{ln0 = (100 / (endp1UN + endn1UN)) * endp1UN;}
+              if(endp1LO  == 0 && endn1LO == 0){ln1 = 0;}else{ln1 = (100 / (endp1LO + endn1LO)) * endp1LO;}
+             
+  
+              let lo1 = 0;
+              let lo0 = 0;
+              if(endpe1UN  == 0 && endne1UN == 0){lo0 = 0;}else{lo0 = (100 / (endpe1UN + endne1UN)) * endpe1UN;}
+              if(endpe1LO  == 0 && endne1LO == 0){lo1 = 0;}else{lo1 = (100 / (endpe1LO + endne1LO)) * endpe1LO;}
+              
+            rsol1.length > 1 && returnv.push(["RN1", rsol1.length, num1  -1, num2, rsol1, rn1, endpLO]);
+            rsol1n.length > 1 && returnv.push(["RN0", rsol1n.length, num1  -1, num2, rsol1n, rn0, endpUN]);
+            rsol2.length > 1 && returnv.push(["RO1", rsol2.length, num1  -1, num2, rsol2, ro1, endpeLO]);
+            rsol2n.length > 1 && returnv.push(["RO0", rsol2n.length, num1  -1, num2, rsol2n, ro0, endpeUN]);
+            lsol1.length > 1 && returnv.push(["LN1", lsol1.length, num1  -1, num2, lsol1, ln1,endp1LO ]);
+            lsol1n.length > 1 && returnv.push(["LN0", lsol1n.length, num1  -1, num2, lsol1n, ln0,endp1UN ]);
+            lsol2.length > 1 && returnv.push(["LO1", lsol2.length, num1  -1, num2, lsol2, lo0, endpe1LO ]);
+            lsol2n.length > 1 && returnv.push(["LO0", lsol2n.length, num1  -1, num2, lsol2n, lo1,endpe1UN ]);
+        
+
+          }
+      
+
 
             rsol1 = [];
             rsol1n = [];
@@ -1202,15 +1395,15 @@ if(count === 8){countf = [6]}
             lsol1n = [];
             lsol2 = [];
             lsol2n = [];
-            resultArray = [];
+           //resultArray = [];
            //resultArray = [];
             
            
 
-          }
+        
       });
   });
-
+}
   return returnv;
 }
 
@@ -1226,24 +1419,26 @@ if(count === 8){countf = [6]}
 
 
   function processInput() {  
+    console.clear();
+
     const numbersInput = document.getElementById('number-input').value.trim();
     
       // Extract numbers and remove non-numeric characters
       numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num) || num === 'x' || num === 'f' || num === 'b');
       const letzteZahl = numbersArray[numbersArray.length - 1];
-      console.log(numbersArray);
+      //console.log(numbersArray);
       //const neighbors = calculateNeighbors(numbersArray);
       const [A, B] = calculateNeighbors(numbersArray);
       
-        console.log("s",A);
-        console.log(B); 
+        //console.log("s",A);
+        //console.log(B); 
 
         const sortedA = calculatePercentage(A);
         const sortedB = calculatePercentage(B);
 
 
-        console.log("Sorted Array A:", sortedA);
-        console.log("Sorted Array B:", sortedB);
+        //console.log("Sorted Array A:", sortedA);
+        //console.log("Sorted Array B:", sortedB);
        
 
         function calculatePercentage(array) {
@@ -1259,7 +1454,7 @@ if(count === 8){countf = [6]}
         const numbersInput = document.getElementById('number-input').value.trim();
         const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num));
         const furz = numbersArray[numbersArray.length - 1];
-        console.log("Furzy" + furz)
+        //console.log("Furzy" + furz)
     
         const result = sortedPercentages.map(entry => {
             const number = parseInt(entry[0]);
@@ -1267,8 +1462,8 @@ if(count === 8){countf = [6]}
             
             let nextNumberIndex = number;
             let neighborIndex = nextNumberIndex + rouletteOrder.indexOf(parseInt(furz));
-            console.log(rouletteOrder.indexOf(parseInt(furz))), "NN";
-            console.log(nextNumberIndex);
+            //console.log(rouletteOrder.indexOf(parseInt(furz))), "NN";
+            //console.log(nextNumberIndex);
             // Adjust neighborIndex to stay within the bounds of the rouletteOrder array
             if (neighborIndex >= rouletteOrder.length) {
                 neighborIndex -= rouletteOrder.length;
@@ -1313,10 +1508,10 @@ function calculateOppositeNeighbor(numberInput) {
     const nA = AElement.number !== null && AElement.number !== undefined ? AElement.number.toString() : "";
     const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(2) : ""; // Round to 3 decimal places if it's a valid number
     const ppops = AElement.bet;
-    console.log(ppops, "Poops"  )
+    //console.log(ppops, "Poops"  )
     const nrA = AElement.bet !== null && AElement.bet !== undefined ? `  ${AElement.bet.toString()}` : "";
 
-    console.log(ppops);
+    //console.log(ppops);
     const BElement = sortedB[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
 
     // Accessing properties of the element
@@ -1345,8 +1540,8 @@ function calculateOppositeNeighbor(numberInput) {
 }
 const numbersInputs = document.getElementById('number-input').value.trim();
 const [Ass, Bss] = calculateNeighborsKessel(numbersArray);
-console.log("AdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS:", Ass);
-console.log("BsadddddddddddddddddddddddddddddddddddS:", Bss);
+//console.log("AdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS:", Ass);
+//console.log("BsadddddddddddddddddddddddddddddddddddS:", Bss);
 
 
 let result = evaluateArray(Ass, numbersArray);
@@ -1364,43 +1559,46 @@ console.log("sucess")
 let copy;
  copy = [...saferesult];
 
-//z
 
-if (strategyNumber != 2) {
-    for (let i = copy.length - 1; i >= 0; i--) {
-        if (
-            (strategyNumber === 40 && copy[i][1] !== 28) ||
-            (strategyNumber === 3 && copy[i][1] !== 27) ||
-            (strategyNumber === 4 && copy[i][1] !== 24) ||
-            (strategyNumber === 5 && copy[i][1] !== 22) ||
-            (strategyNumber === 6 && copy[i][1] !== 19) ||
-            (strategyNumber === 7 && copy[i][1] !== 18) ||
-            (strategyNumber === 8 && copy[i][1] !== 15) ||
-            (strategyNumber === 9 && copy[i][1] !== 13) ||
-            (strategyNumber === 10 && copy[i][1] !== 10) ||
-            (strategyNumber === 69 && copy[i][1] !== 18 && copy[i][1] !== 15 && copy[i][1] !== 13 ) ||
-            (strategyNumber === 1 && copy[i][1] !== 18 && copy[i][1] !== 19) ||
-            (strategyNumber === 11 && copy[i][1] !== 9)
-        ) {
-            copy.splice(i, 1);
-        }
-    }
-}
-if (count != 1) {
+
+ if (strategyNumber != 2) {
   for (let i = copy.length - 1; i >= 0; i--) {
       if (
-          (count === 10 && copy[i][2] !== 0) ||
-          (count === 2 && copy[i][2] !== 2 && copy[i][2] !== 3 && copy[i][2] !== 4) ||
-          (count === 3 && copy[i][2] !== 1) ||
-          (count === 4 && copy[i][2] !== 2) ||
-          (count === 5 && copy[i][2] !== 3) ||
-          (count === 6 && copy[i][2] !== 4) ||
-          (count === 7 && copy[i][2] !== 5) ||
-          (count === 8 && copy[i][2] !== 6)
+          (strategyNumber === 40 && copy[i][1] !== 28) ||
+          (strategyNumber === 3 && copy[i][1] !== 27) ||
+          (strategyNumber === 4 && copy[i][1] !== 24) ||
+          (strategyNumber === 5 && copy[i][1] !== 22) ||
+          (strategyNumber === 6 && copy[i][1] !== 19) ||
+          (strategyNumber === 7 && copy[i][1] !== 18) ||
+          (strategyNumber === 8 && copy[i][1] !== 15) ||
+          (strategyNumber === 9 && copy[i][1] !== 13) ||
+          (strategyNumber === 10 && copy[i][1] !== 10) ||
+          (strategyNumber === 69 && copy[i][1] !== 18 && copy[i][1] !== 15 && copy[i][1] !== 13 ) ||
+          (strategyNumber === 1 && copy[i][1] !== 18 && copy[i][1] !== 19) ||
+          (strategyNumber === 11 && copy[i][1] !== 9)
       ) {
           copy.splice(i, 1);
       }
   }
+}
+if (count != 1) {
+for (let i = copy.length - 1; i >= 0; i--) {
+    if (
+        (count === 11 && copy[i][2] !== 0) ||
+        (count === 10 && copy[i][2] !== 1) ||
+        (count === 2 && copy[i][2] !== 2 && copy[i][2] !== 3 && copy[i][2] !== 4) ||
+        (count === 3 && copy[i][2] !== 2) ||
+        (count === 4 && copy[i][2] !== 3) ||
+        (count === 5 && copy[i][2] !== 4) ||
+        (count === 6 && copy[i][2] !== 5) ||
+        (count === 7 && copy[i][2] !== 6) ||
+        (count === 8 && copy[i][2] !== 7) ||
+        (count === 8 && copy[i][2] !== 8) ||
+        (count === 8 && copy[i][2] !== 9) 
+    ) {
+        copy.splice(i, 1);
+    }
+}
 }
 
 if (ReadyNotAll === 1 || ReadyNotAll === 2 || ReadyNotAll === 3) {
@@ -1419,7 +1617,7 @@ if (ReadyNotAll === 1 || ReadyNotAll === 2 || ReadyNotAll === 3) {
 
  
 
-
+if(LeftRightAll != 1){
   for (let i = copy.length - 1; i >= 0; i--) {
       const halten = String(copy[i][0]);
   
@@ -1428,7 +1626,8 @@ if (ReadyNotAll === 1 || ReadyNotAll === 2 || ReadyNotAll === 3) {
           copy.splice(i, 1);
       }
   }
-
+}
+if(RangeOverAll != 1){
   for (let i = copy.length - 1; i >= 0; i--) {
     const halten = String(copy[i][0]);
 
@@ -1437,7 +1636,8 @@ if (ReadyNotAll === 1 || ReadyNotAll === 2 || ReadyNotAll === 3) {
         copy.splice(i, 1);
     }
 }
-
+}
+if(LogicNonLogicAll != 1){
 for (let i = copy.length - 1; i >= 0; i--) {
   const halten = String(copy[i][0]);
 
@@ -1447,6 +1647,7 @@ for (let i = copy.length - 1; i >= 0; i--) {
       
   }
 
+}
 }
 
 for (let i = copy.length - 1; i >= 0; i--) {
@@ -1458,7 +1659,7 @@ for (let i = copy.length - 1; i >= 0; i--) {
      
 }
 
-console.log(copy)
+////console.log(copy)
 
 /*
 const arrows = document.querySelectorAll('.arrow');
@@ -1559,7 +1760,7 @@ copy.forEach(row => {
 
 });
 resizeTable();
-console.log("sexy", sexy)
+//console.log("sexy", sexy)
 
 }
 

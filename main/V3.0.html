@@ -787,6 +787,18 @@ if(count === 8){countf = [6]}
               let endpe1 = 0;
               let endne1 = 0; 
 
+              let endpF = 0;
+              let endnF = 0;
+
+              let endpeF = 0;
+              let endneF = 0;
+
+              let endp1F = 0;
+              let endn1F = 0;
+
+              let endpe1F = 0;
+              let endne1F = 0;
+
 
               let cendp = 0;
               let cendn = 0;
@@ -853,12 +865,12 @@ if(count === 8){countf = [6]}
               console.log(resultArray.length, "DAMs");
               console.log(b, "Bams");
            
-              for (;b <= resultArray.length - num1; b++) {
-                if (b <= resultArray.length  - num1 ) {
+              for (;b <= resultArray.length -3; b++) {
+                if (b <= resultArray.length  - 3 ) {
                     //length normal +1 becuase array remove -1 add one to get lastr
                     console.log(resultArray.length, "Mande")
                     const range = resultArray.slice(b, b + 2);
-                    const anus = resultArray[b + 3];
+                    const anus = resultArray[b + 2];
                     console.log("anus#", anus)
                     console.log("reng", range) 
                     const maxValue = Math.max(...range);
@@ -881,15 +893,20 @@ if(count === 8){countf = [6]}
                     console.log("minHigherThan18", minHigherThan18);
                   
                     //fertig//Right Fillup
-                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - num2){console.log( "rum", anus); xrsol1 = true; xrsol1n = true; } }else{countpositiv = false;} //
+                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  -3){console.log( "bbb", anus, b); if(cendn >= num1){ xrsol1 = true;}if(cendp >= num1){xrsol1n = true; }} }else{countpositiv = false;} //
                   //fertig//Right Fillup
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - 3 ){if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}} }else{console.log("ID876Ne");countdowne = false;} 
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  -3 ){if(cendne >= num1){xrsol2 = true; } if(cendpe >= num1){ xrsol2n = true; }} }else{console.log("ID876Ne");countdowne = false;} 
 
-             
+                   console.log("ses", resultArray[resultArray.length  - 3]);
                    //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
-                   if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - num1 -1){console.log("ID999NeF");endn++; countpositiv = false; cendn++ ; cendp = 0; }else if(countpositiv == true && b <= resultArray.length  - num1 -1 && isFinite(anus)){console.log("ID999PoF");endp++; countpositiv = false; cendp++; cendn = 0;   }//
+                   if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - 3){if(cendp === num1){endn++}  if(cendn > num1){cendn = 0; endpF++} countpositiv = false; cendn++ ; cendp = 0; }else if(countpositiv == true && b <= resultArray.length  - 3 && isFinite(anus)){  if(cendn === num1){endp++} if(cendp > num1){endnF++ ; cendp = 0;}  countpositiv = false; cendp++; cendn = 0;   }//
                   //fertig //anus infinite, infinite anus
-                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - num1 -1){console.log("ID9Ne#"); endne++; countdowne = false;  cendne++ ; cendpe = 0; }else if(countdowne == true && b <= resultArray.length  - num1 -1 && isFinite(anus)){console.log("ID9PO");endpe++; countdowne = false; cendpe++; cendne = 0; }
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - 3){if(cendpe === num1){endne++} if(cendne > num1){endpeF++; cendne = 0;}     countdowne = false;  cendne++ ; cendpe = 0; }else if(countdowne == true && b <= resultArray.length  - 3 && isFinite(anus)){ if(cendne === num1){endpe++} if(cendpe > num1){endneF++ ; cendpe = 0;}  countdowne = false; cendpe++; cendne = 0; }
+
+                   //erste bedungung
+                
+
+
 
                   //&& anus -37 + num2 > 0 
 
@@ -902,21 +919,26 @@ if(count === 8){countf = [6]}
                  //bb
 
                   // else normal difference höher als 2;
-                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - num1){ xlsol1 = true; xlsol1n = true; }}else{countpositiv1 = false;} 
+                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  -3){  if(cendn1 >= num1){xlsol1 = true; cendn1 = 0;} if(cendp1 >= num1){xlsol1n = true; cendp1 = 0;} }}else{countpositiv1 = false;} 
                    //muss crossen else normal
-                   //if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}
-
-                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - num1){ xlsol2 = true;  xlsol2n = true; }}else{countdowne1 = false;} 
+                   if(cendne >= num1){xrsol2 = true; cendne = 0;} if(cendpe >= num1){ xrsol2n = true; cendpe = 0;}
+                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  -3){ if(cendne1 >= num1){xlsol2 = true; cendne1 = 0;} if(cendpe1 >= num1){ xlsol2n = true; cendpe1 = 0;} }}else{countdowne1 = false;} 
                   
                    console.log("Fre", lowerThan18);
                  
+                  console.log('cendn:', cendn);
+                  console.log('cendpe:', cendpe);
+                  console.log('cendne:', cendne);
+                  console.log('cendp1:', cendp1);
+                  console.log('cendn1:', cendn1);
+                  console.log('cendpe1:', cendpe1);
+                  console.log('cendne1:', cendne1);
 
-             
 
                    //difference check , anus check
                    // difference check ,2 overcross cehck.
-                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  <= anus && maxValue + difference >= anus && b <= resultArray.length  - num1 -1){console.log("ID123Ne");endn1++; cendn1++; cendp1 = 0; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - num1 -1 && isFinite(anus) ){console.log("ID123po");endp1++; cendn1 = 0; cendp1++;    countpositiv1 = false; }
-                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 ) && b <= resultArray.length  - num1 -1 ){console.log("IddiffAnusNe");endne1++;  cendne1++;  cendpe1 = 0;   countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - num1 -1 && isFinite(anus) ){console.log("IddiffAnusPo");endpe1++; cendpe1++;  cendne1 = 0;  countdowne1 = false;  }
+                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  <= anus && maxValue + difference >= anus && b <= resultArray.length  - 3){   if(cendp1 === num1){endn1++}if(cendn1 > num1){cendn1 = 0; endp1F++} cendn1++; cendp1 = 0; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - 3 && isFinite(anus) ){ if(cendn1 === num1){endp1++}if(cendp1 > num1){endn1F++ ; cendp1 = 0;}  cendn1 = 0; cendp1++;    countpositiv1 = false; }
+                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 ) && b <= resultArray.length  - 3 ){ if(cendpe1 === num1){endne1++}if(cendne1 > num1){endpe1F++; cendne1 = 0;}  cendne1++;  cendpe1 = 0;   countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - 3 && isFinite(anus) ){console.log("IddiffAnusPo");  if(cendne1 === num1){endpe1++}if(cendpe1 > num1){endne1F++ ; cendpe1 = 0;} cendpe1++;  cendne1 = 0;  countdowne1 = false;  }
 
                   
                   console.log("KP", parseInt(maxValue - num2), minValue)
@@ -1107,21 +1129,41 @@ if(count === 8){countf = [6]}
 
             console.log("lsol2", lsol2);
             console.log("lsol2n", lsol2n);
+
+            console.log("endpF:", endpF);
+            console.log("endnF:", endnF);
+            
+            console.log("endpeF:", endpeF);
+            console.log("endneF:", endneF);
+            
+            console.log("endp1F:", endp1F);
+            console.log("endn1F:", endn1F);
+            
+            console.log("endpe1F:", endpe1F);
+            console.log("endne1F:", endne1F);
+                                          
+            
+            
+
+              
+
+
+            
             let rn1 = 0;
             let rn0 = 0;
-            if(endp == 0 && endn == 0){rn1 = 0; rn0 = 0;}else{rn1 = (100 / (endp + endn)) * endp; rn0 = (100 / (endp + endn))* endn;}
+            if(endp == 0 && endnF == 0){rn1 = 0;}else{rn1 = (100 / (endp + endnF)) * endp;} if(endpF == 0 && endn == 0 ){rn0 = 0;}else{ rn0 = (100 / (endpF + endn))* endn;}
 
             let ro1 = 0;
             let ro0 = 0;
-            if(endpe == 0 && endne == 0){ro1 = 0; ro0 = 0;}else{ro1 = (100 / (endpe + endne)) * endpe; ro0 = (100 / (endpe + endne)) * endne;}
+            if(endpe == 0 && endneF == 0){ro1 = 0;}else{ro1 = (100 / (endpe + endneF)) * endpe;} if(endpeF == 0 && endne == 0){ro0 = 0;} else{ro0 = (100 / (endpeF + endne)) * endne;}
             
             let ln1 = 0;
             let ln0 = 0;
-            if(endp1 == 0 && endn1 == 0){ln1 = 0; ln0 = 0;}else{ln1 = (100 / (endp1 + endn1)) * endp1; ln0 =  (100 / (endp1 + endn1)) * endn1  ;}
+            if(endp1 == 0 && endn1F == 0){ln1 = 0;}else{ln1 = (100 / (endp1 + endn1F)) * endp1;} if(endp1F == 0 && endn1 == 0 ){ln0 = 0;} else{ ln0 =  (100 / (endp1F + endn1)) * endn1;}
 
             let lo1 = 0;
             let lo0 = 0;
-            if(endpe1 == 0 && endne1 == 0){lo1 = 0; lo0 = 0;}else{lo1 = (100 / (endpe1 + endne1)) * endpe1; lo0 = (100 / (endpe1 + endne1)) * endne1;}
+            if(endpe1 == 0 && endne1F == 0){lo1 = 0;}else{lo1 = (100 / (endpe1 + endne1F)) * endpe1;} if(endpe1F == 0 && endne1 == 0 ){lo0 = 0;}else{ lo0 = (100 / (endpe1F + endne1)) * endne1;}
             /*
             returnv.push(["RN0", rsol1.length || -1, num1, num2, rsol1, rn0, endp]);
             returnv.push(["RN1", rsol1n.length || -1, num1, num2, rsol1n, rn1, endn]);
@@ -1156,28 +1198,28 @@ if(count === 8){countf = [6]}
 
         */
           if (rsol1.length > 1) {
-              returnv.push(["RN1", rsol1.length || -1, num1, num2, rsol1, rn1, endp]);
+              returnv.push(["RN1", rsol1.length || -1, num1 + 2, num2, rsol1, rn1, endp]);
           }
           if (rsol1n.length > 1) {
-              returnv.push(["RN0", rsol1n.length || -1, num1, num2, rsol1n, rn0, endn]);
+              returnv.push(["RN0", rsol1n.length || -1, num1 + 2, num2, rsol1n, rn0, endn]);
           }
           if (rsol2.length > 1) {
-              returnv.push(["RO1", rsol2.length || -1, num1, num2, rsol2, ro1, endpe]);
+              returnv.push(["RO1", rsol2.length || -1, num1 + 2, num2, rsol2, ro1, endpe]);
           }
           if (rsol2n.length > 1) {
-              returnv.push(["RO0", rsol2n.length || -1, num1, num2, rsol2n, ro0, endne]);
+              returnv.push(["RO0", rsol2n.length || -1, num1 + 2, num2, rsol2n, ro0, endne]);
           }
           if (lsol1.length > 1) {
-              returnv.push(["LN1", lsol1.length || -1, num1, num2, lsol1, ln1, endp1]);
+              returnv.push(["LN1", lsol1.length || -1, num1 + 2, num2, lsol1, ln1, endp1]);
           }
           if (lsol1n.length > 1) {
-              returnv.push(["LN0", lsol1n.length || -1, num1, num2, lsol1n, ln0, endn1]);
+              returnv.push(["LN0", lsol1n.length || -1, num1 + 2, num2, lsol1n, ln0, endn1]);
           }
           if (lsol2.length > 1) {
-              returnv.push(["LO1", lsol2.length || -1, num1, num2, lsol2, lo0, endne1]);
+              returnv.push(["LO1", lsol2.length || -1, num1 + 2, num2, lsol2, lo0, endne1]);
           }
           if (lsol2n.length > 1) {
-              returnv.push(["LO0", lsol2n.length || -1, num1, num2, lsol2n, lo1, endpe1]);
+              returnv.push(["LO0", lsol2n.length || -1, num1 + 2, num2, lsol2n, lo1, endpe1]);
           }
           
 
@@ -1202,7 +1244,7 @@ if(count === 8){countf = [6]}
             lsol1n = [];
             lsol2 = [];
             lsol2n = [];
-            resultArray = [];
+           
            //resultArray = [];
             
            
