@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .number-input {
+    width: calc(100% - 40px);
+    padding: 10px;
+    font-size: 18px;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .button-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .confirm-button,
+  .download-button,
+  .load-button,.file-input{
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .confirm-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .download-button {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  .load-button {
+    background-color: #f44336;
+    color: white;
+  }
+  .file-input{
+    background-color: #4936f4;
+    color: white;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+ 
+
+  .label-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 65%;
+    margin: 0 auto;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, rgb(207, 206, 206) 50%, #c0c0c0 50%); /* Gradient */
+}
+
+  .label {
+    flex: 1;
+    text-align: center;
+  }
+  .containers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}
+/* Text in A */
+/* Text in A */
+/* Text in A */
+.label-text-A {
+  color: #0000FF; /* Meerblau */
+  font-style: italic; /* Kursiver Textstil */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten */
+}
+
+/* Text in B */
+.label-text-B {
+  color: #9900cc; /* Violette Textfarbe für Text in B auf dunklem Hintergrund */
+  font-style: italic; /* Kursiver Textstil */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Textschatten */
+}
+
+
+.table-container {
+
+max-height: 100%;
+  max-width: 100%;
+}
+
+.sortable-table {
+  border-collapse: collapse;
+  font-size: medium;
+  width: auto;
+  transform-origin: top left;
+}
+
+.sortable-table th, .sortable-table td {
+  border: 1px solid #ddd;
+  padding: 0.05em;
+  text-align: left;
+}
+
+.sortable-table th {
+  background-color: #f2f2f2;
+  cursor: pointer;
+  position: relative;
+}
+
+.sortable-table th .arrow {
+  margin-left: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sortable-table th:hover {
+  background-color: #ddd;
+}
+
+.sortable-table th:last-child, .sortable-table td:last-child {
+  border-right: none;
+}
+
+.sortable-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.sortable-table tr:hover {
+  background-color: #ddd;
+}
+
+.unsortable {
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+}
+
+.select-strategy-select, .style-select, .select-show {
+  width: 60px;
+  font-size: 14px;
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+
+
+
+
+.cocks {
+  display: flex;
+  z-index: 2; /* Höherer z-index */
+  width: 100%;
+  height: 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.first1, .second1, .third1 {
+  width: 33.33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color:white;
+  border: 1px solid white;
+}
+
+.first1 {
+  background-color: #1A1A1A; /* Sehr dunkles Grau */
+}
+
+.second1 {
+  background-color: #1C1C1C; /* Dunkles Grau */
+}
+
+.third1 {
+  background-color: #1E1E1E; /* Mitteldunkles Grau */
+}
+
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+</style>
+</head>
+<body>
+  <div class="cocks">
+    <div class="first1" onclick="toggleDivs(1)">First</div>
+    <div class="second1" onclick="toggleDivs(2)">Second</div>
+    <div class="third1" onclick="toggleDivs(3)">All</div>
+</div>
+  <div class="title">v3.5</div>
+  <textarea id="number-input" class="number-input" rows="5" placeholder="Enter numbers separated by spaces -v3.5"></textarea>
+  <div class="button-container">
+    <button id="confirm-button" class="confirm-button">Save</button>
+  
+    <!-- Use an input type="file" for loading images -->
+ 
+  </div>
+  
+  <br>
+  <div class="first hidden">
+  <div class="containers">
+    <div class="content">
+      <input type="text" id="input1">
+      <input type="text" id="input2">
+      <label id="pp" for="input1">Label:</label>
+    </div>
+  </div>
+   
+  <!-- Insert provided HTML code here -->
+  <div id="main-container"></div>
+</div>
+
+
+  <div class="container">
+    <div class="second">
+    <div class="table-container">
+      <table class="sortable-table">
+        <thead>
+          <tr>
+            <th> Strategy 
+    
+          </th>
+            <th class="sortable" data-type="numeric">Numbers<br>
+              
+              <select class="select-strategy-select">
+                <option value="1" data-number="1">18, 19</option>
+                <option value="all" data-number="2">All</option>
+                <option value="28" data-number="69">18, 15, 13</option>
+                <option value="28" data-number="40">28</option>
+                <option value="3" data-number="3">27</option>
+                <option value="24" data-number="4">24</option>
+                <option value="24" data-number="5">22</option>
+                <option value="19" data-number="6">19</option>
+                <option value="18" data-number="7">18</option>
+                <option value="18" data-number="8">15</option>
+                <option value="10" data-number="9">13</option>
+                <option value="10" data-number="10">10</option>
+                <option value="9" data-number="11">9</option>
+              </select>
+
+              <select class="select-show">
+                <option value="ready" data-number="1">Optimum</option>
+                <option value="all1" data-number="2">Ready</option>
+                <option value="false" data-number="3">False</option>
+                <option value="sd" data-number="4">All</option>
+              </select>
+          
+            <select class="style-select">
+              <option value="all2" data-number="1">All</option>
+              <option value="left" data-number="2">Left</option>
+              <option value="right" data-number="3">Right</option>
+              <option value="right" data-number="4">M-Logic</option>
+              <option value="right" data-number="5">M-NotLogic</option>
+            </select>
+
+            <select class="prof">
+              <option value="d" data-number="1">All</option>
+              <option value="ed" data-number="2">All Mirror</option>
+              <option value="ed" data-number="3">Mirror-Repeat</option>
+              <option value="ed" data-number="4">//Mirror:1/2-Structure-Repeat</option>
+              <option value="3e" data-number="5">Kessel</option>
+              <option value="ed" data-number="6">//Neighbors-Imbalance</option>
+            </select>
+
+            <br>
+            <select class="style-select1">
+              <option value="all3" data-number="1">All</option>
+              <option value="range" data-number="2">Range</option>
+              <option value="over" data-number="3">O-Edge</option>
+            </select>
+
+            <select class="style-select2">
+              <option value="all4" data-number="1">All</option>
+              <option value="logic" data-number="2">Logic</option>
+              <option value="nlogic" data-number="3">N-Logic</option>
+            </select>
+            
+            <select class="count">
+              <option value="all" data-number="1">All</option>
+              <option value="all" data-number="11">0</option>
+              <option value="dwe" data-number="10">1</option>
+              <option value="28" data-number="2">3, 4, 5</option>
+              <option value="3" data-number="3">2</option>
+              <option value="24" data-number="4">3</option>
+              <option value="24" data-number="5">4</option>
+              <option value="19" data-number="6">5</option>
+              <option value="18" data-number="7">6</option>
+              <option value="18" data-number="8">7</option>
+              <option value="18" data-number="9">8</option>
+              <option value="18" data-number="10">9</option>
+            </select>
+
+
+            <select class="asort">
+              <option value="d" data-number="1">MaxPercent</option>
+              <option value="ed" data-number="2">MaxCount</option>
+              <option value="3e" data-number="3">MaxNumbers</option>
+              <option value="w24" data-number="4">MinCount</option>
+              <option value="w24" data-number="5">MinPercent</option>
+            </select>
+            <br>
+            <select class="lookback">
+              <option value="Max" data-number="1">Max</option>
+              <option value="28" data-number="2">6</option>
+              <option value="28" data-number="2">8</option>
+              <option value="3" data-number="3">10</option>
+              <option value="24" data-number="4">12</option>
+              <option value="24" data-number="5">14</option>
+              <option value="19" data-number="6">16</option>
+              <option value="18" data-number="7">18</option>
+              <option value="18" data-number="8">20</option>
+              <option value="18" data-number="9">24</option>
+              <option value="18" data-number="10">26</option>
+              <option value="18" data-number="11">30</option>
+            </select>
+
+            <select class="ssort">
+              <option value="d" data-number="1">Numeric</option>
+              <option value="ed" data-number="2">Wheel</option>
+            </select>
+
+
+            
+            </th>
+            <th class="sortable" data-type="numeric">Count </th>
+            <th class="sortable" data-type="numeric">Percent </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>All</td>
+         
+            <td class="unsortable">1</td>
+            <td>10</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>Third</td>
+          
+            <td class="unsortable">2</td>
+            <td>5</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>Quarter</td>
+            <td class="unsortable">3</td>
+            <td>15</td>
+            <td>30%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+  <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+  <script>
+    let strategyNumber = 1;
+    let ReadyNotAll = 1;
+    let LeftRightAll = 1;
+    let RangeOverAll = 1;
+    let LogicNonLogicAll = 1;
+
+    let count = 1;
+    let asort = 1;
+    let prof = 1;
+
+    let ssort = 1;
+    let lookback = 1;
+
+    let numbersArray = [[], []];
+    let saferesult;
+    function resizeTable() {
+      var tableContainer = document.querySelector('.table-container');
+      var table = document.querySelector('.sortable-table');
+      var containerWidth = tableContainer.offsetWidth;
+      var tableWidth = table.offsetWidth;
+      var scaleFactor = containerWidth / tableWidth ;
+    
+      table.style.transform = 'scale(' + scaleFactor + ')';
+    }
+    
+    // Call the function once when the page loads
+    window.addEventListener('load', resizeTable);
+    
+    // Call the function again when the window is resized
+    window.addEventListener('resize', resizeTable);
+
+   
+    function toggleDivs(enter) {
+      const firstDiv = document.querySelector('.first');
+      const secondDiv = document.querySelector('.second');
+  
+  
+      if (enter === 1) {
+        secondDiv.classList.remove('visible');
+        firstDiv.classList.remove('hidden');
+
+        secondDiv.classList.add('hidden');
+        firstDiv.classList.add('visible');
+
+      }
+      if (enter === 2) {
+        firstDiv.classList.remove('visible');
+        secondDiv.classList.remove('hidden');
+
+        firstDiv.classList.add('hidden');
+        secondDiv.classList.add('visible');
+
+    
+    }
+    if (enter === 3) {
+      firstDiv.classList.remove('hidden');
+      secondDiv.classList.remove('hidden');
+
+
+     firstDiv.classList.add('visible');
+     secondDiv.classList.add('visible');
+
+ 
+
+  }
+  }
+
+
+
+
+    // Get references to the select elements
+    const strategySelect = document.querySelector('.select-strategy-select');
+    const showSelect = document.querySelector('.select-show');
+    const styleSelect = document.querySelector('.style-select');
+    const styleSelect1 = document.querySelector('.style-select1');
+    const styleSelect2 = document.querySelector('.style-select2');
+    const countw = document.querySelector('.count');
+
+    const asortw = document.querySelector('.asort');
+    const profw = document.querySelector('.prof');
+
+    const ssortw = document.querySelector('.ssort');
+    const lookkbackw = document.querySelector('.lookback');
+
+    // Event listener for strategy select
+    strategySelect.addEventListener('change', function() {
+      const selectedOption = strategySelect.options[strategySelect.selectedIndex];
+      strategyNumber = parseInt(selectedOption.dataset.number);
+      processInput()
+      //console.log('darumdumm', strategyNumber);
+    });
+
+    // Event listener for show select
+    showSelect.addEventListener('change', function() {
+      const selectedOption = showSelect.options[showSelect.selectedIndex];
+      ReadyNotAll = parseInt(selectedOption.dataset.number);
+      filter(saferesult); 
+      //console.log('ReadyNotAll:', ReadyNotAll);
+    });
+
+    // Event listener for style select
+    styleSelect.addEventListener('change', function() {
+      const selectedOption = styleSelect.options[styleSelect.selectedIndex];
+      LeftRightAll = parseInt(selectedOption.dataset.number);
+      filter(saferesult); 
+      //console.log('LeftRightAll:', LeftRightAll);
+    });
+
+    styleSelect1.addEventListener('change', function() {
+      const selectedOption = styleSelect1.options[styleSelect1.selectedIndex];
+      RangeOverAll = parseInt(selectedOption.dataset.number);
+      filter(saferesult); 
+      //console.log('RangeOverAll', RangeOverAll);
+    });
+
+    styleSelect2.addEventListener('change', function() {
+      const selectedOption = styleSelect2.options[styleSelect2.selectedIndex];
+      LogicNonLogicAll = parseInt(selectedOption.dataset.number);
+      filter(saferesult); 
+      //console.log('LogicNonLogicAll', LogicNonLogicAll);
+    });
+
+    countw.addEventListener('change', function() {
+      const selectedOption = countw.options[countw.selectedIndex];
+      count = parseInt(selectedOption.dataset.number);
+      processInput()
+      //console.log('count', count);
+    });
+
+    asortw.addEventListener('change', function() {
+      const selectedOption = countw.options[asortw.selectedIndex];
+      asort = parseInt(selectedOption.dataset.number);
+      filter(saferesult); 
+      //console.log('asort', asort);
+    });
+
+    profw.addEventListener('change', function() {
+      const selectedOption = profw.options[profw.selectedIndex];
+      prof = parseInt(selectedOption.dataset.number);
+      processInput()
+      //console.log('prof', prof);
+    });
+    
+    ssortw.addEventListener('change', function() {
+      const selectedOption = ssortw.options[ssortw.selectedIndex];
+      ssort = parseInt(selectedOption.dataset.number);
+      filter(saferesult); 
+      //console.log('ssort', ssort);
+    });
+    
+
+    lookkbackw.addEventListener('change', function() {
+      const selectedOption = lookkbackw.options[lookkbackw.selectedIndex];
+      const test = lookback;
+      lookback = parseInt(selectedOption.dataset.number);
+      if(test != lookback){processInput()}
+      //console.log('lookkback', lookkback);
+     
+    });
+    
+
+
+    
+
+
+
+    // Funktion zum Anpassen der Schriftgröße basierend auf der Container-Breite
+// Funktion zum Anpassen der Schriftgröße, bis der Text innerhalb des Containers passt
+// Funktion zum Anpassen der Schriftgröße, bis der Text innerhalb des Containers passt
+//6969
+
+    
+ 
+  let f = 0;
+  const input1 = document.getElementById('input1');
+  const input2 = document.getElementById('input2');
+
+  //console.log(parseInt(input2.value));
+  const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+
+  input2.addEventListener('input', function(event) {
+    let nextNumberIndex = rouletteOrder.indexOf(parseInt(input1.value));
+    //console.log(nextNumberIndex);
+    if(nextNumberIndex + parseInt(input2.value) <= 36) { 
+      f = (nextNumberIndex + parseInt(input2.value));
+      
+    }
+    if(nextNumberIndex + parseInt(input2.value) > 36) { 
+      f = nextNumberIndex + parseInt(input2.value) - 37;
+      
+    }
+    
+    // For example, update another element with the new value
+    const pp = document.getElementById('pp');
+    let ff = rouletteOrder[f];
+    pp.innerHTML = ff.toString();
+  });
+  // Example: Logging the value of input1
+  
+  // Define the number of iterations
+  const iterations = 37;
+
+  // Define the roulette order
+  // Get the main container
+  const mainContainer = document.getElementById('main-container');
+
+  // Loop to create the structure dynamically
+  for (let i = 0; i < iterations; i++) {
+    // Create div container
+   
+    
+
+    // Create label container
+    const labelContainer = document.createElement('div');
+    labelContainer.classList.add('label-container');
+
+    // Create labels
+    for (let j = 0; j < 4; j++) {
+      const label = document.createElement('label');
+      label.textContent = ``;
+      label.classList.add('label', j % 2 === 0 ? 'left' : 'right');
+      labelContainer.appendChild(label);
+    }
+
+    // Append label container to div container
+  
+
+    // Append div container to main container
+    mainContainer.appendChild(labelContainer);
+  }
+
+
+
+
+
+
+
+  // Function to calculate neighbors
+  function calculateNeighbors(numbersArray) {
+    const neighbors = {};
+    let bool = true;
+    let A = [];
+    let B = [];
+    let Neighbors = 0;
+    for (let i = 0; i < numbersArray.length-1; i++) {
+        const number = numbersArray[i + 1];
+        const prevnumber = numbersArray[i];
+        //console.log("Number:", number);
+        //console.log("Previous Number:", prevnumber);
+        const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+        let nextNumberIndex = rouletteOrder.indexOf(parseInt(number));
+        let prevNumberIndex = rouletteOrder.indexOf(parseInt(prevnumber));
+        //console.log("Position of next number:", nextNumberIndex);
+        //console.log("Position of previous number:", prevNumberIndex);
+        if (prevnumber === 'f') {
+            bool = true;
+        } if (prevnumber === 'b') {
+            bool = false;
+        }
+        if (bool &&  prevnumber !== 'x' && prevnumber !== 'f' && prevnumber !== 'b' && number !== 'x' && number !== 'f' && number !== 'b') {
+        let f = 0;
+        if(nextNumberIndex - prevNumberIndex > 0) { f = nextNumberIndex - prevNumberIndex }
+        if(nextNumberIndex - prevNumberIndex < 0) { f = 37 + (nextNumberIndex - prevNumberIndex)}
+            A.push(f);
+            //console.log("Gezählte Nachbarn F:",f );
+        } 
+        if (!bool && prevnumber !== 'x' && prevnumber !== 'f' && prevnumber !== 'b' && number !== 'x' && number !== 'f' && number !== 'b') {
+            let b = 0;
+        if(nextNumberIndex - prevNumberIndex > 0) { b = nextNumberIndex - prevNumberIndex }
+        if(nextNumberIndex - prevNumberIndex < 0) { b = 37 + (nextNumberIndex - prevNumberIndex)}
+            
+            B.push(b);
+            //console.log("Gezählte Nachbarn B:",b );
+
+        }
+        
+    }
+    //console.log("Array A:", A);
+    //console.log("Array B:", B);
+    return [A, B];
+}
+
+function calculateNeighborsKessel(numbersArray) {
+  const neighbors = {};
+  let bool = true;
+  let A = [];
+  let B = [];
+  let Neighbors = 0;
+  for (let i = 0; i < numbersArray.length-1; i++) {
+      const number = numbersArray[i + 1];
+      const prevnumber = numbersArray[i];
+      //console.log("Number:", number);
+      //console.log("Previous Number:", prevnumber);
+      const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+      let nextNumberIndex = rouletteOrder.indexOf(parseInt(number));
+      let prevNumberIndex = rouletteOrder.indexOf(parseInt(prevnumber));
+      //console.log("Position of next number:", nextNumberIndex);
+      //console.log("Position of previous number:", prevNumberIndex);
+      if (prevnumber === 'f') {
+          bool = true;
+      } if (prevnumber === 'b') {
+          bool = false;
+      }
+      if (bool) {
+      if(prevnumber === 'x' || prevnumber === 'f' || prevnumber === 'b' && number === 'x' || number === 'f' || number === 'b'){  A.push("k");}
+      else{
+      let f = 0;
+      if(nextNumberIndex - prevNumberIndex > 0) { f = nextNumberIndex - prevNumberIndex }
+      if(nextNumberIndex - prevNumberIndex < 0) { f = 37 + (nextNumberIndex - prevNumberIndex)}
+          A.push(f);
+          //console.log("Gezählte Nachbarn F:",f );
+      }
+      }
+      if (!bool) {
+      if(prevnumber === 'x' || prevnumber === 'f' || prevnumber === 'b' || number === 'x' || number === 'f' || number === 'b'){B.push("k");}
+      else{
+      let b = 0;
+      if(nextNumberIndex - prevNumberIndex > 0) { b = nextNumberIndex - prevNumberIndex }
+      if(nextNumberIndex - prevNumberIndex < 0) { b = 37 + (nextNumberIndex - prevNumberIndex)}
+          
+          B.push(b);
+          //console.log("Gezählte Nachbarn B:",b );
+
+      }
+      }
+      
+  }
+  //console.log("Array A:", A);
+  //console.log("Array B:", B);
+  return [A, B];
+}
+function evaluateArray(arr, numbersArray) {
+  // Initialisiere das Mehrdimensionale Array zur Speicherung der Ergebnisse
+  
+  saferesult = [];
+  let returnv = [];
+  let resultArray = [];
+  let rsol1 = [];
+  let rsol2 = [];
+  let rsol1n = [];
+  let rsol2n = [];
+
+
+  let lsol1 = [];
+  let lsol2 = [];
+  let lsol1n = [];
+  let lsol2n = [];
+  // Definiere die Array-Länge für den Iterationsbereich
+  let arrayLength = arr.length;
+  for (let b = 0; b <= numbersArray.length - 1; b++) {
+    const index = rouletteOrder.indexOf(parseInt(numbersArray[b]));
+    resultArray.push(index);
+    //console.log("wedwed", resultArray)
+  }
+ 
+  
+  if(prof === 1 || prof === 2 || prof === 3){
+
+    if (strategyNumber === 1) { numbersf = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]; }
+    if (strategyNumber === 2) { numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9]; }
+  if (strategyNumber === 69) { numbersf = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]; }
+  if (strategyNumber === 40) { numbersf = [28, 29, 30, 31, 32]; }
+  if (strategyNumber === 3) { numbersf = [27, 28, 29, 30, 31]; }
+  if (strategyNumber === 4) { numbersf = [24, 25, 26, 27, 28]; }
+  if (strategyNumber === 5) { numbersf = [22, 23, 24, 25, 26]; }
+  if (strategyNumber === 6) { numbersf = [19, 20, 21, 22, 23]; }
+  if (strategyNumber === 7) { numbersf = [18, 19, 20, 21, 22]; }
+  if (strategyNumber === 8) { numbersf = [15, 16, 17, 18, 19]; }
+  if (strategyNumber === 9) { numbersf = [13, 14, 15, 16, 17]; }
+  if (strategyNumber === 10) { numbersf = [10, 11, 12, 13, 14]; }
+  if (strategyNumber === 11) { numbersf = [9, 10, 11, 12, 13]; }
+
+    if(count === 10){countf = [0];}
+    if(count === 1){countf = [0, 2, 3, 4, 5, 6, 7];}
+    if(count === 2){countf = [2, 3, 4];}
+    if(count === 3){countf = [7]}
+    if(count === 4){countf = [2]}
+    if(count === 5){countf = [3]}
+    if(count === 6){countf = [4]}
+    if(count === 7){countf = [5]}
+    if(count === 8){countf = [6]}
+
+    
+  
+    // Ausgabe der Positionen
+    let pos = new Array(100).fill(null).map(() => new Array(100).fill(null).map(() => new Array(100).fill(0)));
+    let neg = new Array(100).fill(null).map(() => new Array(100).fill(null).map(() => new Array(100).fill(0)));
+    let profi = 0;
+    let profi2 =0;
+   
+
+    //Count 0
+    let negA1 = new Array(10).fill(0);
+    let posA1 = new Array(10).fill(0);
+    //Count2
+    let negA2 = new Array(10).fill(0);
+    let posA2 = new Array(10).fill(0);
+    //Count3
+    let negA3 = new Array(10).fill(0);
+    let posA3 = new Array(10).fill(0);
+    //Count4
+    let negA4 = new Array(10).fill(0);
+    let posA4 = new Array(10).fill(0);
+    //Count5
+    let negA5 = new Array(10).fill(0);
+    let posA5 = new Array(10).fill(0);
+    //Count6
+    let negA6 = new Array(10).fill(0);
+    let posA6 = new Array(10).fill(0);
+    //Count7
+    let negA7 = new Array(10).fill(0);
+    let posA7 = new Array(10).fill(0);
+    //Count8
+    let negA8 = new Array(10).fill(0);
+    let posA8 = new Array(10).fill(0);
+    //Count9
+    let negA9 = new Array(10).fill(0);
+    let posA9 = new Array(10).fill(0);
+    //Count10
+    let negA10 = new Array(10).fill(0);
+    let posA10 = new Array(10).fill(0);
+    
+    let currentElement2 = 0;
+   
+      numbersf.forEach(num2 => {
+        // Your code here
+        //console.log("iq",num2 )
+        if(numbersArray.length  >= num2){
+       
+        
+       
+          for (let x = 0; x < numbersArray.length  - num2 + 1; x++) {
+          
+           
+            let copynumbersArray = [];
+            let duplicatesCount = 0;
+       
+           if(numbersArray.length + 1 > num2 + x ){
+            //console.log("xx", x)
+            
+            for (let b = 0 + x;  b  < num2 + x; b++) {
+                let currentElement1 = numbersArray[b];
+               
+                if (copynumbersArray.includes(currentElement1)) {
+                  duplicatesCount++;
+          
+                   // Break to avoid counting multiple duplicates of the same element
+                } else {
+                  copynumbersArray.push(currentElement1); // Add unique elements to the new array
+                  currentElement2 = numbersArray[b + 1];
+              }
+            }
+            
+          if(copynumbersArray.length == 18 ){console.log("DDUlicates count",duplicatesCount );profi += duplicatesCount; profi2 += (18 - duplicatesCount); console.log("ASS", profi, profi2);}
+          let ddx1 = numbersArray[copynumbersArray.length  + x  + duplicatesCount -2];
+          if(copynumbersArray.length == 18 && duplicatesCount == 1 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++} console.log("DD1", posA1, negA1 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 2 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++} console.log("DD2", posA1, negA1 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 3 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++} console.log("DD3", posA1, negA1 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 4 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++}console.log("DD4", posA1, negA1 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 5 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++}console.log("DD5", posA1, negA1 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 6 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++}console.log("DD6", posA1, negA1 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 7 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++}console.log("DD7", posA1, negA1 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 8 ){if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++}console.log("DD8", posA1, negA1 );} 
+          if(copynumbersArray.length == 18 && duplicatesCount == 9 ){let test = "ERROR"; if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++; test = "Good"}console.log("DD9", posA1, negA1, "array", copynumbersArray, currentElement2, test, num2 );}
+          if(copynumbersArray.length == 18 && duplicatesCount == 10 ){let test = "ERROR"; if (copynumbersArray.includes(ddx1)){negA1++}else{posA1++; test = "Good"}console.log("DD9", posA1, negA1, "array", copynumbersArray, currentElement2, test, num2 );}
+
+
+      
+          console.log("PIMMEL", ddx1, copynumbersArray, "DUPUS", duplicatesCount);
+          /*
+          let rouletteOrders1 = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+          let copynumbersArrayAsNumbers = copynumbersArray.map(Number);
+
+          //console.log("Ficki", copynumbersArray, x, "NUM2",num2, duplicatesCount)
+          rouletteOrders1 = rouletteOrders1.filter(order => !copynumbersArrayAsNumbers.includes(order));
+          if(copynumbersArray.length == 18 ){console.log("rouletteOrders1",rouletteOrders1 );} 
+
+          let ddx = numbersArray[rouletteOrders1.length + x + 1];
+          if (copynumbersArray.includes(ddx)){}
+   */
+
+
+
+          if(duplicatesCount < 10){
+          let rouletteOrders = [];
+          let copynumbersArrayAsNumbers = copynumbersArray.map(Number);
+          //console.log("Ficki", copynumbersArray, x, "NUM2",num2, duplicatesCount)
+          rouletteOrders = rouletteOrders.filter(order => !copynumbersArrayAsNumbers.includes(order));
+            
+          //console.log( "Bug",rouletteOrders, copynumbersArray );
+          let brx = true;
+          let br0 = true;
+          let br1 = true;
+          let br2 = true;
+          let br3 = true;
+          let br4 = true;
+          let br5 = true;
+
+          for(let c = 0; c < 10; c++){
+          let lc = copynumbersArray.length;
+
+          let currentElement = copynumbersArray.length  + x + c + duplicatesCount ;
+          //console.log("copynumbersArray length:", copynumbersArray.length);
+//console.log("xxx:", x);
+//console.log("ccc:", c);
+          let ddx = numbersArray[copynumbersArray.length  + x -1 + c];
+
+          //console.log("BTC" , ddx);
+          //console.log("GAY","currentElement,",currentElement, "numbersArray.length",numbersArray.length -1, "copynumbersArray", copynumbersArray,  "X", x,  "c",   c ,  "NUM2",num2, "DUP", duplicatesCount);
+          //console.log("duplicate", duplicatesCount);
+          
+     
+
+          if(br0 == true){if (copynumbersArray.includes(ddx)){neg[lc][10][c] += 1; }else{pos[lc][10][c] += 1; br0 = false;} }
+          if(currentElement  === numbersArray.length -1  ){    console.log("TRICK","currentElement,",currentElement, "numbersArray.length",numbersArray.length -1, "copynumbersArray", copynumbersArray,  "X", x,  "c",   c ,  "NUM2",num2, "DUP", duplicatesCount);     let nn0 = 0;  let p0 = 0; if (pos[lc][10][c] + neg[lc][10][c] === 0) {}else{  p0 = 100 / (pos[lc][10][c] + neg[lc][10][c]) * pos[lc][10][c];   nn0 = 100 / (pos[lc][10][c] + neg[lc][10][c]) * neg[lc][10][c];}    returnv.push([`M${duplicatesCount}0`, copynumbersArray.length, c , copynumbersArray.length, copynumbersArray, nn0, neg[lc][10][c]]);  returnv.push([`M${duplicatesCount}1`, rouletteOrders.length, c, rouletteOrders.length, rouletteOrders, p0, pos[lc][10][c]]);  }
+       
+          
+          }
+        //klammer check ob nicht infinite ifs
+      }
+
+        }
+      }
+     }
+   });
+ 
+}
+ 
+
+
+
+
+
+
+
+
+
+  if(prof === 1 || prof === 5){
+
+  if(strategyNumber === 2){numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9];}
+  if(strategyNumber === 40 || strategyNumber === 11){numbersf = [28, 9];}
+  if(strategyNumber === 3 || strategyNumber === 10){numbersf = [ 27, 10];}
+  if(strategyNumber === 4 || strategyNumber === 9){numbersf = [24, 13];}
+  if(strategyNumber === 5 || strategyNumber === 8){numbersf = [22, 15];}
+  if(strategyNumber === 6 || strategyNumber === 7 || strategyNumber === 1){numbersf = [19, 18];}
+  if(strategyNumber === 69){numbersf = [24, 22, 19, 18, 15, 13];}
+  
+  if(count === 11){countf = [0];}
+  if(count === 10){countf = [2];}
+  if(count === 1){countf = [0, 2, 3, 4, 5, 6, 7, 8, 9];}
+  if(count === 2){countf = [2, 3, 4];}
+  if(count === 3){countf = [3]}
+  if(count === 4){countf = [4]}
+  if(count === 5){countf = [5]}
+  if(count === 6){countf = [6]}
+  if(count === 7){countf = [7]}
+  if(count === 8){countf = [8]}
+
+  
+  //x
+    // Iteriere über das Array mit drei verschachtelten forEach-Schleifen
+    countf.forEach(num1 => {
+      numbersf.forEach(num2 => {
+         // Add foreach loop for num3
+            let rouletteOrders = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+          
+              let difference = 0;
+              let difference2 = 0;
+              
+              let b = 0;
+              let endp = 0;
+              let endn = 0;
+
+              let endpe = 0;
+              let endne = 0;
+
+              let endp1 = 0;
+              let endn1 = 0;
+
+              let endpe1 = 0;
+              let endne1 = 0; 
+
+
+              let endpUN = 0;
+              let endnUN = 0;
+              
+              let endpeUN = 0;
+              let endneUN = 0;
+              
+              let endp1UN = 0;
+              let endn1UN = 0;
+              
+              let endpe1UN = 0;
+              let endne1UN = 0;
+
+
+
+              let endpLO = 0;
+              let endnLO = 0;
+
+              let endpeLO = 0;
+              let endneLO = 0;
+
+              let endp1LO = 0;
+              let endn1LO = 0;
+
+              let endpe1LO = 0;
+              let endne1LO = 0;
+
+              
+
+              let countdown = false;
+              let countpositiv = false;
+
+              let countdowne = false;
+              let countpositive = false;
+//deckel  1
+              let countdown1 = false;
+              let countpositiv1 = false;
+
+              
+              let countdowne1 = false;
+              let countpositive1 = false;
+
+              let biggest = 0;
+              let probabilityPercentage = 0;
+              
+              let xrsol1 = false;
+              let xrsol2 = false;
+              let xrsol1n = false;
+              let xrsol2n = false;
+            
+            
+              let xlsol1 = false;
+              let xlsol2 = false;
+              let xlsol1n = false;
+              let xlsol2n = false;
+             
+             
+             
+              if(lookback === 2){ b = resultArray.length - 1 - 6}
+              if(lookback === 3){ b = resultArray.length - 1 - 8}
+              if(lookback === 4){ b = resultArray.length - 1 - 10}
+              if(lookback === 5){ b = resultArray.length - 1 - 12}
+              if(lookback === 6){ b = resultArray.length - 1 - 14}
+              if(lookback === 7){ b = resultArray.length - 1 - 16}
+              if(lookback === 8){ b = resultArray.length - 1 - 18}
+              if(lookback === 9){ b = resultArray.length - 1 - 20}
+              if(lookback === 10){ b = resultArray.length - 1 - 24}
+              if(lookback === 11){ b = resultArray.length - 1 - 26}
+              if(lookback === 12){ b = resultArray.length - 1 - 30}
+
+              if (b < 0) {
+                b = 0;
+              }
+        
+              // Überprüfe, ob genug Elemente im Array vorhanden sind
+              //One less because it is not possible to create one then statistic by 3 22
+              const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+            
+              
+           
+              for (;b <= resultArray.length - 2; b++) {
+                if (b <= resultArray.length  - 2 ) {
+                    //length normal +1 becuase array remove -1 add one to get lastr
+                    //console.log(resultArray.length, "Mande")
+                    const range = resultArray.slice(b, b + 2);
+                    const anus = resultArray[b + 2];
+                    //console.log("anus#", anus)
+                    //console.log("reng", range) 
+                    const maxValue = Math.max(...range);
+                    const minValue = Math.min(...range);
+                  
+                    //console.log("FIckmi", minValue )
+                  
+
+                    const higherThan18 = range.filter(value => value > 18);
+                    const lowerThan18 = Math.max(...range.filter(value => value < 18));
+                    const minHigherThan18 = Math.min(...higherThan18);
+                    
+                    
+                   
+
+                    //console.log("Maximum value:", maxValue, b, num2);
+                    //console.log("Minimum value:", minValue,  b, num2);
+
+                    //console.log("lowerThan18:", lowerThan18);
+                    //console.log("minHigherThan18", minHigherThan18);
+                  
+                    //fertig//Right Fillup
+                   if(maxValue - num2  <= minValue){countpositiv = true; if(b == resultArray.length  - 2){console.log( "rum", anus); xrsol1 = true; xrsol1n = true;  }}else{countpositiv = false;} //
+                  //fertig//Right Fillup
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){console.log("ID876Po");countdowne = true; if(b == resultArray.length  - 2 ){console.log("rum2", anus), xrsol2 = true; xrsol2n = true;}}else{console.log("ID876Ne");countdowne = false;} 
+
+             
+                   //fertig //anus infinite, infinite anus   kleiner als max, grösser als min 
+                   if(maxValue - num2 <= minValue && countpositiv == true && maxValue - num2 <= anus && maxValue >= anus  && b <= resultArray.length  - 2 -1){console.log("ID999NeF");endn++; countpositiv = false; }else if(countpositiv == true && b <= resultArray.length  - 2 -1){console.log("ID999PoF");endp++; countpositiv = false;  }//
+                  //fertig //anus infinite, infinite anus
+                   if(minHigherThan18 -37 + num2 > 0 && minHigherThan18 -37 + num2 > lowerThan18  && minHigherThan18 -37 + num2  > anus  && countdowne == true && isFinite(minHigherThan18) && isFinite(lowerThan18) && b <= resultArray.length  - 2 -1){console.log("ID9Ne#"); endne++; countdowne = false; }else if(countdowne == true && b <= resultArray.length  - 2 -1){console.log("ID9PO");endpe++; countdowne = false; }
+
+                  //&& anus -37 + num2 > 0 
+
+                   //with Difference Left Fillup
+                    difference = num2 - (maxValue - minValue) - 1;
+                    //console.log(difference, "Difference")
+
+                    difference2 =  num2 - (37 -minHigherThan18) - lowerThan18 -1;
+                    //console.log("Difference2", difference2 )
+                 
+            
+                  // else normal difference höher als 2;
+                   if(difference > 1 && maxValue - num2 + difference < minValue){countpositiv1 = true; if(b == resultArray.length  - 2){console.log("rum", anus), xlsol1 = true; xlsol1n = true;}}else{countpositiv1 = false;} 
+                   //muss crossen else normal
+                   if(difference2 > 1 && minHigherThan18 -37 + num2 - difference2 >  0 && minHigherThan18 -37 + num2 - difference2 > lowerThan18 && isFinite(minHigherThan18) && isFinite(lowerThan18)){countdowne1 = true; if(b == resultArray.length  - 2){console.log("rum", anus), xlsol2 = true; xlsol2n = true;}}else{countdowne1 = false;} 
+                  
+                   //console.log("Fre", lowerThan18);
+                 
+
+             
+
+                   //difference check , anus check
+                   // difference check ,2 overcross cehck.
+                   if(difference > 1 && maxValue - num2 + difference < minValue &&  countpositiv1 == true && maxValue - num2 + difference  <= anus && maxValue + difference >= anus && b <= resultArray.length  - 2 -1){console.log("ID123Ne");endn1++; countpositiv1 = false; }else if(countpositiv1 == true && b <= resultArray.length  - 2 -1){console.log("ID123po");endp1++; countpositiv1 = false; }
+                   if(difference2 > 1 &&  minHigherThan18 -37 + num2 - difference2  > 0 && minHigherThan18 -37 -difference2 + num2 > lowerThan18  && countdowne1 == true && minHigherThan18 -37 -difference2 + num2 > anus && anus -37 + num2 - difference2  > 0 && isFinite(minHigherThan18) && isFinite(lowerThan18 )  && b <= resultArray.length  - 2 -1 ){console.log("IddiffAnusNe");endne1++; countdowne1 = false; }else if(countdowne1 == true && b <= resultArray.length  - 2 -1){console.log("IddiffAnusPo");endpe1++; countdowne1 = false;  }
+
+                  
+                  //console.log("KP", parseInt(maxValue - num2), minValue)
+                  //console.log("KN", parseInt(minHigherThan18 -37 + num2 ), lowerThan18)
+
+                  if(num1 != 0){
+                  //RN0 negativ - logisch korrekt
+                  if(num1 != endp && endn != 0){xrsol1 = false;}
+                  if(num1 == endp && endn == 1) { endpUN++}
+                  if(num1 < endp){endp = 1;  endnUN ++}
+                
+
+                  //RN1
+                  if(num1 != endn && endp != 0){xrsol1n = false;}
+                  if(num1 == endn && endp == 1){ endpLO++}
+                  if(num1 < endn){endn = 1; endnLO ++}
+                  if(endn != 0 && endp != 0){endn = 0; endp = 0;}
+
+
+                  //Ro0
+                  if(num1 != endpe && endne != 0){xrsol2 = false;}
+                  if(num1 == endpe && endne == 1){ endpeUN++}
+                  if(num1 < endpe){endpe = 1; endneUN ++}
+                
+                  //Ro1
+                  if(num1 != endne && endpe != 0){xrsol2n = false;}
+                  if(num1 == endne && endpe == 1){endpeLO++}
+                  if(num1 < endne){endne = 1; endneLO++}
+                  if(endne != 0 && endpe != 0){endne = 0; endpe = 0;}
+
+
+
+
+                  //LN0
+                  if(num1 != endp1 && endn1 != 0){xlsol1 = false;}
+                  if(num1 == endp1 && endn1 == 1){endp1UN++}
+                  if(num1 < endp1){endp1 = 1; endn1UN ++}
+             
+
+                  //LN1
+                  if(num1 != endn1 && endp1 != 0){xlsol1n = false;}
+                  if(num1 == endn1 && endp1 == 1){  endp1LO++}
+                  if(num1 < endn1){endn1 = 1; endn1LO ++}
+                  if(endn1 != 0 && endp1 != 0){endn1 = 0; endp1 = 0;}
+
+
+
+                  //L00
+                  if(num1 != endpe1 && endne1 != 0){xlsol2 = false;}
+                  if(num1 == endpe1 && endne1 == 1){ endpe1UN++}
+                  if(num1 < endpe1){endpe1 = 1; endne1UN++}
+             
+
+                  //L01
+                  if(num1 != endne1 && endpe1 != 0){xlsol2n = false;}
+                  if(num1 == endne1 && endpe1 == 1){endpe1LO++}
+                  if(num1 < endne1){endne1 = 1; endne1LO++}
+                  if(endne1 != 0 && endpe1 != 0){endne1 = 0; endpe1 = 0;}
+
+
+                }
+
+ 
+
+                if (xrsol1 == true) {
+                  //logisch
+                  for (let i = maxValue + 1; i <  maxValue + (37 - num2) + 1; i++) {//
+              
+                    let neighborIndex = i;
+                
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;}
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+                    rsol1.push(nextNumberIndex.toString());
+                  }
+                  xrsol1 = false;
+                }
+                
+                if (xrsol1n == true) {
+                  //unlogisch
+                  for (let i = maxValue - num2 + 1 ; i < maxValue + 1; i++) {//
+         
+                    let neighborIndex = i;
+                
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;}
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+                    rsol1n.push(nextNumberIndex.toString());
+                  }
+                  xrsol1n = false;
+                }
+                
+                if (xrsol2 == true) {
+                 //logisch
+                 
+                  for (let i = minHigherThan18 -37 + num2; i < num2 + (minHigherThan18 -37) + (37 -num2)  ; i++) {
+         
+                    let neighborIndex = i;
+              
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;}
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+
+
+                    rsol2.push(nextNumberIndex.toString());
+                  }
+                  xrsol2 = false;
+                }
+                
+                if (xrsol2n == true) {
+                  //unlogisch  (26 - 37) -11   (26  37 + 18) 7
+                  //console.log("Dreckiger schleinm,",  minHigherThan18 -37, num2, (minHigherThan18 -37) + num2)
+                  for (let i = minHigherThan18 -37; i < (minHigherThan18 -37) + num2 ; i++) {
+          
+                    let neighborIndex = i;
+              
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;}
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+
+                    rsol2n.push(nextNumberIndex.toString());
+
+                  }
+                  xrsol2n = false;
+                }
+                
+                if (xlsol1 == true && difference > 1) {
+                  //logisch
+                  for (  let i = maxValue + difference + 1; i <  maxValue + (37 - num2) + difference + 1; i++) {//
+         
+                    let neighborIndex = i;
+                
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;} 
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+
+                    lsol1.push(nextNumberIndex.toString());
+
+                  }
+                  xlsol1 = false;
+                }
+                
+                if (xlsol1n == true && difference > 1) {
+                  //unlogisch
+                  for (let i = maxValue - num2 + difference + 1 ; i < maxValue  + difference + 1; i++) {
+          
+                    let neighborIndex = i;
+                
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;}
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+                    lsol1n.push(nextNumberIndex.toString());
+                  }
+                  xlsol1n = false;
+                }
+                
+                if (xlsol2 == true && difference2 > 1) {
+                 //logisch
+                  for ( let i = minHigherThan18 -37 + num2 - difference2 + 1; i < num2 + (minHigherThan18 -37) + (37 -num2) - difference2 + 1 ; i++) {
+         
+                    let neighborIndex = i;
+              
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;}
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+
+
+                    lsol2.push(nextNumberIndex.toString());
+                  }
+                  xlsol2 = false;
+                }
+                //ungloisch
+                if (xlsol2n == true && difference2 > 1) {
+                  for (let i = minHigherThan18 -37 -difference2 + 1; i < num2 + (minHigherThan18 -37) -difference2 + 1 ; i++) {
+          
+                    let neighborIndex = i;
+              
+                    if(neighborIndex < 0){ neighborIndex = 37 + neighborIndex; }
+                    if (neighborIndex >= rouletteOrders.length) {
+                      if (neighborIndex - rouletteOrders.length >= rouletteOrders.length) {
+                        neighborIndex = neighborIndex - rouletteOrders.length - rouletteOrders.length;
+                       }
+                       else{ neighborIndex -= rouletteOrders.length;}
+                    }
+                    let nextNumberIndex = rouletteOrders[neighborIndex];
+
+                    lsol2n.push(nextNumberIndex.toString());
+
+                  }
+                  xlsol2n = false;
+                }
+
+              }  
+            }
+            //console.log("countpositiv", countpositiv)
+            //console.log("countd", countdown)
+
+            //console.log("endp", endp);
+            //console.log("endn", endn);
+            //console.log("endpe", endpe);
+            //console.log("endne", endne);
+
+            //console.log("rsol1", rsol1);
+            //console.log("rsol1n", rsol1n);
+
+            //console.log("rsol2", rsol2);
+            //console.log("rsol2n", rsol2n);
+
+
+            //console.log("lsol1", lsol1);
+            //console.log("lsol1n", lsol1n);
+
+            //console.log("lsol2", lsol2);
+            //console.log("lsol2n", lsol2n);
+            if(num1 == 0){
+            let rn1 = 0;
+            let rn0 = 0;
+            if(endp == 0 && endn == 0){rn1 = 0; rn0 = 0;}else{rn1 = (100 / (endp + endn)) * endp; rn0 = (100 / (endp + endn))* endn;}
+
+            let ro1 = 0;
+            let ro0 = 0;
+            if(endpe == 0 && endne == 0){ro1 = 0; ro0 = 0;}else{ro1 = (100 / (endpe + endne)) * endpe; ro0 = (100 / (endpe + endne)) * endne;}
+            
+            let ln1 = 0;
+            let ln0 = 0;
+            if(endp1 == 0 && endn1 == 0){ln1 = 0; ln0 = 0;}else{ln1 = (100 / (endp1 + endn1)) * endp1; ln0 =  (100 / (endp1 + endn1)) * endn1  ;}
+
+            let lo1 = 0;
+            let lo0 = 0;
+            if(endpe1 == 0 && endne1 == 0){lo1 = 0; lo0 = 0;}else{lo1 = (100 / (endpe1 + endne1)) * endpe1; lo0 = (100 / (endpe1 + endne1)) * endne1;}
+         
+            
+            rsol1.length > 1 && returnv.push(["RN1", rsol1.length, num1 , num2, rsol1, rn1, endp]);
+            rsol1n.length > 1 && returnv.push(["RN0", rsol1n.length, num1 , num2, rsol1n, rn0, endn]);
+            rsol2.length > 1 && returnv.push(["RO1", rsol2.length, num1 , num2, rsol2, ro1, endpe]);
+            rsol2n.length > 1 && returnv.push(["RO0", rsol2n.length, num1 , num2, rsol2n, ro0, endne]);
+            lsol1.length > 1 && returnv.push(["LN1", lsol1.length, num1 , num2, lsol1, ln1, endp1]);
+            lsol1n.length > 1 && returnv.push(["LN0", lsol1n.length, num1 , num2, lsol1n, ln0, endn1]);
+            lsol2.length > 1 && returnv.push(["LO1", lsol2.length, num1 , num2, lsol2, lo0, endne1]);
+            lsol2n.length > 1 && returnv.push(["LO0", lsol2n.length, num1 , num2, lsol2n, lo1, endpe1]);
+            
+
+            //n hinten unlogisch gleich pe  negativ = logisch; positiv = unlogisch
+          }
+          else{
+     
+              let rn1 = 0;
+              let rn0 = 0;
+              if(endpUN  == 0 && endnUN == 0){rn0 = 0;}else{rn0 = (100 / (endpUN + endnUN)) * endpUN;}
+              if(endpLO  == 0 && endnLO == 0){rn1 = 0;}else{rn1 = (100 / (endpLO + endnLO)) * endpLO;}
+             
+            
+              let ro1 = 0;
+              let ro0 = 0;
+              if(endpeUN  == 0 && endneUN == 0){ro0 = 0;}else{ro0 = (100 / (endpeUN + endneUN)) * endpeUN;}
+              if(endpeLO  == 0 && endneLO == 0){ro1 = 0;}else{ro1 = (100 / (endpeLO + endneLO)) * endpeLO;}
+
+              let ln1 = 0;
+              let ln0 = 0;
+              if(endp1UN  == 0 && endn1UN == 0){ln0 = 0;}else{ln0 = (100 / (endp1UN + endn1UN)) * endp1UN;}
+              if(endp1LO  == 0 && endn1LO == 0){ln1 = 0;}else{ln1 = (100 / (endp1LO + endn1LO)) * endp1LO;}
+             
+  
+              let lo1 = 0;
+              let lo0 = 0;
+              if(endpe1UN  == 0 && endne1UN == 0){lo0 = 0;}else{lo0 = (100 / (endpe1UN + endne1UN)) * endpe1UN;}
+              if(endpe1LO  == 0 && endne1LO == 0){lo1 = 0;}else{lo1 = (100 / (endpe1LO + endne1LO)) * endpe1LO;}
+              
+            rsol1.length > 1 && returnv.push(["RN1", rsol1.length, num1  -1, num2, rsol1, rn1, endpLO]);
+            rsol1n.length > 1 && returnv.push(["RN0", rsol1n.length, num1  -1, num2, rsol1n, rn0, endpUN]);
+            rsol2.length > 1 && returnv.push(["RO1", rsol2.length, num1  -1, num2, rsol2, ro1, endpeLO]);
+            rsol2n.length > 1 && returnv.push(["RO0", rsol2n.length, num1  -1, num2, rsol2n, ro0, endpeUN]);
+            lsol1.length > 1 && returnv.push(["LN1", lsol1.length, num1  -1, num2, lsol1, ln1,endp1LO ]);
+            lsol1n.length > 1 && returnv.push(["LN0", lsol1n.length, num1  -1, num2, lsol1n, ln0,endp1UN ]);
+            lsol2.length > 1 && returnv.push(["LO1", lsol2.length, num1  -1, num2, lsol2, lo0, endpe1LO ]);
+            lsol2n.length > 1 && returnv.push(["LO0", lsol2n.length, num1  -1, num2, lsol2n, lo1,endpe1UN ]);
+        
+
+          }
+      
+
+
+            rsol1 = [];
+            rsol1n = [];
+            rsol2 = [];
+            rsol2n = [];
+            lsol1 = [];
+            lsol1n = [];
+            lsol2 = [];
+            lsol2n = [];
+           //resultArray = [];
+           //resultArray = [];
+            
+           
+
+        
+      });
+  });
+}
+  return returnv;
+}
+
+
+
+
+
+
+  document.getElementById('confirm-button').addEventListener('click', processInput);
+
+
+// Beispielaufruf der Funktion mit dem Array 'sortedPercentages'
+
+
+  function processInput() {  
+    console.clear();
+
+    const numbersInput = document.getElementById('number-input').value.trim();
+    
+      // Extract numbers and remove non-numeric characters
+      numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num) || num === 'x' || num === 'f' || num === 'b');
+      const letzteZahl = numbersArray[numbersArray.length - 1];
+      //console.log(numbersArray);
+      //const neighbors = calculateNeighbors(numbersArray);
+      const [A, B] = calculateNeighbors(numbersArray);
+      
+        //console.log("s",A);
+        //console.log(B); 
+
+        const sortedA = calculatePercentage(A);
+        const sortedB = calculatePercentage(B);
+
+
+        //console.log("Sorted Array A:", sortedA);
+        //console.log("Sorted Array B:", sortedB);
+       
+
+        function calculatePercentage(array) {
+          const percentages = {};
+          const length = array.length;
+          array.forEach(number => {
+            percentages[number] = (percentages[number] || 0) + (1 / length * 100);
+        });
+    
+        // Convert to an array of objects with count, number, and percentage
+        const sortedPercentages = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+       const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+        const numbersInput = document.getElementById('number-input').value.trim();
+        const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num));
+        const furz = numbersArray[numbersArray.length - 1];
+        //console.log("Furzy" + furz)
+    
+        const result = sortedPercentages.map(entry => {
+            const number = parseInt(entry[0]);
+            const percentage = entry[1];
+            
+            let nextNumberIndex = number;
+            let neighborIndex = nextNumberIndex + rouletteOrder.indexOf(parseInt(furz));
+            //console.log(rouletteOrder.indexOf(parseInt(furz))), "NN";
+            //console.log(nextNumberIndex);
+            // Adjust neighborIndex to stay within the bounds of the rouletteOrder array
+            if (neighborIndex >= rouletteOrder.length) {
+                neighborIndex -= rouletteOrder.length;
+            }
+           
+    
+            const oppositeNeighbor = rouletteOrder[neighborIndex];
+    
+            return {
+                count: percentage / 100 * length, // Calculate count
+                number: number, // Convert number to integer
+                percentage: percentage, // Keep percentage
+                bet: oppositeNeighbor // Assign the opposite neighbor as the bet
+            };
+        });
+
+    return result;
+}
+function calculateOppositeNeighbor(numberInput) {
+  const rouletteOrder = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+  const numbersArray = numbersInput.split(/[ ,\n]+/).filter(num => !isNaN(num));
+  
+  const furz = numbersArray[numbersArray.length - 1];
+
+  let nextNumberIndex = numberInput[i];
+  let neighborIndex = nextNumberIndex + rouletteOrder.indexOf(parseInt(furz));
+
+  // Adjust neighborIndex to stay within the bounds of the rouletteOrder array
+  if (neighborIndex >= rouletteOrder.length) {
+      neighborIndex -= rouletteOrder.length;
+  }
+
+  return rouletteOrder[neighborIndex];
+}
+        // Calculate percentages and sort arrays A and B
+        for (let i = 1; i <= 37; i++) {
+    // Text innerhalb von Label 1 (Label 1)
+    const AElement = sortedA[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
+
+    // Accessing properties of the element
+    const cA = AElement.count !== null && AElement.count !== undefined && AElement.count !== "" ? Math.round(AElement.count) : "";
+    const nA = AElement.number !== null && AElement.number !== undefined ? AElement.number.toString() : "";
+    const pA = AElement.percentage !== null && AElement.percentage !== undefined && !isNaN(parseFloat(AElement.percentage)) ? parseFloat(AElement.percentage).toFixed(2) : ""; // Round to 3 decimal places if it's a valid number
+    const ppops = AElement.bet;
+    //console.log(ppops, "Poops"  )
+    const nrA = AElement.bet !== null && AElement.bet !== undefined ? `  ${AElement.bet.toString()}` : "";
+
+    //console.log(ppops);
+    const BElement = sortedB[i - 1] || { count: "", number: "", percentage: "" }; // Indexing starts from 0, so the first element is at index 0
+
+    // Accessing properties of the element
+    const cB = BElement.count !== null && BElement.count !== undefined && BElement.count !== "" ? Math.round(BElement.count) : "";
+    const nB = BElement.number !== null && BElement.number !== undefined ? BElement.number.toString() : "";
+    const pB = BElement.percentage !== null && BElement.percentage !== undefined && !isNaN(parseFloat(BElement.percentage)) ? parseFloat(BElement.percentage).toFixed(2) : ""; // Round to 3 decimal places if it's a valid number
+    const prB = BElement.bet !== null && BElement.bet !== undefined ? `  ${BElement.bet.toString()}` : "";
+
+    // Additional text for percentage
+    const percentageTextA = pA ? " (" + pA + "%)" : "";
+    const percentageTextB = pB ? " (" + pB + "%)" : "";
+
+    // Text innerhalb von Label 1 (Label 1)
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).textContent = nA + nrA;
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(2)`).textContent = cA + percentageTextA;
+    
+    // Labels innerhalb von B
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(3)`).textContent = nB + prB;
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(4)`).textContent = cB + percentageTextB;
+    
+    // Klassen für die Textfarben hinzufügen
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(1)`).classList.add('label-text-A');
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(2)`).classList.add('label-text-A');
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(3)`).classList.add('label-text-B');
+    document.querySelector(`.label-container:nth-child(${i}) label:nth-child(4)`).classList.add('label-text-B');
+}
+const numbersInputs = document.getElementById('number-input').value.trim();
+const [Ass, Bss] = calculateNeighborsKessel(numbersArray);
+//console.log("AdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaS:", Ass);
+//console.log("BsadddddddddddddddddddddddddddddddddddS:", Bss);
+
+
+let result = evaluateArray(Ass, numbersArray);
+console.log("BENJAMINDERELEFANT:", result);
+saferesult = result;
+console.log("safed sucess", saferesult)
+filter(saferesult);  
+
+
+
+
+};
+function filter(saferesult){
+console.log("sucess")
+let copy;
+ copy = [...saferesult];
+
+
+
+ if (strategyNumber != 2) {
+  for (let i = copy.length - 1; i >= 0; i--) {
+      if (
+          (strategyNumber === 40 && copy[i][1] !== 28) ||
+          (strategyNumber === 3 && copy[i][1] !== 27) ||
+          (strategyNumber === 4 && copy[i][1] !== 24) ||
+          (strategyNumber === 5 && copy[i][1] !== 22) ||
+          (strategyNumber === 6 && copy[i][1] !== 19) ||
+          (strategyNumber === 7 && copy[i][1] !== 18) ||
+          (strategyNumber === 8 && copy[i][1] !== 15) ||
+          (strategyNumber === 9 && copy[i][1] !== 13) ||
+          (strategyNumber === 10 && copy[i][1] !== 10) ||
+          (strategyNumber === 69 && copy[i][1] !== 18 && copy[i][1] !== 15 && copy[i][1] !== 13 ) ||
+          (strategyNumber === 1 && copy[i][1] !== 18 && copy[i][1] !== 19) ||
+          (strategyNumber === 11 && copy[i][1] !== 9)
+      ) {
+          copy.splice(i, 1);
+      }
+  }
+}
+if (count != 1) {
+for (let i = copy.length - 1; i >= 0; i--) {
+    if (
+        (count === 11 && copy[i][2] !== 0) ||
+        (count === 10 && copy[i][2] !== 1) ||
+        (count === 2 && copy[i][2] !== 2 && copy[i][2] !== 3 && copy[i][2] !== 4) ||
+        (count === 3 && copy[i][2] !== 2) ||
+        (count === 4 && copy[i][2] !== 3) ||
+        (count === 5 && copy[i][2] !== 4) ||
+        (count === 6 && copy[i][2] !== 5) ||
+        (count === 7 && copy[i][2] !== 6) ||
+        (count === 8 && copy[i][2] !== 7) ||
+        (count === 8 && copy[i][2] !== 8) ||
+        (count === 8 && copy[i][2] !== 9) 
+    ) {
+        copy.splice(i, 1);
+    }
+}
+}
+
+if (ReadyNotAll === 1 || ReadyNotAll === 2 || ReadyNotAll === 3) {
+  for (let i = copy.length - 1; i >= 0; i--) {
+      if (copy[i][1] === -1 && ReadyNotAll === 1 || copy[i][5] === 0 && ReadyNotAll === 1 ) {
+          copy.splice(i, 1);
+      } 
+      else if (copy[i][1] === -1 && ReadyNotAll === 2) {
+        copy.splice(i, 1);
+       } 
+      else if (copy[i][1] !== -1 && ReadyNotAll === 3) {
+          copy.splice(i, 1);
+      }
+  }
+}
+
+ 
+
+if(LeftRightAll != 1){
+  for (let i = copy.length - 1; i >= 0; i--) {
+      const halten = String(copy[i][0]);
+  
+      const firstLetter = halten.charAt(0);
+      if ((LeftRightAll === 2 && firstLetter !== 'L') || (LeftRightAll === 3 && firstLetter !== 'R') || (LeftRightAll === 1 && firstLetter !== 'R' &&  firstLetter !== 'L')) {
+          copy.splice(i, 1);
+      }
+  }
+}
+if(RangeOverAll != 1){
+  for (let i = copy.length - 1; i >= 0; i--) {
+    const halten = String(copy[i][0]);
+
+    const firstLetter = halten.charAt(1);
+    if ((RangeOverAll  === 2 && firstLetter !== 'N') || (RangeOverAll  === 3 && firstLetter !== 'O')) {
+        copy.splice(i, 1);
+    }
+}
+}
+if(LogicNonLogicAll != 1){
+for (let i = copy.length - 1; i >= 0; i--) {
+  const halten = String(copy[i][0]);
+
+  const firstLetter = halten.charAt(2);
+  if ((LogicNonLogicAll  === 2 && firstLetter !== '1') || (LogicNonLogicAll  === 3 && firstLetter !== '0')) {
+      copy.splice(i, 1);
+      
+  }
+
+}
+}
+
+for (let i = copy.length - 1; i >= 0; i--) {
+  if (asort === 3){copy.sort((a, b) => b[1] - a[1]);}
+  if (asort === 2){copy.sort((a, b) => b[2] - a[2]);}
+  if (asort === 1){copy.sort((a, b) => b[5] - a[5]);}
+  if (asort === 4){copy.sort((a, b) => a[2] - b[2]);}
+  if (asort === 5){copy.sort((a, b) => a[5] - b[5]);}
+     
+}
+
+////console.log(copy)
+
+/*
+const arrows = document.querySelectorAll('.arrow');
+
+arrows.forEach((arrow, index) => {
+    arrow.addEventListener('click', () => {
+        if (index === 0) {
+            arrow.classList.toggle('sort1max');
+            if (arrows[1].classList.contains('sort2max')) {
+                arrows[1].classList.remove('sort2max');
+            }
+            if (arrow.classList.contains('sort1max')) {
+                copy.sort((a, b) => b[2] - a[2]); // Sortierung von max zu min
+               
+            } else {
+                copy.sort((a, b) => a[2] - b[2]); // Sortierung von min zu max
+                
+            }
+        } else if (index === 1) {
+            arrow.classList.toggle('sort2max');
+            if (arrows[0].classList.contains('sort1max')) {
+                arrows[0].classList.remove('sort1max');
+            }
+            if (arrow.classList.contains('sort2max')) {
+                copy.sort((a, b) => b[5] - a[5]); // Sortierung von max zu min
+            
+            } else {
+                copy.sort((a, b) => a[5] - b[5]); // Sortierung von min zu max
+               
+            }
+        }
+    });
+});
+*/
+createtable();
+//In diesem aktualisierten Code werden die Bedingungen hinzugefügt, um zu prüfen, ob das erste Element die Klasse "sort1" hat und das zweite Element die Klasse "sort2". Wenn dies der Fall ist, wird die entsprechende Sortierung durchgeführt und die Tabelle erstellt.
+
+
+
+
+
+
+
+
+
+// Add a click event listener to each element
+
+
+// Define sorting functions
+
+
+ 
+
+// Add a click event listener to each element
+
+function createtable(){
+
+
+// 1. Leere die Tabelle, indem alle td-Elemente mit der Klasse 'sortable-table' entfernt werden
+let table = document.querySelector('.sortable-table tbody');
+let tds = table.querySelectorAll('tr');
+
+tds.forEach(td => {
+    td.parentNode.removeChild(td); // Entferne das td-Element
+});
+let sexy = 0;
+// 2. Fülle die Tabelle mit den Daten aus dem copy-Array
+copy.forEach(row => {
+    // Erstelle eine neue Tabellenzeile
+    let tr = document.createElement('tr');
+    sexy ++;
+    // Erste Spalte: copy[i][1] leerzeichen copy[i][1]
+    let td1 = document.createElement('td');
+    td1.textContent = `${row[0]} ${row[1]}`;
+    tr.appendChild(td1);
+    
+    // Zweite Spalte: String(copy[i][4])
+    let td2 = document.createElement('td');
+    if(ssort == 1){td2.textContent = td2.textContent = [...row[4]].sort((a, b) => a - b).join(',');}
+    if(ssort == 2){td2.textContent = String(row[4]);}
+    tr.appendChild(td2);
+    
+    // Dritte Spalte: copy[i][3]
+    let td3 = document.createElement('td');
+    td3.textContent = String(row[2]);
+    tr.appendChild(td3);
+    
+    // Vierte Spalte: copy[i][5]
+
+    
+    let td4 = document.createElement('td');
+    td4.textContent = `${String(row[5].toFixed(1))} (${row[6]})`;
+
+    tr.appendChild(td4);
+    
+    // Füge die erstellte Zeile zur Tabelle hinzu
+    table.appendChild(tr);
+
+});
+resizeTable();
+//console.log("sexy", sexy)
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+  document.getElementById('download-button').addEventListener('click', function() {
+   
+  });
+
+
+
+  document.getElementById('file-input').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = e.target.result;
+      try {
+        const parsedData = JSON.parse(content);
+        if (parsedData && parsedData.numbers && Array.isArray(parsedData.numbers)) {
+          document.getElementById('number-input').value = parsedData.numbers.join(' ');
+        } else {
+          alert('Invalid JSON format. Please select a valid JSON file.');
+        }
+      } catch (error) {
+        alert('Error parsing JSON. Please select a valid JSON file.');
+      }
+    };
+    reader.readAsText(file);
+  });
+</script>
+
+</body>
+</html>
