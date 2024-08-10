@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muster Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"], select {
+            font-size: 16px;
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .button-group button {
+            flex: 1;
+            margin: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            h1, h2 {
+                font-size: 18px;
+            }
+
+            button, input[type="text"], select {
+                font-size: 14px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Muster Simulation</h1>
+    <label for="pattern">Muster eingeben (z.B. RBRBRBRB):</label>
+    <input type="text" id="pattern" placeholder="RBRBRBRB" oninput="trimPattern()">
+    
+    <div class="button-group">
+        <button onclick="addCharacter('R')">R hinzufügen</button>
+        <button onclick="addCharacter('B')">B hinzufügen</button>
+    </div>
+    
+    <label for="patternLength">Musterauswahl:</label>
+    <select id="patternLength" onchange="trimPattern()">
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+    </select>
+    
+    <label for="rounds">Anzahl Runden:</label>
+    <select id="rounds">
+        <option value="1000">1,000</option>
+        <option value="1500">1,500</option>
+        <option value="2000" selected>2,000</option>
+        <option value="5000">5,000</option>
+        <option value="10000">10,000</option>
+        <option value="100000">100,000</option>
+        <option value="1000000">1,000,000</option>
+        <option value="10000000">10,000,000</option>
+    </select>
+    
+    <button onclick="startSimulation()">Simulation Starten</button>
+    <button onclick="sortResultsByWins()">Nach Gewinnen Sortieren</button>
+    <button onclick="sortResultsByLosses()">Nach Verlierern Sortieren</button>
+    
+    <h2>Ergebnisse</h2>
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Simulation</th>
+                <th>Muster</th>
+                <th>Historie</th>
+                <th>Gesamtgewinne</th>
+                <th>Gesamtverluste</th>
+                <th>Bets</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        let simulations = [];
+
+        function trimPattern() {
+            const patternInput = document.getElementById('pattern');
+            const selectedLength = parseInt(document.getElementById('patternLength').value);
+            if (patternInput.value.length > selectedLength) {
+                patternInput.value = patternInput.value.slice(0, selectedLength);
+            }
+        }
+
+        function addCharacter(char) {
+            const patternInput = document.getElementById('pattern');
+            patternInput.value += char;
+            trimPattern();  // ensures the input does not exceed the selected pattern length
+        }
+
+        function generateRandomPattern(length) {
+            let result = '';
+            const choices = ['R', 'B'];
+            for (let i = 0; i < length; i++) {
+                result += choices[Math.floor(Math.random() * choices.length)];
+            }
+            return result;
+        }
+
+        function startSimulation() {
+            const inputPattern = document.getElementById('pattern').value;
+            const patternLength = inputPattern.length;
+            const numberOfSimulations = parseInt(document.getElementById('rounds').value);
+            simulations = [];
+
+            for (let i = 0; i < numberOfSimulations; i++) {
+                const history = [];
+                let totalWins = 0;
+                let totalLosses = 0;
+                let bets = '';
+
+                for (let j = 0; j < patternLength + 3; j++) {
+                    const randomValue = generateRandomPattern(1);
+                    if (j < patternLength) {
+                        const result = (randomValue === inputPattern[j]) ? 'W' : 'L';
+                        history.push(result);
+                        if (result === 'W') {
+                            totalWins++;
+                        } else {
+                            totalLosses++;
+                        }
+                    } else {
+                        bets += randomValue;
+                    }
+                }
+
+                simulations.push({
+                    id: i + 1,
+                    pattern: inputPattern,
+                    history: history.join(''),
+                    totalWins: totalWins,
+                    totalLosses: totalLosses,
+                    bets: bets
+                });
+            }
+
+            sortResultsByWins();
+        }
+
+        function displayResults(simulations) {
+            const resultsTableBody = document.getElementById('resultsTable').querySelector('tbody');
+            resultsTableBody.innerHTML = '';
+
+            simulations.forEach(simulation => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${simulation.id}</td>
+                    <td>${simulation.pattern}</td>
+                    <td>${simulation.history}</td>
+                    <td>${simulation.totalWins}</td>
+                    <td>${simulation.totalLosses}</td>
+                    <td>${simulation.bets}</td>
+                `;
+                resultsTableBody.appendChild(row);
+            });
+        }
+
+        function sortResultsByWins() {
+            simulations.sort((a, b) => b.totalWins - a.totalWins);
+            displayResults(simulations);
+        }
+
+        function sortResultsByLosses() {
+            simulations.sort((a, b) => b.totalLosses - a.totalLosses);
+            displayResults(simulations);
+        }
+    </script>
+</body>
+</html>

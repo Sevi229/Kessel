@@ -754,7 +754,7 @@ function evaluateArray(arr, numbersArray) {
 
     if (strategyNumber === 1) { numbersf = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]; }
     if (strategyNumber === 2) { numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9]; }
-  if (strategyNumber === 69) { numbersf = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]; }
+  if (strategyNumber === 69) { numbersf = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]; }
   if (strategyNumber === 40) { numbersf = [28, 29, 30, 31, 32]; }
   if (strategyNumber === 3) { numbersf = [27, 28, 29, 30, 31]; }
   if (strategyNumber === 4) { numbersf = [24, 25, 26, 27, 28]; }
@@ -819,7 +819,7 @@ function evaluateArray(arr, numbersArray) {
     let currentElement2 = 0;
 //let NERVEN = new Array(10); // First dimension length based on numbersArray
 
-let NERVEN = new Array(10).fill(null).map(() => 
+let NERVEN = new Array(16).fill(null).map(() => 
   new Array(35).fill(null).map(() => 
     new Array(2).fill(null).map(() => [])
   )
@@ -897,7 +897,7 @@ let lastArray = [];
          
            let filteredRouletteOrders = rouletteOrders.filter(number => !copynumbersArray.includes(number));
             console.log("ewq",copynumbersArray)
-           if(copynumbersArray.length == 18 && duplicatesCount > 0 && duplicatesCount < 11){
+           if(copynumbersArray.length == 18 && duplicatesCount > 0 && duplicatesCount < 16){
             let test = "ERROR"; if (copynumbersArray.includes(currentElement2)){ NERVEN[duplicatesCount -1][18][0].push("N");                console.log("wejfjn", duplicatesCount, copynumbersArray, currentElement2)}else if(x  != numbersArray.length  - num2){console.log("DuplikatesP", duplicatesCount, copynumbersArray, currentElement2) ;NERVEN[duplicatesCount -1][18][0].push("P");   } else if(x  == numbersArray.length  - num2){NERVEN[duplicatesCount -1][18][0].push("R"); NERVEN[duplicatesCount -1][18][1].push(copynumbersArray);    console.log("fref", duplicatesCount, copynumbersArray, currentElement2);}
          
             }
