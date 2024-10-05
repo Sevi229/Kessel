@@ -1,0 +1,196 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anpassbare Verlust Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #333;
+        }
+        textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            resize: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ff4500;
+        }
+        #counter {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #333;
+        }
+        #resetButton {
+            background-color: #f44336;
+            margin-top: 10px;
+        }
+        #resetButton:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loss Builder</h1>
+        <p>Gib deine Zahlen von 0 bis 36 ein:</p>
+        <textarea id="inputNumbers" rows="5" placeholder="History eingeben"></textarea>
+        
+        <label for="lookback">Lookback:</label>
+        <select id="lookback">
+            <option value="1">Max</option>
+            <option value="7">7</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+        </select>
+        
+        <label for="groupSize">Gruppengröße:</label>
+        <select id="groupSize">
+            <option value="9">9</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="24">24</option>
+        </select>
+
+        <button onclick="createLosingGroup()">Verlierende Gruppe Erstellen</button>
+        <button id="resetButton" onclick="resetCounter()">Reset</button>
+        <p id="result"></p>
+        <p id="counter">Loses: 0</p>
+    </div>
+
+    <script>
+        let manualCounter = 0;  // Manuell Counter initialisieren
+
+        function createLosingGroup() {
+            // Zahlen aus Textarea holen und durch verschiedene Trennzeichen splitten
+            const inputNumbers = document.getElementById('inputNumbers').value
+                .split(/[\s,]+/)  // Splitting by commas, spaces, or new lines
+                .map(num => num.trim())
+                .map(Number);
+
+            let lookback = parseInt(document.getElementById('lookback').value);
+            const groupSize = parseInt(document.getElementById('groupSize').value);
+
+            // Eingabevalidierung
+            if (inputNumbers.length === 0 || inputNumbers.some(isNaN)) {
+                document.getElementById('result').innerText = "Bitte gib gültige Zahlen von 0 bis 36 ein, getrennt durch Kommas, Leerzeichen oder Zeilenumbrüche.";
+                return;
+            }
+
+            if (!validateInputNumbers(inputNumbers)) {
+                document.getElementById('result').innerText = "Alle eingegebenen Zahlen müssen zwischen 0 und 36 liegen.";
+                return;
+            }
+
+            if (lookback === 1) {
+                lookback = inputNumbers.length;
+            }
+
+            const possibleNumbers = Array.from({ length: 37 }, (_, i) => i); // Zahlen von 0 bis 36
+            const losingGroup = [];
+
+            // Entferne die eingegebenen Verlustzahlen aus den möglichen Zahlen
+            const filteredNumbers = possibleNumbers.filter(num => !inputNumbers.includes(num));
+
+            // Überprüfen, ob der Lookback möglich ist
+            if (inputNumbers.length < lookback) {
+                document.getElementById('result').innerText = "Lookback nicht möglich. Zu wenige Zahlen verfügbar.";
+                return;
+            }
+
+            // Überprüfen, ob genügend Zahlen für die Gruppengröße verfügbar sind
+            if (filteredNumbers.length < groupSize) {
+                document.getElementById('result').innerText = "Gruppe kann nicht erstellt werden. Zu wenige Zahlen verfügbar.";
+                return;
+            }
+
+            let lossCount = 0;
+
+            while (losingGroup.length < groupSize) {
+                const randomIndex = Math.floor(Math.random() * filteredNumbers.length);
+                const chosenNumber = filteredNumbers[randomIndex];
+
+                losingGroup.push(chosenNumber);
+                if (losingGroup.length >= lookback && isLossSequence(losingGroup.slice(-lookback))) {
+                    lossCount++;
+                }
+
+                // Entferne die gewählte Zahl aus der Liste, um keine Wiederholungen zu haben
+                filteredNumbers.splice(randomIndex, 1);
+
+                if (filteredNumbers.length === 0) {
+                    break; // Falls keine Zahlen mehr zur Auswahl stehen
+                }
+            }
+
+            const resultText = lossCount >= lookback ? `LB: ${lookback}` : `LB: ${lookback}`;
+            document.getElementById('result').innerText = `All Loss: ${losingGroup.join(', ')}. ${resultText}`;
+
+            // Manuelle Zählung erhöhen und anzeigen
+            manualCounter++;
+            document.getElementById('counter').innerText = `Loses: ${manualCounter}`;
+        }
+
+        function validateInputNumbers(inputNumbers) {
+            return inputNumbers.every(num => !isNaN(num) && num >= 0 && num <= 36);
+        }
+
+        function isLossSequence(sequence) {
+            return sequence.every(num => num === sequence[0]);
+        }
+
+        function resetCounter() {
+            manualCounter = 0; // Zähler auf 0 setzen
+            document.getElementById('counter').innerText = `Loses: ${manualCounter}`; // Nur den Zähler zurücksetzen
+        }
+    </script>
+</body>
+</html>
+
