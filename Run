@@ -1,0 +1,4 @@
+ let SWITCH = false;
+          let CLEAN = false;
+          let AutoBet = true;
+        

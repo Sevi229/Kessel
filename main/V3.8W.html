@@ -340,7 +340,7 @@ max-height: 100%;
             <select class="lookback">
               <option value="Max" data-number="1">Max</option>
               <option value="28" data-number="2">6</option>
-              <option value="28" data-number="2">8</option>
+              <option value="28" data-number="20">8</option>
               <option value="3" data-number="3">10</option>
               <option value="24" data-number="4">12</option>
               <option value="24" data-number="5">14</option>
@@ -350,6 +350,8 @@ max-height: 100%;
               <option value="18" data-number="9">24</option>
               <option value="18" data-number="10">26</option>
               <option value="18" data-number="11">30</option>
+              <option value="18" data-number="12">35</option>
+              <option value="18" data-number="13">40</option>
             </select>
 
             <select class="ssort">
@@ -742,29 +744,51 @@ function evaluateArray(arr, numbersArray) {
   let lsol1n = [];
   let lsol2n = [];
   // Definiere die Array-Länge für den Iterationsbereich
+  
+
+
   let arrayLength = arr.length;
   for (let b = 0; b <= numbersArray.length - 1; b++) {
     const index = rouletteOrder.indexOf(parseInt(numbersArray[b]));
     resultArray.push(index);
-    //console.log("wedwed", resultArray)
+  
   }
- 
+
+
+
+  const offsets = {
+    2: 6, 1: 9999, 20: 8, 4: 12, 5: 14, 6: 16, 7: 18, 8: 20,
+    9: 22, 10: 26, 11: 30, 12: 35, 13: 40
+};
+
+let adjustedNumbersArray = []; // Array to hold the backward values
+//iable
+
+if (lookback === 1) {
+    // Special case for lookback === 1: retrieve all elements in their original order
+    adjustedNumbersArray = [...numbersArray];
+} else if (offsets[lookback] !== undefined) {
+    const count = offsets[lookback];
+    b = resultArray.length - 1 - count;
+
+    const start = Math.max(numbersArray.length - count, 0); // Start index to avoid negative values
+
+    for (let i = numbersArray.length - 1; i >= start; i--) {
+        adjustedNumbersArray.push(numbersArray[i]);
+    }
+    adjustedNumbersArray.reverse();
+}
+
   
   if(prof === 1 || prof === 2 || prof === 3){
 
-    if (strategyNumber === 1) { numbersf = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]; }
-    if (strategyNumber === 2) { numbersf = [28, 27, 24, 22, 19, 18, 15, 13, 10, 9]; }
-  if (strategyNumber === 69) { numbersf = [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]; }
-  if (strategyNumber === 40) { numbersf = [28, 29, 30, 31, 32]; }
-  if (strategyNumber === 3) { numbersf = [27, 28, 29, 30, 31]; }
-  if (strategyNumber === 4) { numbersf = [24, 25, 26, 27, 28]; }
-  if (strategyNumber === 5) { numbersf = [22, 23, 24, 25, 26]; }
-  if (strategyNumber === 6) { numbersf = [19, 20, 21, 22, 23]; }
-  if (strategyNumber === 7) { numbersf = [18, 19, 20, 21, 22]; }
-  if (strategyNumber === 8) { numbersf = [15, 16, 17, 18, 19]; }
-  if (strategyNumber === 9) { numbersf = [13, 14, 15, 16, 17]; }
-  if (strategyNumber === 10) { numbersf = [10, 11, 12, 13, 14]; }
-  if (strategyNumber === 11) { numbersf = [9, 10, 11, 12, 13]; }
+    if(strategyNumber === 2){numbersf = [ 24, 22, 19, 18, 15, 13];}
+    if(strategyNumber === 40 || strategyNumber === 11){numbersf = [9];}
+    if(strategyNumber === 3 || strategyNumber === 10){numbersf = [ 15, 14];}
+    if(strategyNumber === 4 || strategyNumber === 9){numbersf = [24, 13];}
+    if(strategyNumber === 5 || strategyNumber === 8){numbersf = [22, 15];}
+    if(strategyNumber === 6 || strategyNumber === 7 || strategyNumber === 1){numbersf = [19, 18];}
+    if(strategyNumber === 69){numbersf = [ 22, 19, 18, 15, 13];}
 
     if(count === 10){countf = [0];}
     if(count === 1){countf = [0, 2, 3, 4, 5, 6, 7];}
@@ -776,189 +800,376 @@ function evaluateArray(arr, numbersArray) {
     if(count === 7){countf = [5]}
     if(count === 8){countf = [6]}
 
-    
+    console.log("hä", adjustedNumbersArray,"dsf", numbersArray );
+
+    numbersf.forEach(num2 => {
+    function calculateWinRateDetailed(adjustedNumbersArray) {
+      let winCount = 0;
+      let lossCount = 0;
+      const results = [];
+      let i = 0;
+      let groupNumber = 1;
   
-    // Ausgabe der Positionen
-    let pos = new Array(100).fill(null).map(() => new Array(100).fill(null).map(() => new Array(100).fill(0)));
-    let neg = new Array(100).fill(null).map(() => new Array(100).fill(null).map(() => new Array(100).fill(0)));
-    let profi = 0;
-    let profi2 =0;
-   
-
-    //Count 0
-    let negA1 = new Array(10).fill(0);
-    let posA1 = new Array(10).fill(0);
-    //Count2
-    let negA2 = new Array(10).fill(0);
-    let posA2 = new Array(10).fill(0);
-    //Count3
-    let negA3 = new Array(10).fill(0);
-    let posA3 = new Array(10).fill(0);
-    //Count4
-    let negA4 = new Array(10).fill(0);
-    let posA4 = new Array(10).fill(0);
-    //Count5
-    let negA5 = new Array(10).fill(0);
-    let posA5 = new Array(10).fill(0);
-    //Count6
-    let negA6 = new Array(10).fill(0);
-    let posA6 = new Array(10).fill(0);
-    //Count7
-    let negA7 = new Array(10).fill(0);
-    let posA7 = new Array(10).fill(0);
-    //Count8
-    let negA8 = new Array(10).fill(0);
-    let posA8 = new Array(10).fill(0);
-    //Count9
-    let negA9 = new Array(10).fill(0);
-    let posA9 = new Array(10).fill(0);
-    //Count10
-    let negA10 = new Array(10).fill(0);
-    let posA10 = new Array(10).fill(0);
+  
+      while (i < adjustedNumbersArray.length) {
+          // Leeren von uniqueNumbers und seenNumbers für die neue Gruppe
+          let uniqueNumbers = [];
+          let seenNumbers = new Set();
+          let duplicateCount = 0;
+          let j = i;
+          let groupBuildLog = [];
+  
+          console.log(`\n--- Starting Group ${groupNumber} ---`);
+  
+          while (uniqueNumbers.length < num2 && j < adjustedNumbersArray.length) {
+              const currentNumber = adjustedNumbersArray[j];
+              const status = seenNumbers.has(currentNumber) ? "D" : "U";
+              groupBuildLog.push(status);
+  
+              if (status === "U") {
+                  uniqueNumbers.push(currentNumber);
+                  seenNumbers.add(currentNumber);
+              } else {
+                  duplicateCount++;
+              }
+              j++;
+          }
+  
+          let groupResult = {
+              groupName: groupNumber,
+              startPosition: i + 1,
+              duplicates: duplicateCount,
+              uniqueGroup: uniqueNumbers.slice(),
+              lastFiveEntries:  groupBuildLog.slice(-1),
+              result0: "",
+              result1: "",
+              result2: "",
+              result3: "",
+              result4: "",
+              result5: "",
+          };
+  
+          // Überprüfung, ob die Gruppe vollständig ist
+          if (uniqueNumbers.length === num2 && j < adjustedNumbersArray.length) {
+              const nextNumber = adjustedNumbersArray[j];
+              let lose = false;
+              if (seenNumbers.has(nextNumber)) {
+                  lossCount++;
+                  lose = true;
+                  groupResult.result0 = "Loss";
+                  console.log(`Position ${j}: Loss, number ${nextNumber} is a duplicate`);
+              } else {
+                  winCount++;
+                  groupResult.result0 = "Win";
+                  console.log(`Position ${j}: Win, number ${nextNumber} is unique`);
+              }
+              
+              for (let d = 1; d < 6; d++) {
+                  if (lose) {
+                      const nextNumber = adjustedNumbersArray[j + d];
+                      if (seenNumbers.has(nextNumber)) {
+                          lose = true;
+                          groupResult[`result${d}`] = "Loss";
+                      } else {
+                          lose = false;
+                          groupResult[`result${d}`] = "Win";
+                      }
+                  }
+              }
+              results.push(groupResult);
+             
+              groupNumber++;
+          } else if (adjustedNumbersArray.length != i) {
+              if (groupResult.lastFiveEntries.every(entry => entry === "U")) {
+                  groupResult.result0 = "Complete";
+              } else {
+                  groupResult.result0 = "Incomplete";
+              }
+              results.push(groupResult);
+              break;
+          }  
+          i++
+      }//
     
-    let currentElement2 = 0;
-//let NERVEN = new Array(10); // First dimension length based on numbersArray
+      const totalAttempts = winCount + lossCount;
+      const winRate = totalAttempts > 0 ? (winCount / totalAttempts) * 100 : 0;
+  
+      console.log(`\nFinal Results:`);
+      console.log(`Wins: ${winCount}, Losses: ${lossCount}, Win Rate: ${winRate.toFixed(2)}%`);
+      console.log("Detailed Group Results:", results);
+    
+      return {
+          winCount,
+          lossCount,
+          winRate: winRate.toFixed(2),
+          results
+      };
+      
+  }
+  
+ 
+  
+  const backtestResults = calculateWinRateDetailed(adjustedNumbersArray);
+  
+  // Vollständige Ausgabe der Ergebnisse in der Konsole
+  console.log("REed", JSON.stringify(backtestResults, null, 2));
+  
+  const incompleteResult = backtestResults.results.find(result => result.result0 === "Incomplete");
+  
+  let CountNow = 0;
+  let full = false;
+  let lastUniqueGroup;
+  let dupback = false;
+  let duplicatesM = 0;
+  if (incompleteResult) {
+      // Rückwärtszählung der "D"-Einträge in `lastFiveEntries` bis zum ersten "U"
+      full = true; 
+      for (let k = incompleteResult.lastFiveEntries.length - 1; k >= 0; k--) {
+          if (incompleteResult.lastFiveEntries[k] === "U") break; // Stoppe bei erstem "U"
+          CountNow++;
+      }
+  }
+  if(full == true){
+  const largestCompleteGroup = backtestResults.results
+      .filter(result => result.result0 !== "Incomplete") // Filtert nur vollständige Gruppen
+      .reduce((max, current) => (current.groupName > max.groupName ? current : max), { groupName: '' });
+  
+  if (largestCompleteGroup) {
+      lastUniqueGroup = largestCompleteGroup.uniqueGroup; // Speichere die `uniqueGroup` der größten vollständigen Gruppe
+      duplicatesM = largestCompleteGroup.duplicates;
+  }
+  }else{
+      lastUniqueGroup = backtestResults.results
+      .filter(result => result.result0 === "Complete")
+      .map(result => result.uniqueGroup);
+      duplicatesM = backtestResults.results
+      .filter(result => result.result0 === "Complete")
+      .map(result => result.duplicates);
+  
+  
+  }
+  let allRouletteNumbers = [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+      10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+      20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+      30, 31, 32, 33, 34, 35, 36
+  ];console.log(full)
+  
+  let flattenedLastUniqueGroup = Array.from(lastUniqueGroup || []).flat(Infinity).map(Number);
+  console.log("Arschloch", flattenedLastUniqueGroup);
+  
+  // Entferne alle Zahlen in flattenedLastUniqueGroup aus allRouletteNumbers
+  let uniqueSet = new Set(flattenedLastUniqueGroup);
 
-let NERVEN = new Array(16).fill(null).map(() => 
-  new Array(35).fill(null).map(() => 
-    new Array(2).fill(null).map(() => [])
-  )
+  let filteredRouletteNumbers = [];
+  for (let number of allRouletteNumbers) {
+      if (!uniqueSet.has(number)) {
+          filteredRouletteNumbers.push(number);
+      }
+  }
+
+  console.log(lastUniqueGroup);
+  console.log("Updated allRouletteNumbers:", filteredRouletteNumbers);
+  console.log("Duplicates", duplicatesM);
+  console.log("CountNow:", CountNow);
+  
+  
+  if(dupback > 5){dupback  = false;}
+  console.log("Dupback",dupback)
+  
+  
+  const { totalWins, totalLosses } = backtestResults.results.reduce(
+      (acc, current) => {
+          const resultsArray = [
+              current.result0,
+              current.result1,
+              current.result2,
+              current.result3,
+              current.result4,
+              current.result5
+          ];
+  
+          resultsArray.forEach(entry => {
+              if (entry === "Win") acc.totalWins += 1;
+              if (entry === "Loss") acc.totalLosses += 1;
+          });
+  
+          return acc;
+      },
+      { totalWins: 0, totalLosses: 0 }
+  );
+
+
+  const { waitLGewinne, waitLVerluste, currententry } = backtestResults.results.reduce(
+    (acc, current) => {
+        const resultsArray = [
+        current.result0,
+        current.result1,
+        current.result2,
+        current.result3,
+        current.result4,
+        current.result5
+        ];
+
+        resultsArray.forEach((entry, index) => {
+          if (entry === "Loss") {console.log("speed");acc.currententry = "Loss"}
+          if (entry === "Win") {acc.currententry = "Win" }
+
+          if (entry === "Loss") {
+                // Verlust gefunden, prüfe das nächste Ergebnis, falls vorhanden
+                const nextEntry = resultsArray[index + 1];
+                if (nextEntry === "Win") {
+                    acc.waitLGewinne += 1;
+                } else if (nextEntry === "Loss") {
+                    acc.waitLVerluste += 1;
+                }
+            }
+        });
+
+        return acc;
+    },
+    { waitLGewinne: 0, waitLVerluste: 0, currententry: "" }
 );
 
-/*
-// Initialize each element of NERVEN
-for (let i = 0; i < NERVEN.length; i++) {
-  NERVEN[i] = new Array(35); // Second dimension length set to 35
+console.log("Gewinne nach Verlusten:", waitLGewinne);
+console.log("Verluste nach Verlusten:", waitLVerluste);
 
-  // Initialize the third dimension with values 0 and 1
-  for (let j = 0; j < NERVEN[i].length; j++) {
-    NERVEN[i][j] = new Array(2); // Third dimension initialized with values 0 and 1
+
+
+
+
+
+  
+  const { totalWins1, totalLosses1 } = backtestResults.results.reduce(
+      (acc, current) => {
+          // Greift direkt auf das Feld `result0`, `result1`, etc. zu, basierend auf CountNow
+          const entry = current[`result${CountNow}`];
+  
+          if (entry === "Win") acc.totalWins1 += 1;
+          if (entry === "Loss") acc.totalLosses1 += 1;
+  
+          return acc;
+      },
+      { totalWins1: 0, totalLosses1: 0 }
+  );
+  
+  
+  
+  // Filter auf Gruppen basierend auf der dupback-Bedingung
+  const filteredResultsSet = backtestResults.results.filter(result => {
+      return dupback ? result.duplicates < 5 : result.duplicates >= 5;
+  });
+  
+  // Zähle `Win` und `Loss` für alle Ergebnisfelder (result0 bis result5)
+  const { overallWins, overallLosses } = filteredResultsSet.reduce(
+      (acc, current) => {
+          const resultsArray = [
+              current.result0,
+              current.result1,
+              current.result2,
+              current.result3,
+              current.result4,
+              current.result5
+          ];
+  
+          resultsArray.forEach(entry => {
+              if (entry === "Win") acc.overallWins += 1;
+              if (entry === "Loss") acc.overallLosses += 1;
+          });
+  
+          return acc;
+      },
+      { overallWins: 0, overallLosses: 0 }
+  );
+  
+  // Zähle `Win` und `Loss` basierend auf dem spezifischen Feld `CountNow`
+  const { singleFieldWins, singleFieldLosses } = filteredResultsSet.reduce(
+      (acc, current) => {
+          const entry = current[`result${CountNow}`];
+  
+          if (entry === "Win") acc.singleFieldWins += 1;
+          if (entry === "Loss") acc.singleFieldLosses += 1;
+  
+          return acc;
+      },
+      { singleFieldWins: 0, singleFieldLosses: 0 }
+  );
+  
+  function calculateWinRate(wins, losses, basedOnWins = true) {
+      const total = wins + losses;
+      if (total === 0) return 0; // Keine Win-Rate bei 0 Total
+      return basedOnWins ? (wins / total) * 100 : (losses / total) * 100;
   }
-}
 
+  // Win-Rate Berechnungen
+  const winRateOverall = calculateWinRate(overallWins, overallLosses, true);
+  const lossRateOverall = calculateWinRate(overallWins, overallLosses, false);
 
-    let NERVEN = new Array(10);
-
-    // Initialisiere jedes Element als leeres Array
-for (let i = 0; i < NERVEN.length; i++) {
-  NERVEN[i] = [];
-}
-
-if(lookback === 2){ x = resultArray.length - 1 - 6}
-if(lookback === 3){ x = resultArray.length - 1 - 8}
-if(lookback === 4){ x = resultArray.length - 1 - 10}
-if(lookback === 5){ x = resultArray.length - 1 - 12}
-if(lookback === 6){ x = resultArray.length - 1 - 14}
-if(lookback === 7){ x = resultArray.length - 1 - 16}
-if(lookback === 8){ x = resultArray.length - 1 - 18}
-if(lookback === 9){ x = resultArray.length - 1 - 20}
-if(lookback === 10){ x = resultArray.length - 1 - 24}
-if(lookback === 11){ x = resultArray.length - 1 - 26}
-if(lookback === 12){ x = resultArray.length - 1 - 30}
-
-if (x < 18) {
-  x = 0;
-}*/
-let lastArray = [];
-       
-
-      numbersf.forEach(num2 => {
-        // Your code here
-        //console.log("iq",num2 )
-        if(numbersArray.length  >= num2){
-       
-         
-          for (let x = 0; x < numbersArray.length  - num2 + 1; x++) {
-          
-           
-            let copynumbersArray = [];
-            let duplicatesCount = 0;
-       
-           if(numbersArray.length + 1 > num2 + x ){
-            //console.log("xx", x)
-            
-            for (let b = 0 + x;  b  < num2 + x; b++) {
-                let currentElement1 = numbersArray[b];
-               
-                if (copynumbersArray.includes(currentElement1)) {
-                  duplicatesCount++;
-          
-                   // Break to avoid counting multiple duplicates of the same element
-                } else {
-                  copynumbersArray.push(currentElement1); // Add unique elements to the new array
-                  currentElement2 = numbersArray[b + 1];
-              }
-            }
-            
-          //if(copynumbersArray.length == 18 ){console.log("DDUlicates count",duplicatesCount );profi += duplicatesCount; profi2 += (18 - duplicatesCount); console.log("ASS", profi, profi2);}
-          
-           let rouletteOrders = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-        
-         
-           let filteredRouletteOrders = rouletteOrders.filter(number => !copynumbersArray.includes(number));
-            console.log("ewq",copynumbersArray)
-           if(copynumbersArray.length == 18 && duplicatesCount > 0 && duplicatesCount < 16){
-            let test = "ERROR"; if (copynumbersArray.includes(currentElement2)){ NERVEN[duplicatesCount -1][18][0].push("N");                console.log("wejfjn", duplicatesCount, copynumbersArray, currentElement2)}else if(x  != numbersArray.length  - num2){console.log("DuplikatesP", duplicatesCount, copynumbersArray, currentElement2) ;NERVEN[duplicatesCount -1][18][0].push("P");   } else if(x  == numbersArray.length  - num2){NERVEN[duplicatesCount -1][18][0].push("R"); NERVEN[duplicatesCount -1][18][1].push(copynumbersArray);    console.log("fref", duplicatesCount, copynumbersArray, currentElement2);}
-         
-            }
-
+  const winLOverall = calculateWinRate(waitLGewinne, waitLVerluste, true);
+  const lossLOverall = calculateWinRate(waitLGewinne, waitLVerluste, false);
+  
+  const winRateSingleField = calculateWinRate(singleFieldWins, singleFieldLosses, true);
+  const lossRateSingleField = calculateWinRate(singleFieldWins, singleFieldLosses, false);
+  
+  const winRateTotalCountNow = calculateWinRate(totalWins1, totalLosses1, true);
+  const lossRateTotalCountNow = calculateWinRate(totalWins1, totalLosses1, false);
+  
+  const winRateTotal = calculateWinRate(totalWins, totalLosses, true);
+  const lossRateTotal = calculateWinRate(totalWins, totalLosses, false);
+  
+  
+  /*
+  console.log("Overall Wins for all fields:", overallWins);
+  console.log("Overall Losses for all fields:", overallLosses);
+  console.log("Win Rate (Overall):", winRateOverall.toFixed(2) + "%");
+  console.log("Loss Rate (Overall):", lossRateOverall.toFixed(2) + "%");
+  
+  console.log(`Single Field Wins for result${CountNow}:`, singleFieldWins);
+  console.log(`Single Field Losses for result${CountNow}:`, singleFieldLosses);
+  console.log(`Win Rate (Single Field result${CountNow}):`, winRateSingleField.toFixed(2) + "%");
+  console.log(`Loss Rate (Single Field result${CountNow}):`, lossRateSingleField.toFixed(2) + "%");
+  
+  console.log("Total Wins (CountNow):", totalWins1);
+  console.log("Total Losses (CountNow):", totalLosses1);
+  console.log("Win Rate (Total CountNow):", winRateTotalCountNow.toFixed(2) + "%");
+  console.log("Loss Rate (Total CountNow):", lossRateTotalCountNow.toFixed(2) + "%");
+  
+  console.log("Total Wins:", totalWins);
+  console.log("Total Losses:", totalLosses);
+  console.log("Win Rate (Total):", winRateTotal.toFixed(2) + "%");
+  console.log("Loss Rate (Total):", lossRateTotal.toFixed(2) + "%");
+  */
+  
+  /*
+  returnv.push(["M5X1", flattenedLastUniqueGroup.length, 0 , "", filteredRouletteNumbers, winRateOverall, `${overallWins}|${overallLosses}`]);
+  returnv.push(["M5X0", filteredRouletteNumbers.length, 0 , "", flattenedLastUniqueGroup,lossRateOverall, `${overallLosses}|${overallWins}`]);
+  
+  //gezielt 5 ja
+  returnv.push(["M51", flattenedLastUniqueGroup.length, CountNow , "", filteredRouletteNumbers, winRateSingleField, `${singleFieldWins}|${singleFieldLosses}`]);
+  returnv.push(["M50", filteredRouletteNumbers.length, CountNow , "", flattenedLastUniqueGroup,lossRateSingleField, `${singleFieldLosses}|${singleFieldWins}`]);
+  */
+  //gezielt keine 5 winLverall = calculateWinRate(waitLGewinne, waitLVerluste, true);
+  //const lossLOverall
+  console.log("meno", currententry)
+  if(currententry == "Loss"){
     
-        }
-       
-      }
-      
-     }
-   
-    
-   });
-
-   for (let i = 0; i < NERVEN.length; i++) {
-    let countP = 0;
-    let countN = 0;
-    
-    let lastLetter = NERVEN[i][18][0][NERVEN[i][18][0].length - 1];
-    console.log("lastLetter", lastLetter)
-    console.log(`Element ${i}: ${NERVEN[i][18][0]}, Dup  ${NERVEN[i][18][1]}-->`,lastLetter);
-    if (lastLetter === 'R') {
-      // Durch das Unterarray iterieren und zählen
-      for (let j = 0; j < NERVEN[i].length; j++) {
-          if (NERVEN[i][18][0][j] === 'P') {
-              countP++;
-          } else if (NERVEN[i][18][0][j] === 'N') {
-              countN++;
-          }
-      }
-      const singleValueArray = [...NERVEN[i][18][1]]; // Assuming NERVEN[i][18][1] is an array of strings
-
-      const rouletteOrder = ["0", "32", "15", "19", "4", "21", "2", "25", "17", "34", "6", "27", "13", "36", "11", "30", "8", "23", "10", "5", "24", "16", "33", "1", "20", "14", "31", "9", "22", "18", "29", "7", "28", "12", "35", "3", "26"];
-      
-      // Make copies of arrays
-      const flattenedSingleValueArray = singleValueArray.flat();
-
-// Create a Set for faster lookup
-      const singleValueSet = new Set(flattenedSingleValueArray);
-
-// Filter rouletteOrder to remove elements present in singleValueSet
-      const filteredRouletteOrder = rouletteOrder.filter(number => !singleValueSet.has(number));
-
-      
-      console.log("weed",singleValueArray, filteredRouletteOrder)
-      let mn1 = 0;
-      let mn0 = 0;
-      if(countP == 0 && countN == 0){rn1 = 0; rn0 = 0;}else{mn1 = (100 / (countP + countN)) * countP; mn0 = (100 / (countP + countN))* countN;}
-       
-      returnv.push([`M${i + 1}0`, flattenedSingleValueArray.length, 0 , flattenedSingleValueArray.length, flattenedSingleValueArray, mn0, `${countN}|${countP}`]);
-      returnv.push([`M${i + 1}1`, filteredRouletteOrder.length, 0 , filteredRouletteOrder.length, filteredRouletteOrder, mn1 , `${countP}|${countN}`]);
-      console.log(`X922${NERVEN[i]}`, `Anzahl der 'P': ${countP}`, `Anzahl der 'N': ${countN}`, );
-   }
-    
+    returnv.push(["MXL1", filteredRouletteNumbers.length, 0 , "", filteredRouletteNumbers, winLOverall, `${waitLGewinne}|${waitLVerluste}`]);
+    returnv.push(["MXL0", flattenedLastUniqueGroup.length, 0 , "", flattenedLastUniqueGroup,  lossLOverall, `${waitLVerluste}|${waitLGewinne}`]);
   }
-   
+   returnv.push(["M1", filteredRouletteNumbers.length, CountNow, "", filteredRouletteNumbers, winRateTotalCountNow,  `${totalWins1}|${totalLosses1}`]);
+   returnv.push(["M0", flattenedLastUniqueGroup.length, CountNow, "", flattenedLastUniqueGroup, lossRateTotalCountNow, `${totalLosses1}|${totalWins1}`]);
+  //1 alles keine 5  winRateTotalCountNow,  `${totalWins1}|${totalLosses1}`
+  returnv.push(["MX1", filteredRouletteNumbers.length, 0 , "", filteredRouletteNumbers, winRateTotal, `${totalWins}|${totalLosses}`]);
+  returnv.push(["MX0", flattenedLastUniqueGroup.length, 0 , "", flattenedLastUniqueGroup,  lossRateTotal, `${totalLosses}|${totalWins}`]);
+  
+
+      
+ 
+});
+
 
 }
  
-
-
 
 
 
@@ -1067,9 +1278,6 @@ let lastArray = [];
               let xlsol1n = false;
               let xlsol2n = false;
              
-             
-             
-              if(lookback === 2){ b = resultArray.length - 1 - 6}
               if(lookback === 3){ b = resultArray.length - 1 - 8}
               if(lookback === 4){ b = resultArray.length - 1 - 10}
               if(lookback === 5){ b = resultArray.length - 1 - 12}
@@ -1080,6 +1288,10 @@ let lastArray = [];
               if(lookback === 10){ b = resultArray.length - 1 - 24}
               if(lookback === 11){ b = resultArray.length - 1 - 26}
               if(lookback === 12){ b = resultArray.length - 1 - 30}
+              if(lookback === 13){ b = resultArray.length - 1 - 35}
+              if(lookback === 14){ b = resultArray.length - 1 - 40}
+             
+            
 
               if (b < 0) {
                 b = 0;
